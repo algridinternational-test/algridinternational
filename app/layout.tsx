@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://algridinternational.com"),
   title: {
     default: "Algrid International — AI Venture Builder",
     template: "%s — Algrid International",
@@ -28,9 +29,10 @@ export const metadata: Metadata = {
     "growth systems",
   ],
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/algrid-logo.png",
+    shortcut: "/algrid-logo.png",
   },
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Algrid International — Build the next version of your business.",
     description:
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
     locale: "en_MY",
     images: [
       {
-        url: "/og.png",
+        url: "/og-gold.png",
         width: 1730,
         height: 909,
         alt: "Algrid International — Build the next version of your business",
@@ -51,8 +53,32 @@ export const metadata: Metadata = {
     title: "Algrid International — AI Venture Builder",
     description:
       "Build the next version of your business with brand, software, AI and growth working as one.",
-    images: ["/og.png"],
+    images: ["/og-gold.png"],
   },
+};
+
+const organisationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Algrid International",
+  url: "https://algridinternational.com",
+  email: "social@algridinternational.com",
+  telephone: "+601169194826",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "15-13A, Wisma UOA II, Jalan Pinang",
+    postalCode: "50450",
+    addressLocality: "Kuala Lumpur",
+    addressCountry: "MY",
+  },
+  areaServed: "Worldwide",
+  knowsAbout: [
+    "Artificial intelligence automation",
+    "Software engineering",
+    "Brand systems",
+    "Digital product development",
+    "Growth strategy",
+  ],
 };
 
 export default function RootLayout({
@@ -65,7 +91,16 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationSchema) }}
+        />
+      </body>
     </html>
   );
 }

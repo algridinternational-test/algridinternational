@@ -1,70 +1,19 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  type FormEvent,
+  type KeyboardEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { SiteFooter, SiteHeader } from "./components/SiteChrome";
+import { ventureStories as ventures } from "./content";
+import { mvpProducts } from "./mvps/data";
 
-const ventures = [
-  {
-    name: "Leroselle",
-    type: "Oral care",
-    code: "LR/01",
-    color: "#d7ff59",
-    title: "Turning a toothpaste into a modern oral-care ritual.",
-    summary:
-      "Brand strategy, packaging architecture and a conversion-led commerce experience designed to earn attention in a crowded category.",
-    impact: ["2.8×", "conversion intent", "42%", "stronger recall"],
-  },
-  {
-    name: "Mesfleur",
-    type: "Beauty",
-    code: "MF/02",
-    color: "#ff758f",
-    title: "A lip matte brand built for the camera-first shelf.",
-    summary:
-      "A confident identity and product system that translates naturally from packaging to creator content and digital commerce.",
-    impact: ["3.1×", "content velocity", "64%", "repeat interest"],
-  },
-  {
-    name: "Solid Coffee",
-    type: "Beverage",
-    code: "SC/03",
-    color: "#d39a68",
-    title: "Making daily coffee feel like an owned ritual.",
-    summary:
-      "Positioning, packaging and a retention engine designed to move a commodity product into a repeatable lifestyle platform.",
-    impact: ["38%", "higher AOV", "4.6/5", "product intent"],
-  },
-  {
-    name: "Glups",
-    type: "Cordial drinks",
-    code: "GL/04",
-    color: "#56d8ff",
-    title: "A cordial system with room to play and scale.",
-    summary:
-      "A modular flavour architecture, expressive campaign system and digital launch experience made for families and modern retail.",
-    impact: ["6", "SKU system", "51%", "better recall"],
-  },
-  {
-    name: "Matt's",
-    type: "Sauces",
-    code: "MT/05",
-    color: "#ff8c42",
-    title: "Shelf presence engineered from the bottle up.",
-    summary:
-      "A bold packaging family and retail-to-social brand language that makes flavour instantly legible without losing craft credibility.",
-    impact: ["73%", "shelf standout", "2.4×", "social saves"],
-  },
-  {
-    name: "Tomm's",
-    type: "Health supplements",
-    code: "TM/06",
-    color: "#8ee7b1",
-    title: "Health decisions made clear, credible and human.",
-    summary:
-      "A trust-first brand, information system and subscription journey that turns complexity into confident daily action.",
-    impact: ["31%", "less friction", "58%", "subscription intent"],
-  },
-];
+const featuredLaunchSystems = mvpProducts.slice(0, 4);
 
 const systems = [
   {
@@ -87,6 +36,103 @@ const systems = [
   },
 ];
 
+const services = [
+  {
+    index: "01",
+    title: "AI & Automation",
+    outcome: "Turn repetitive work into an intelligent operating advantage.",
+    text: "Deploy trusted AI experiences that respond, qualify, retrieve and act across your customer and internal workflows.",
+    capabilities: [
+      "AI Chatbots",
+      "AI Sales Assistants",
+      "Workflow Automation",
+      "CRM Integration",
+      "Knowledge Base AI",
+    ],
+    visual: "automation",
+    signal: "24/7",
+    signalLabel: "intelligent execution",
+  },
+  {
+    index: "02",
+    title: "Web & Software",
+    outcome: "Ship digital products people trust—and teams can scale.",
+    text: "Create fast, resilient product infrastructure that connects the customer experience to the systems behind it.",
+    capabilities: [
+      "Next.js Websites",
+      "SaaS Platforms",
+      "Custom Dashboards",
+      "Client Portals",
+      "API Integrations",
+    ],
+    visual: "software",
+    signal: "95+",
+    signalLabel: "performance target",
+  },
+  {
+    index: "03",
+    title: "Brand & Creative",
+    outcome: "Become the brand your category remembers.",
+    text: "Build a distinctive commercial identity that stays coherent from shelf and screen to motion and campaign.",
+    capabilities: [
+      "Brand Identity",
+      "Packaging",
+      "Motion Graphics",
+      "Commercial Videos",
+      "Product Photography",
+    ],
+    visual: "brand",
+    signal: "1×",
+    signalLabel: "connected brand world",
+  },
+  {
+    index: "04",
+    title: "Growth Marketing",
+    outcome: "Replace campaign spikes with a system that compounds.",
+    text: "Connect acquisition, content and retention around one measurable learning loop.",
+    capabilities: [
+      "SEO",
+      "Paid Advertising",
+      "Content Marketing",
+      "Email Marketing",
+      "Social Media",
+    ],
+    visual: "growth",
+    signal: "LOOP",
+    signalLabel: "acquire · learn · retain",
+  },
+  {
+    index: "05",
+    title: "Business Intelligence",
+    outcome: "Know what is working, why—and what to do next.",
+    text: "Turn fragmented activity into decision-ready intelligence across the complete customer journey.",
+    capabilities: [
+      "Analytics Dashboards",
+      "Conversion Tracking",
+      "Customer Journey Mapping",
+      "Reporting",
+    ],
+    visual: "intelligence",
+    signal: "LIVE",
+    signalLabel: "decision visibility",
+  },
+  {
+    index: "06",
+    title: "Business Launch",
+    outcome: "Move from promising idea to market signal faster.",
+    text: "Align the proposition, product and commercial story into a launch designed to learn and scale.",
+    capabilities: [
+      "Go-to-Market Strategy",
+      "MVP Development",
+      "Sales Assets",
+      "Product Launch",
+    ],
+    visual: "launch",
+    signal: "0→1",
+    signalLabel: "market momentum",
+  },
+];
+
 const stack = [
   "Next.js",
   "React",
@@ -103,6 +149,24 @@ const stack = [
   "HubSpot",
   "Figma",
 ];
+
+const guidedAnalyses = {
+  consumer: [
+    ["Own a repeatable consumption ritual", "Reframe the product around an occasion, not only a SKU."],
+    ["Capture preference at the right moment", "Use zero-party data to improve bundles, guidance and CRM."],
+    ["Connect creative to commercial signals", "Turn customer behaviour into a focused weekly content hypothesis."],
+  ],
+  operations: [
+    ["Map the repeated decision", "Identify the handoff or judgement that creates the most operational delay."],
+    ["Create one trusted knowledge layer", "Connect approved information before introducing automation across teams."],
+    ["Automate the next action", "Move from alerts to governed workflows that update, route and follow through."],
+  ],
+  commerce: [
+    ["Reduce the confidence gap", "Find the product information customers need before they can act."],
+    ["Design the learning journey", "Use questions, comparison and guidance to make choice feel easier."],
+    ["Close the retention loop", "Carry purchase and support signals into replenishment and lifecycle communication."],
+  ],
+} as const;
 
 function SectionIntro({
   eyebrow,
@@ -131,12 +195,11 @@ function FadeIn({
   className?: string;
   delay?: number;
 }) {
-  const reduceMotion = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={false}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -145,45 +208,158 @@ function FadeIn({
   );
 }
 
+function VentureMedia({
+  venture,
+}: {
+  venture: (typeof ventures)[number];
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!video || prefersReducedMotion) {
+      video?.pause();
+      setIsPlaying(false);
+      return;
+    }
+
+    video.muted = true;
+    video.play().catch(() => setIsPlaying(false));
+  }, [venture.loopVideo]);
+
+  function togglePlayback() {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  }
+
+  return (
+    <div className={`case-visual ${venture.captionMask ? "case-visual-caption-mask" : ""}`}>
+      <video
+        key={venture.loopVideo}
+        ref={videoRef}
+        className="case-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster={venture.homepagePoster}
+        aria-label={`${venture.name} silent eight-second brand-film loop`}
+      >
+        <source src={venture.loopVideo} type="video/mp4" />
+      </video>
+      <div className="case-video-shade" />
+      <div className="case-video-top">
+        <span>BRAND FILM / {venture.code}</span>
+        <i>08 SEC LOOP</i>
+      </div>
+      <div className="case-video-title">
+        <span>{venture.type}</span>
+        <strong>{venture.name}</strong>
+      </div>
+      <div className="case-video-controls">
+        <button
+          className="case-video-toggle"
+          type="button"
+          onClick={togglePlayback}
+          aria-label={`${isPlaying ? "Pause" : "Play"} ${venture.name} brand film`}
+        >
+          {isPlaying ? "Ⅱ" : "▶"}
+        </button>
+      </div>
+      <p>ALGRID VENTURE / {venture.code}</p>
+    </div>
+  );
+}
+
 export default function Home() {
   const [activeVenture, setActiveVenture] = useState(0);
+  const [activeLaunchSystem, setActiveLaunchSystem] = useState(0);
   const [aiPrompt, setAiPrompt] = useState(
     "How could a traditional F&B brand create a repeatable growth engine?",
   );
+
+  function prepareProjectBrief(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const company = String(data.get("company") || "New project");
+    const brief = [
+      `Name: ${data.get("name") || ""}`,
+      `Work email: ${data.get("email") || ""}`,
+      `Company: ${company}`,
+      `Phone: ${data.get("phone") || "Not provided"}`,
+      `Project type: ${data.get("projectType") || ""}`,
+      `Preferred start: ${data.get("timeline") || ""}`,
+      "",
+      "What we are trying to change or launch:",
+      String(data.get("challenge") || ""),
+    ].join("\n");
+
+    window.location.href = `mailto:social@algridinternational.com?subject=${encodeURIComponent(
+      `Project brief — ${company}`,
+    )}&body=${encodeURIComponent(brief)}`;
+  }
   const [aiState, setAiState] = useState<"idle" | "thinking" | "done">("idle");
+  const [analysisKey, setAnalysisKey] =
+    useState<keyof typeof guidedAnalyses>("consumer");
   const [monthlyLeads, setMonthlyLeads] = useState(320);
   const [closeRate, setCloseRate] = useState(12);
   const [dealValue, setDealValue] = useState(4200);
   const venture = ventures[activeVenture];
+  const highlightedLaunchSystem = featuredLaunchSystems[activeLaunchSystem];
   const annualRevenue = useMemo(
     () => Math.round(monthlyLeads * (closeRate / 100) * dealValue * 12),
     [monthlyLeads, closeRate, dealValue],
   );
 
   function runAnalysis() {
+    const prompt = aiPrompt.toLowerCase();
+    const nextKey =
+      /manual|workflow|crm|operation|process|team/.test(prompt)
+        ? "operations"
+        : /commerce|website|conversion|shop|sales|checkout/.test(prompt)
+          ? "commerce"
+          : "consumer";
+
+    setAnalysisKey(nextKey);
     setAiState("thinking");
-    window.setTimeout(() => setAiState("done"), 1100);
+    window.setTimeout(() => setAiState("done"), 700);
+  }
+
+  function handleVentureKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"].includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+    const direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (index + direction + ventures.length) % ventures.length;
+    setActiveVenture(nextIndex);
+    const tabs = event.currentTarget.parentElement?.querySelectorAll("button");
+    tabs?.[nextIndex]?.focus();
   }
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      <header className="nav-shell">
-        <a className="brand" href="#top" aria-label="Algrid International home">
-          ALGRID<span>®</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#work">Ventures</a>
-          <a href="#systems">Systems</a>
-          <a href="#ai">AI Lab</a>
-          <a href="#company">Company</a>
-        </nav>
-        <a className="nav-cta" href="#contact">
-          Start a conversation <span aria-hidden="true">↗</span>
-        </a>
-      </header>
+      <SiteHeader />
 
       <section className="hero section" id="top">
         <FadeIn className="hero-kicker">
@@ -205,7 +381,7 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#contact">
-                Build with Algrid <span>↗</span>
+                Build with Algrid <span aria-hidden="true">+</span>
               </a>
               <a className="text-link" href="#work">
                 Explore our work <span>↓</span>
@@ -239,12 +415,12 @@ export default function Home() {
             </div>
             <div className="metric-board">
               <div className="metric-head">
-                <span>VENTURE SIGNALS</span>
-                <span>LIVE ↗</span>
+                <span>VENTURE SIGNAL MODEL</span>
+                <span>INTERFACE DEMO ↗</span>
               </div>
               <div className="big-metric">
-                <strong>+184%</strong>
-                <span>COMPOUND SIGNAL</span>
+                <strong>06</strong>
+                <span>CONNECTED GROWTH LAYERS</span>
               </div>
               <div className="sparkline" aria-label="Upward growth chart">
                 {[24, 32, 27, 42, 48, 44, 61, 68, 74, 93, 88, 100].map(
@@ -258,10 +434,10 @@ export default function Home() {
                   <b>06</b> ACTIVE SYSTEMS
                 </span>
                 <span>
-                  <b>91%</b> VELOCITY
+                  <b>04</b> DELIVERY PHASES
                 </span>
                 <span>
-                  <b>24/7</b> AUTOMATION
+                  <b>01</b> ACCOUNTABLE TEAM
                 </span>
               </div>
             </div>
@@ -292,6 +468,283 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section services-section" id="services">
+        <FadeIn>
+          <SectionIntro
+            eyebrow="Our services / Solution platform"
+            title="One platform. Six systems for growth."
+            copy="A modular operating platform for building, launching and scaling companies. Activate one system—or connect all six through one accountable partner."
+          />
+        </FadeIn>
+        <FadeIn className="services-platform-bar" delay={0.06}>
+          <div>
+            <i aria-hidden="true" />
+            <span>ALGRID / SOLUTION OS</span>
+          </div>
+          <p>Strategy / Build / Intelligence / Growth</p>
+          <div>
+            <span>06 connected modules</span>
+            <b>Platform active</b>
+          </div>
+        </FadeIn>
+        <div className="service-grid">
+          {services.map((service, index) => (
+            <motion.article
+              className={`service-card service-card-${service.visual}`}
+              key={service.title}
+              initial={false}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="service-card-head">
+                <span>{service.index}</span>
+                <p>{service.title}</p>
+                <i aria-hidden="true">
+                  <span />
+                  Active
+                </i>
+              </div>
+
+              <div
+                className={`service-product service-product-${service.visual}`}
+                aria-hidden="true"
+              >
+                <div className="service-product-label">
+                  <span>Solution interface</span>
+                  <i>Module {service.index}</i>
+                </div>
+                {service.visual === "automation" && (
+                  <>
+                    <div className="automation-node">
+                      <span>IN</span>
+                    </div>
+                    <div className="automation-flow">
+                      <i />
+                      <i />
+                      <i />
+                    </div>
+                    <div className="automation-core">AI</div>
+                    <div className="automation-output">
+                      <span>QUALIFY</span>
+                      <span>UPDATE</span>
+                      <span>ACT</span>
+                    </div>
+                  </>
+                )}
+                {service.visual === "software" && (
+                  <>
+                    <div className="software-toolbar">
+                      <span />
+                      <span />
+                      <span />
+                      <i>DEPLOY / READY</i>
+                    </div>
+                    <div className="software-layout">
+                      <span />
+                      <div>
+                        <i />
+                        <i />
+                        <i />
+                      </div>
+                    </div>
+                    <div className="software-status">● EDGE / READY</div>
+                  </>
+                )}
+                {service.visual === "brand" && (
+                  <>
+                    <div className="brand-monogram">A.</div>
+                    <div className="brand-palette">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                    <div className="brand-word">DISTINCT / COHERENT</div>
+                  </>
+                )}
+                {service.visual === "growth" && (
+                  <>
+                    <div className="growth-chart">
+                      {[28, 42, 36, 58, 64, 81, 96].map((height) => (
+                        <i key={height} style={{ height: `${height}%` }} />
+                      ))}
+                    </div>
+                    <div className="growth-loop">
+                      <span>ACQUIRE</span>
+                      <i>→</i>
+                      <span>LEARN</span>
+                      <i>→</i>
+                      <span>COMPOUND</span>
+                    </div>
+                  </>
+                )}
+                {service.visual === "intelligence" && (
+                  <>
+                    <div className="bi-metric">
+                      <span>CONVERSION SIGNAL</span>
+                      <b>PRIORITY / HIGH</b>
+                      <i>NEXT / TEST</i>
+                    </div>
+                    <div className="bi-map">
+                      <span />
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  </>
+                )}
+                {service.visual === "launch" && (
+                  <>
+                    <div className="launch-orbit">
+                      <span>01</span>
+                      <i />
+                    </div>
+                    <div className="launch-steps">
+                      <span className="done">THESIS</span>
+                      <span className="done">MVP</span>
+                      <span>MARKET</span>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <div className="service-card-copy">
+                <h3>{service.outcome}</h3>
+                <p>{service.text}</p>
+              </div>
+              <div className="service-capabilities" aria-label={`${service.title} capabilities`}>
+                {service.capabilities.map((capability) => (
+                  <span key={capability}>{capability}</span>
+                ))}
+              </div>
+              <div className="service-signal">
+                <div>
+                  <span>Outcome signal</span>
+                  <strong>{service.signal}</strong>
+                  <small>{service.signalLabel}</small>
+                </div>
+                <a
+                  href="#contact"
+                  aria-label={`Scope ${service.title} with Algrid`}
+                >
+                  Scope system <span aria-hidden="true">+</span>
+                </a>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+        <FadeIn className="services-cta">
+          <div>
+            <span>Not sure where to start?</span>
+            <p>We will map the highest-leverage system for your next stage.</p>
+          </div>
+          <a href="#contact">
+            Design your growth system <span aria-hidden="true">+</span>
+          </a>
+        </FadeIn>
+      </section>
+
+      <section className="section mvp-highlight-section" id="mvps">
+        <FadeIn className="mvp-highlight-head">
+          <div>
+            <p className="eyebrow">Minimum viable products / Launch systems</p>
+            <h2>Ready-to-launch businesses, not agency deliverables.</h2>
+          </div>
+          <div>
+            <p>
+              Focused software products designed to reach market quickly,
+              validate the core signal and scale without a rebuild.
+            </p>
+            <a className="section-cta" href="/mvps">
+              Explore all 15 MVPs <span aria-hidden="true">+</span>
+            </a>
+          </div>
+        </FadeIn>
+        <FadeIn className="mvp-home-browser">
+          <div className="mvp-home-toolbar">
+            <div aria-hidden="true"><i /><i /><i /></div>
+            <span>ALGRID / LAUNCH SYSTEMS / FEATURED</span>
+            <b><i aria-hidden="true" /> 15 systems indexed</b>
+          </div>
+          <div className="mvp-home-browser-body">
+            <div className="mvp-home-index" role="group" aria-label="Featured launch systems">
+              <div className="mvp-home-index-head">
+                <span>01 / Select a system</span>
+                <i>Build window</i>
+              </div>
+              {featuredLaunchSystems.map((product, index) => (
+                <button
+                  key={product.id}
+                  type="button"
+                  aria-pressed={activeLaunchSystem === index}
+                  onClick={() => setActiveLaunchSystem(index)}
+                >
+                  <span>{product.code}</span>
+                  <div>
+                    <b>{product.name}</b>
+                    <small>{product.category}</small>
+                  </div>
+                  <i>{product.buildTime}</i>
+                  <strong aria-hidden="true">↗</strong>
+                </button>
+              ))}
+              <a href="/mvps">
+                <span>View all 15 product systems</span>
+                <i>Open index ↗</i>
+              </a>
+            </div>
+
+            <motion.article
+              className="mvp-home-preview"
+              key={highlightedLaunchSystem.id}
+              initial={{ opacity: 0.45, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="mvp-home-preview-head">
+                <span>{highlightedLaunchSystem.category} / Selected system</span>
+                <i>Scale-ready architecture</i>
+              </div>
+              <div className="mvp-home-preview-main">
+                <div>
+                  <p>{highlightedLaunchSystem.code}</p>
+                  <h3>{highlightedLaunchSystem.name}</h3>
+                  <strong>{highlightedLaunchSystem.promise}</strong>
+                </div>
+                <div className="mvp-home-preview-metric">
+                  <span>{highlightedLaunchSystem.metric}</span>
+                  <i>{highlightedLaunchSystem.metricLabel}</i>
+                </div>
+              </div>
+              <div className="mvp-home-preview-specs">
+                <div>
+                  <span>Estimated build</span>
+                  <b>{highlightedLaunchSystem.buildTime}</b>
+                </div>
+                <div>
+                  <span>Ideal business</span>
+                  <b>{highlightedLaunchSystem.idealFor}</b>
+                </div>
+                <div>
+                  <span>Scalability</span>
+                  <b>{highlightedLaunchSystem.scalability}</b>
+                </div>
+              </div>
+              <div className="mvp-home-preview-foot">
+                <div>
+                  <span>Core product layer</span>
+                  {highlightedLaunchSystem.features.slice(0, 3).map((feature) => (
+                    <i key={feature}>{feature}</i>
+                  ))}
+                </div>
+                <a href={`/mvps#${highlightedLaunchSystem.id}`}>
+                  View system <span aria-hidden="true">+</span>
+                </a>
+              </div>
+            </motion.article>
+          </div>
+        </FadeIn>
+      </section>
+
       <section className="section work-section" id="work">
         <FadeIn>
           <SectionIntro
@@ -306,9 +759,13 @@ export default function Home() {
             {ventures.map((item, index) => (
               <button
                 key={item.name}
+                id={`venture-tab-${item.slug}`}
                 role="tab"
                 aria-selected={activeVenture === index}
+                aria-controls="venture-panel"
+                tabIndex={activeVenture === index ? 0 : -1}
                 onClick={() => setActiveVenture(index)}
+                onKeyDown={(event) => handleVentureKeyDown(event, index)}
               >
                 <span>{item.code}</span>
                 <b>{item.name}</b>
@@ -319,24 +776,16 @@ export default function Home() {
           </div>
           <motion.article
             className="case-stage"
+            id="venture-panel"
+            role="tabpanel"
+            aria-labelledby={`venture-tab-${venture.slug}`}
             key={venture.name}
             initial={{ opacity: 0.4, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             style={{ "--case-color": venture.color } as React.CSSProperties}
           >
-            <div className="case-visual">
-              <div className="case-brand">{venture.name}</div>
-              <div className="pack pack-one">
-                <span>{venture.name}</span>
-                <i>{venture.type}</i>
-              </div>
-              <div className="pack pack-two">
-                <span>{venture.name}</span>
-                <i>01 / DAILY</i>
-              </div>
-              <p>ALGRID VENTURE / {venture.code}</p>
-            </div>
+            <VentureMedia venture={venture} />
             <div className="case-content">
               <p className="eyebrow">{venture.type} · Selected work</p>
               <h3>{venture.title}</h3>
@@ -351,9 +800,9 @@ export default function Home() {
                   {venture.impact[3]}
                 </span>
               </div>
-              <button className="case-link">
-                View venture story <span>↗</span>
-              </button>
+              <a className="case-link" href={`/work/${venture.slug}`}>
+                View venture story <span aria-hidden="true">+</span>
+              </a>
             </div>
           </motion.article>
         </div>
@@ -400,7 +849,7 @@ export default function Home() {
           <div className="ai-playground">
             <div className="panel-top">
               <span>ALGRID / OPPORTUNITY ENGINE</span>
-              <span className="beta">DEMO</span>
+              <span className="beta">GUIDED DEMO</span>
             </div>
             <div className="ai-terminal">
               <label htmlFor="ai-prompt">Ask the venture strategist</label>
@@ -414,7 +863,7 @@ export default function Home() {
               />
               <button onClick={runAnalysis} disabled={!aiPrompt.trim()}>
                 {aiState === "thinking" ? "Mapping opportunity…" : "Run analysis"}
-                <span>↗</span>
+                <span aria-hidden="true">+</span>
               </button>
             </div>
             <div className={`ai-output ${aiState}`}>
@@ -430,32 +879,24 @@ export default function Home() {
               {aiState === "done" && (
                 <>
                   <div className="output-head">
-                    <span>OPPORTUNITY MAP</span>
-                    <b>HIGH SIGNAL</b>
+                    <span>GUIDED OPPORTUNITY MAP</span>
+                    <b>FRAMEWORK OUTPUT</b>
                   </div>
                   <ol>
-                    <li>
-                      <span>01</span>
-                      <div>
-                        <b>Own a repeatable consumption ritual</b>
-                        <p>Reframe the product around an occasion, not a SKU.</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span>02</span>
-                      <div>
-                        <b>Build zero-party data into the journey</b>
-                        <p>Use preference capture to personalise bundles and CRM.</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span>03</span>
-                      <div>
-                        <b>Automate the content learning loop</b>
-                        <p>Turn sales signals into weekly creative hypotheses.</p>
-                      </div>
-                    </li>
+                    {guidedAnalyses[analysisKey].map((item, index) => (
+                      <li key={item[0]}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <div>
+                          <b>{item[0]}</b>
+                          <p>{item[1]}</p>
+                        </div>
+                      </li>
+                    ))}
                   </ol>
+                  <p className="demo-disclosure">
+                    Guided demonstration using a prebuilt decision framework.
+                    No prompt data is stored or sent to an AI provider.
+                  </p>
                 </>
               )}
             </div>
@@ -562,7 +1003,9 @@ export default function Home() {
                 modelled conversion lift
               </p>
             </div>
-            <a href="#contact">Build your business case ↗</a>
+            <a href="#contact">
+              Build your business case <span aria-hidden="true">+</span>
+            </a>
           </div>
         </div>
       </section>
@@ -619,10 +1062,10 @@ export default function Home() {
           <div className="dash-main">
             <div className="dash-header">
               <div>
-                <small>VENTURE / LEROSELLE</small>
+                <small>CLIENT INTERFACE / ILLUSTRATIVE</small>
                 <b>Growth command centre</b>
               </div>
-              <span>Q3 · LIVE</span>
+              <span>Q3 · DEMO</span>
             </div>
             <div className="dash-stats">
               <article>
@@ -697,7 +1140,7 @@ export default function Home() {
           {stack.map((item, index) => (
             <motion.span
               key={item}
-              whileHover={{ y: -4, borderColor: "#b8ff3d" }}
+              whileHover={{ y: -4, borderColor: "#d6a52b" }}
               transition={{ duration: 0.2 }}
               className={index % 4 === 0 ? "featured" : ""}
             >
@@ -725,7 +1168,7 @@ export default function Home() {
             title="Ideas for builders."
             copy="Practical thinking at the intersection of brand, technology, intelligence and growth."
           />
-          <a href="#insights">View all insights ↗</a>
+          <a href="/insights">View all insights ↗</a>
         </FadeIn>
         <div className="insights-grid" id="insights">
           <article className="insight-featured">
@@ -736,7 +1179,7 @@ export default function Home() {
             </div>
             <p>VENTURE STRATEGY · 8 MIN</p>
             <h3>Why the next generation of companies will be designed around intelligence.</h3>
-            <a href="#contact">Read field note ↗</a>
+            <a href="/insights/designing-companies-around-intelligence">Read field note ↗</a>
           </article>
           <article>
             <div className="insight-art art-two">
@@ -746,7 +1189,7 @@ export default function Home() {
             </div>
             <p>BRAND SYSTEMS · 6 MIN</p>
             <h3>Your brand is not a layer. It is the interface to your business.</h3>
-            <a href="#contact">Read field note ↗</a>
+            <a href="/insights/brand-as-business-interface">Read field note ↗</a>
           </article>
           <article>
             <div className="insight-art art-three">
@@ -756,7 +1199,7 @@ export default function Home() {
             </div>
             <p>GROWTH · 5 MIN</p>
             <h3>From campaigns to compounding: the growth operating system.</h3>
-            <a href="#contact">Read field note ↗</a>
+            <a href="/insights/from-campaigns-to-compounding-growth">Read field note ↗</a>
           </article>
         </div>
       </section>
@@ -776,6 +1219,11 @@ export default function Home() {
               Algrid International is an independent venture builder and digital
               transformation company. We bring strategy, creative, engineering,
               AI and growth into one accountable team.
+            </p>
+            <p>
+              For almost a decade, our Kuala Lumpur-based team has worked
+              remotely and globally—helping founders and transformation leaders
+              move from ambitious ideas to operating systems.
             </p>
             <blockquote>
               “The work is only successful when the business is stronger after
@@ -802,36 +1250,148 @@ export default function Home() {
         <div className="contact-orb" aria-hidden="true">
           <span />
         </div>
-        <FadeIn className="contact-content">
-          <p className="eyebrow">The next move</p>
-          <h2>
-            Build what your
-            <br /> business could become.
-          </h2>
-          <p>
-            Tell us what you are changing, creating or trying to unlock. We will
-            come back with a point of view—not a sales deck.
-          </p>
-          <a className="button button-primary" href="mailto:hello@algrid.com">
-            Start a conversation <span>↗</span>
-          </a>
-          <small>Typical response within 2 business days.</small>
-        </FadeIn>
+        <div className="contact-layout">
+          <FadeIn className="contact-content">
+            <p className="eyebrow">The next move / 11</p>
+            <h2>
+              Bring us the
+              <br /> hard problem.
+            </h2>
+            <p>
+              Tell us what you are changing, creating or trying to unlock. A
+              senior team member will review the brief and return with a point
+              of view—not a generic sales deck.
+            </p>
+
+            <div className="contact-proof">
+              <div>
+                <b>01</b>
+                <span>Senior review from the first conversation</span>
+              </div>
+              <div>
+                <b>02</b>
+                <span>Clear next step within two business days</span>
+              </div>
+              <div>
+                <b>03</b>
+                <span>Project, launch or long-term partnership</span>
+              </div>
+            </div>
+
+            <div className="contact-direct">
+              <p>Prefer a direct channel?</p>
+              <a href="mailto:social@algridinternational.com">
+                social@algridinternational.com ↗
+              </a>
+              <a
+                href="https://wa.me/601169194826"
+                target="_blank"
+                rel="noreferrer"
+              >
+                WhatsApp +60 11 6919 4826 ↗
+              </a>
+              <small>
+                15-13A, Wisma UOA II, Jalan Pinang, 50450 Kuala Lumpur
+              </small>
+            </div>
+          </FadeIn>
+
+          <FadeIn className="contact-form-shell" delay={0.1}>
+            <div className="contact-form-head">
+              <span>PROJECT BRIEF / SECURE INTAKE</span>
+              <i>Typically replies within 2 business days</i>
+            </div>
+            <form onSubmit={prepareProjectBrief}>
+              <div className="contact-fields">
+                <label>
+                  <span>Your name *</span>
+                  <input
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="Name"
+                    required
+                  />
+                </label>
+                <label>
+                  <span>Work email *</span>
+                  <input
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@company.com"
+                    required
+                  />
+                </label>
+                <label>
+                  <span>Company</span>
+                  <input
+                    name="company"
+                    type="text"
+                    autoComplete="organization"
+                    placeholder="Company or venture"
+                  />
+                </label>
+                <label>
+                  <span>Phone</span>
+                  <input
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="+60"
+                  />
+                </label>
+                <label>
+                  <span>What are we building? *</span>
+                  <select name="projectType" defaultValue="" required>
+                    <option value="" disabled>
+                      Select a project type
+                    </option>
+                    <option>AI &amp; automation system</option>
+                    <option>Website or software platform</option>
+                    <option>Brand, packaging or creative system</option>
+                    <option>Growth and performance engine</option>
+                    <option>Business launch or MVP</option>
+                    <option>Multi-system transformation</option>
+                    <option>Long-term execution partnership</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Preferred start *</span>
+                  <select name="timeline" defaultValue="" required>
+                    <option value="" disabled>
+                      Select a timeframe
+                    </option>
+                    <option>As soon as possible</option>
+                    <option>Within 30 days</option>
+                    <option>Within 1–3 months</option>
+                    <option>Exploring the right approach</option>
+                  </select>
+                </label>
+                <label className="contact-message">
+                  <span>What are you trying to change or launch? *</span>
+                  <textarea
+                    name="challenge"
+                    rows={5}
+                    placeholder="Share the business context, the friction you see and what a strong outcome would look like."
+                    required
+                  />
+                </label>
+              </div>
+
+              <button className="contact-submit" type="submit">
+                Prepare project brief <span aria-hidden="true">+</span>
+              </button>
+              <p className="contact-privacy">
+                Your details are used only to assess and respond to this
+                enquiry. Submitting prepares an email in your mail application.
+              </p>
+            </form>
+          </FadeIn>
+        </div>
       </section>
 
-      <footer>
-        <a className="brand" href="#top">
-          ALGRID<span>®</span>
-        </a>
-        <p>AI ventures · Digital systems · Growth</p>
-        <div>
-          <a href="#work">Work</a>
-          <a href="#ai">AI Lab</a>
-          <a href="#company">Company</a>
-          <a href="mailto:hello@algrid.com">Email</a>
-        </div>
-        <span>© 2026 Algrid International</span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
