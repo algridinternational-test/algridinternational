@@ -10,11 +10,15 @@
   --muted: #9ea39d;
   --acid: #d8a12b;
   --blue: #5ed6ff;
+  --font-geist-sans: "Helvetica Neue", "Avenir Next", Inter, Arial,
+    sans-serif;
+  --font-geist-mono: "SFMono-Regular", "SF Mono", Consolas,
+    "Liberation Mono", monospace;
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 * {
