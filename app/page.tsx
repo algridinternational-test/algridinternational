@@ -1205,42 +1205,100 @@ export default function Home() {
       </section>
 
       <section className="section philosophy-section" id="company">
-        <FadeIn className="philosophy-grid">
-          <div>
+        <FadeIn className="philosophy-head">
+          <div className="philosophy-title">
             <p className="eyebrow">About Algrid / 10</p>
-            <h2>Built for the space between vision and reality.</h2>
+            <h2>
+              The company behind
+              <br /> the <em>next company.</em>
+            </h2>
           </div>
-          <div className="philosophy-copy">
+          <div className="philosophy-intro">
+            <span>Independent · Kuala Lumpur · Global</span>
             <p>
               Most companies do not need more advice. They need a partner who can
               see the whole system—and make it real.
             </p>
-            <p>
-              Algrid International is an independent venture builder and digital
-              transformation company. We bring strategy, creative, engineering,
-              AI and growth into one accountable team.
-            </p>
-            <p>
-              For almost a decade, our Kuala Lumpur-based team has worked
-              remotely and globally—helping founders and transformation leaders
-              move from ambitious ideas to operating systems.
-            </p>
-            <blockquote>
-              “The work is only successful when the business is stronger after
-              we leave.”
-            </blockquote>
           </div>
         </FadeIn>
+
+        <div className="philosophy-stage">
+          <div className="philosophy-manifesto">
+            <div className="philosophy-manifesto-top">
+              <span>ALGRID / COMPANY PROFILE</span>
+              <i>EST. KUALA LUMPUR</i>
+            </div>
+            <div className="philosophy-statement">
+              <p>We operate where strategy usually stops.</p>
+              <strong>
+                One senior team to define the opportunity, shape the brand,
+                engineer the product, apply intelligence and build growth.
+              </strong>
+            </div>
+            <div className="philosophy-note">
+              <p>
+                Algrid International is an independent venture builder and
+                digital transformation company. For almost a decade, we have
+                helped founders and transformation leaders turn ambitious ideas
+                into businesses that can operate, learn and scale.
+              </p>
+              <blockquote>
+                The work is only successful when the business is stronger after
+                we leave.
+              </blockquote>
+            </div>
+          </div>
+
+          <div className="philosophy-system" aria-label="Algrid integrated execution model">
+            <div className="philosophy-system-head">
+              <span>ONE ACCOUNTABLE SYSTEM</span>
+              <i>05 / CONNECTED DISCIPLINES</i>
+            </div>
+            <div className="philosophy-orbit" aria-hidden="true">
+              <span className="philosophy-ring philosophy-ring-one" />
+              <span className="philosophy-ring philosophy-ring-two" />
+              <b>A</b>
+              <i className="philosophy-node node-strategy">STRATEGY</i>
+              <i className="philosophy-node node-creative">CREATIVE</i>
+              <i className="philosophy-node node-engineering">ENGINEERING</i>
+              <i className="philosophy-node node-ai">AI</i>
+              <i className="philosophy-node node-growth">GROWTH</i>
+            </div>
+            <div className="philosophy-system-foot">
+              <span>VISION</span>
+              <i />
+              <span>OPERATING REALITY</span>
+            </div>
+          </div>
+        </div>
+
         <div className="principles">
           {[
-            ["01", "Systems over symptoms"],
-            ["02", "Senior talent, close to the work"],
-            ["03", "Evidence before theatre"],
-            ["04", "Build for ownership"],
+            [
+              "01",
+              "Systems over symptoms",
+              "Solve the connected business problem, not the visible fragment.",
+            ],
+            [
+              "02",
+              "Senior talent, close to the work",
+              "The people shaping the strategy stay accountable through delivery.",
+            ],
+            [
+              "03",
+              "Evidence before theatre",
+              "Prototype, measure and learn before scaling the story.",
+            ],
+            [
+              "04",
+              "Build for ownership",
+              "Create capability your team can operate long after launch.",
+            ],
           ].map((principle) => (
             <div key={principle[0]}>
               <span>{principle[0]}</span>
               <b>{principle[1]}</b>
+              <p>{principle[2]}</p>
             </div>
           ))}
         </div>
