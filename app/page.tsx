@@ -662,14 +662,16 @@ export default function Home() {
         <FadeIn className="mvp-home-browser">
           <div className="mvp-home-toolbar">
             <div aria-hidden="true"><i /><i /><i /></div>
-            <span>ALGRID / LAUNCH SYSTEMS / FEATURED</span>
-            <b><i aria-hidden="true" /> 15 systems indexed</b>
+            <span>
+              ALGRID / LAUNCH SYSTEMS / <strong>FEATURED</strong>
+            </span>
+            <b><i aria-hidden="true" /> Product library online</b>
           </div>
           <div className="mvp-home-browser-body">
             <div className="mvp-home-index" role="group" aria-label="Featured launch systems">
               <div className="mvp-home-index-head">
-                <span>01 / Select a system</span>
-                <i>Build window</i>
+                <span>Product library</span>
+                <i>04 featured / 15 total</i>
               </div>
               {featuredLaunchSystems.map((product, index) => (
                 <button
@@ -684,12 +686,12 @@ export default function Home() {
                     <small>{product.category}</small>
                   </div>
                   <i>{product.buildTime}</i>
-                  <strong aria-hidden="true">↗</strong>
+                  <strong aria-hidden="true">{activeLaunchSystem === index ? "●" : "○"}</strong>
                 </button>
               ))}
               <a href="/mvps">
                 <span>View all 15 product systems</span>
-                <i>Open index ↗</i>
+                <i>Open product library +</i>
               </a>
             </div>
 
@@ -701,40 +703,94 @@ export default function Home() {
               transition={{ duration: 0.3 }}
             >
               <div className="mvp-home-preview-head">
-                <span>{highlightedLaunchSystem.category} / Selected system</span>
-                <i>Scale-ready architecture</i>
-              </div>
-              <div className="mvp-home-preview-main">
                 <div>
-                  <p>{highlightedLaunchSystem.code}</p>
+                  <span>Blueprint / {highlightedLaunchSystem.code}</span>
+                  <small>{highlightedLaunchSystem.category} product system</small>
+                </div>
+                <i><b aria-hidden="true" /> Reference configuration</i>
+              </div>
+
+              <div className="mvp-home-preview-overview">
+                <div>
                   <h3>{highlightedLaunchSystem.name}</h3>
                   <strong>{highlightedLaunchSystem.promise}</strong>
                 </div>
-                <div className="mvp-home-preview-metric">
-                  <span>{highlightedLaunchSystem.metric}</span>
-                  <i>{highlightedLaunchSystem.metricLabel}</i>
+                <div className="mvp-home-readiness">
+                  <span>Blueprint status</span>
+                  <strong>Build-ready</strong>
+                  <small>Scope, architecture and launch path mapped</small>
                 </div>
               </div>
-              <div className="mvp-home-preview-specs">
-                <div>
+
+              <div className="mvp-home-kpis">
+                <article>
+                  <span>Outcome signal</span>
+                  <strong>{highlightedLaunchSystem.metric}</strong>
+                  <small>{highlightedLaunchSystem.metricLabel}</small>
+                </article>
+                <article>
                   <span>Estimated build</span>
-                  <b>{highlightedLaunchSystem.buildTime}</b>
-                </div>
-                <div>
-                  <span>Ideal business</span>
-                  <b>{highlightedLaunchSystem.idealFor}</b>
-                </div>
-                <div>
-                  <span>Scalability</span>
-                  <b>{highlightedLaunchSystem.scalability}</b>
-                </div>
+                  <strong>{highlightedLaunchSystem.buildTime}</strong>
+                  <small>Strategy through launch</small>
+                </article>
+                <article>
+                  <span>Architecture</span>
+                  <strong>{highlightedLaunchSystem.stack.length} layers</strong>
+                  <small>Modular and scale-ready</small>
+                </article>
               </div>
-              <div className="mvp-home-preview-foot">
-                <div>
-                  <span>Core product layer</span>
-                  {highlightedLaunchSystem.features.slice(0, 3).map((feature) => (
-                    <i key={feature}>{feature}</i>
+
+              <div className="mvp-home-command-grid">
+                <section className="mvp-home-plan">
+                  <div className="mvp-home-panel-head">
+                    <span>Delivery plan</span>
+                    <i>{highlightedLaunchSystem.buildTime} total</i>
+                  </div>
+                  {[
+                    ["01", "Product strategy", "15%"],
+                    ["02", "Experience system", "25%"],
+                    ["03", "Build & integration", "45%"],
+                    ["04", "Launch & learning", "15%"],
+                  ].map((phase) => (
+                    <div className="mvp-home-phase" key={phase[0]}>
+                      <span>{phase[0]}</span>
+                      <b>{phase[1]}</b>
+                      <i>{phase[2]}</i>
+                      <em aria-hidden="true"><span style={{ width: phase[2] }} /></em>
+                    </div>
                   ))}
+                </section>
+
+                <section className="mvp-home-modules">
+                  <div className="mvp-home-panel-head">
+                    <span>Product architecture</span>
+                    <i>{highlightedLaunchSystem.features.length} modules included</i>
+                  </div>
+                  <div className="mvp-home-module-list">
+                    {highlightedLaunchSystem.features.map((feature, index) => (
+                      <div key={feature}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <b>{feature}</b>
+                        <i>Included</i>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mvp-home-stack">
+                    <span>Technology stack</span>
+                    <div>
+                      {highlightedLaunchSystem.stack.map((technology) => (
+                        <i key={technology}>{technology}</i>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <div className="mvp-home-preview-foot">
+                <div className="mvp-home-fit">
+                  <span>Best suited for</span>
+                  <b>{highlightedLaunchSystem.idealFor}</b>
+                  <small>{highlightedLaunchSystem.scalability}</small>
                 </div>
                 <a href={`/mvps#${highlightedLaunchSystem.id}`}>
                   View system <span aria-hidden="true">+</span>
