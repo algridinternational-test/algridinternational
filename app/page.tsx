@@ -15,6 +15,40 @@ import { mvpProducts } from "./mvps/data";
 
 const featuredLaunchSystems = mvpProducts.slice(0, 4);
 
+const portfolioSignals = [
+  {
+    value: "+20%",
+    label: "reservations",
+    context: "SEO system · Kuala Lumpur hospitality",
+    period: "03 months",
+  },
+  {
+    value: "+50%",
+    label: "audience growth",
+    context: "Social growth · Boutique retail",
+    period: "02 months",
+  },
+  {
+    value: "+15%",
+    label: "conversions",
+    context: "Lifecycle automation · Technology",
+    period: "+30% opens",
+  },
+];
+
+const clientVoices = [
+  {
+    quote: "Streamlined our workflows, saving us time and resources.",
+    name: "Samantha Lee",
+    focus: "Digital growth & automation",
+  },
+  {
+    quote: "The results exceeded our expectations.",
+    name: "Dinesh Kumar",
+    focus: "Operations & online engagement",
+  },
+];
+
 const systems = [
   {
     index: "01",
@@ -862,6 +896,48 @@ export default function Home() {
             </div>
           </motion.article>
         </div>
+
+        <FadeIn className="portfolio-proof" delay={0.08}>
+          <div className="portfolio-proof-head">
+            <div>
+              <p className="eyebrow">Portfolio highlights / Client evidence</p>
+              <h3>Expert work.<br />Visible momentum.</h3>
+            </div>
+            <p>
+              Selected outcomes and client feedback from Algrid engagements—
+              presented as signals of what connected execution can unlock.
+            </p>
+          </div>
+
+          <div className="portfolio-signal-grid" aria-label="Selected portfolio outcomes">
+            {portfolioSignals.map((signal, index) => (
+              <article className="portfolio-signal" key={signal.label}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{signal.value}</strong>
+                <h4>{signal.label}</h4>
+                <p>{signal.context}</p>
+                <small>{signal.period}</small>
+              </article>
+            ))}
+          </div>
+
+          <div className="client-voice-grid" aria-label="Client testimonials">
+            <div className="client-voice-label">
+              <span>CLIENT VOICE</span>
+              <i aria-hidden="true" />
+              <small>02 selected notes</small>
+            </div>
+            {clientVoices.map((voice) => (
+              <figure className="client-voice" key={voice.name}>
+                <blockquote>“{voice.quote}”</blockquote>
+                <figcaption>
+                  <span>{voice.name}</span>
+                  <small>{voice.focus}</small>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </FadeIn>
       </section>
 
       <section className="section systems-section" id="systems">
