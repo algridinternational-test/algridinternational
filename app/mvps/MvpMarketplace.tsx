@@ -351,7 +351,7 @@ export function MvpMarketplace() {
       <section className="mvp-hero">
         <div className="mvp-hero-grid" aria-hidden="true" />
         <div className="mvp-hero-copy">
-          <p className="eyebrow">Algrid Launch Systems / MVP Library</p>
+          <p className="eyebrow">Algrid / Ready-to-launch products</p>
           <h1>
             Products designed
             <br /> to reach <em>market.</em>
@@ -389,7 +389,7 @@ export function MvpMarketplace() {
       <section className="mvp-marketplace">
         <div className="mvp-market-head">
           <div>
-            <p className="eyebrow">Browse launch systems</p>
+            <p className="eyebrow">Explore ready-to-launch products</p>
             <h2>Choose the business outcome.</h2>
           </div>
           <p>
@@ -407,7 +407,7 @@ export function MvpMarketplace() {
               <i />
             </div>
             <div className="mvp-browser-path">
-              <span>ALGRID / LAUNCH SYSTEMS</span>
+              <span>ALGRID / BUSINESS PRODUCTS</span>
               <b>Product index</b>
             </div>
             <div className="mvp-browser-status">
@@ -422,7 +422,7 @@ export function MvpMarketplace() {
                 <span>01</span>
                 <p>Filter by outcome</p>
               </div>
-              <div className="mvp-filter" role="group" aria-label="Filter launch systems">
+              <div className="mvp-filter" role="group" aria-label="Filter business products">
                 {categories.map((category, categoryIndex) => (
                   <button
                     key={category}
@@ -512,7 +512,7 @@ export function MvpMarketplace() {
                         ))}
                       </div>
                     </div>
-                    <a href={`mailto:social@algridinternational.com?subject=${encodeURIComponent(`MVP enquiry: ${product.name}`)}`}>
+                    <a href={`mailto:social@algridinternational.com?subject=${encodeURIComponent(`Product enquiry: ${product.name}`)}`}>
                       Scope this product <span aria-hidden="true">+</span>
                     </a>
                   </motion.article>
@@ -525,7 +525,7 @@ export function MvpMarketplace() {
 
       <section className="mvp-method">
         <div>
-          <p className="eyebrow">How MVP delivery works</p>
+          <p className="eyebrow">How product delivery works</p>
           <h2>Fixed focus. Real product. Clear next move.</h2>
         </div>
         <ol>
@@ -567,7 +567,7 @@ export function MvpMarketplace() {
           <br /> We’ll shape the product.
         </h2>
         <a className="button button-primary" href="/#contact">
-          Start an MVP conversation <span aria-hidden="true">+</span>
+          Start a product conversation <span aria-hidden="true">+</span>
         </a>
       </section>
     </>

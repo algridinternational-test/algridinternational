@@ -29,7 +29,7 @@ export default function TermsPage() {
           <section>
             <h2>Demonstrations and estimates</h2>
             <p>
-              Interactive tools, interface previews, opportunity maps and calculators are illustrative. Their outputs are not forecasts, guarantees or a substitute for analysis using your actual business data. MVP build-time ranges are initial planning guides and may change after discovery.
+              Interactive tools, interface previews, opportunity maps and calculators are illustrative. Their outputs are not forecasts, guarantees or a substitute for analysis using your actual business data. Product build-time ranges are initial planning guides and may change after discovery.
             </p>
           </section>
           <section>

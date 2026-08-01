@@ -59,7 +59,7 @@ const systems = [
     index: "01",
     title: "Venture Creation",
     text: "From opportunity thesis to product-market signal. We turn underdeveloped ideas into investable, operating ventures.",
-    tags: ["Venture strategy", "Brand systems", "MVP build"],
+    tags: ["Venture strategy", "Brand systems", "Product build"],
   },
   {
     index: "02",
@@ -162,7 +162,7 @@ const services = [
     text: "Align the proposition, product and commercial story into a launch designed to learn and scale.",
     capabilities: [
       "Go-to-Market Strategy",
-      "MVP Development",
+      "Product Development",
       "Sales Assets",
       "Product Launch",
     ],
@@ -639,7 +639,7 @@ export default function Home() {
                     </div>
                     <div className="launch-steps">
                       <span className="done">THESIS</span>
-                      <span className="done">MVP</span>
+                      <span className="done">PRODUCT</span>
                       <span>MARKET</span>
                     </div>
                   </>
@@ -685,8 +685,8 @@ export default function Home() {
       <section className="section mvp-highlight-section" id="mvps">
         <FadeIn className="mvp-highlight-head">
           <div>
-            <p className="eyebrow">Minimum viable products / Launch systems</p>
-            <h2>Ready-to-launch businesses, not agency deliverables.</h2>
+            <p className="eyebrow">Ready-to-launch products / Featured</p>
+            <h2>Business products built to launch and grow.</h2>
           </div>
           <div>
             <p>
@@ -694,7 +694,7 @@ export default function Home() {
               validate the core signal and scale without a rebuild.
             </p>
             <a className="section-cta" href="/mvps">
-              Explore all 15 MVPs <span aria-hidden="true">+</span>
+              Explore all 15 products <span aria-hidden="true">+</span>
             </a>
           </div>
         </FadeIn>
@@ -702,12 +702,12 @@ export default function Home() {
           <div className="mvp-home-toolbar">
             <div aria-hidden="true"><i /><i /><i /></div>
             <span>
-              ALGRID / LAUNCH SYSTEMS / <strong>FEATURED</strong>
+              ALGRID / BUSINESS PRODUCTS / <strong>FEATURED</strong>
             </span>
             <b><i aria-hidden="true" /> Product library online</b>
           </div>
           <div className="mvp-home-browser-body">
-            <div className="mvp-home-index" role="group" aria-label="Featured launch systems">
+            <div className="mvp-home-index" role="group" aria-label="Featured business products">
               <div className="mvp-home-index-head">
                 <span>Product library</span>
                 <i>04 featured / 15 total</i>
@@ -729,7 +729,7 @@ export default function Home() {
                 </button>
               ))}
               <a href="/mvps">
-                <span>View all 15 product systems</span>
+                <span>View all 15 business products</span>
                 <i>Open product library +</i>
               </a>
             </div>
@@ -1588,7 +1588,7 @@ export default function Home() {
                     <option>Website or software platform</option>
                     <option>Brand, packaging or creative system</option>
                     <option>Growth and performance engine</option>
-                    <option>Business launch or MVP</option>
+                    <option>Business or product launch</option>
                     <option>Multi-system transformation</option>
                     <option>Long-term execution partnership</option>
                   </select>

@@ -157,7 +157,7 @@ export const mvpProducts: MvpProduct[] = [
   {
     id: "mobile-app-mvp",
     code: "PL/11",
-    name: "Mobile App MVP",
+    name: "Mobile App Launch",
     category: "Platforms",
     promise: "Validate the core habit before scaling the product.",
     buildTime: "10–14 weeks",
@@ -225,4 +225,3 @@ export const mvpProducts: MvpProduct[] = [
     metricLabel: "network value",
   },
 ];
-

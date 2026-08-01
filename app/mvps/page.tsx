@@ -3,12 +3,12 @@ import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 import { MvpMarketplace } from "./MvpMarketplace";
 
 export const metadata: Metadata = {
-  title: "Minimum Viable Products We Build",
+  title: "Ready-to-Launch Business Products",
   description:
     "Explore ready-to-launch AI, software, commerce and operations products built by Algrid International.",
   alternates: { canonical: "/mvps" },
   openGraph: {
-    title: "Minimum Viable Products We Build — Algrid International",
+    title: "Ready-to-Launch Business Products — Algrid International",
     description:
       "Explore ready-to-launch AI, software, commerce and operations products engineered for scalable business growth.",
     url: "/mvps",

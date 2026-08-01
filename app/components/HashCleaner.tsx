@@ -15,12 +15,17 @@ const knownSections = new Set([
 
 function cleanLocationHash() {
   const fragments = window.location.hash.split("#").filter(Boolean);
-  if (fragments.length < 2) return;
+  if (fragments.length === 0) return;
 
   const section = [...fragments]
     .reverse()
     .find((fragment) => knownSections.has(fragment));
-  const cleanHash = section ? `#${section}` : "";
+  const shouldClean = fragments.length > 1 || section === "top";
+
+  if (!shouldClean) return;
+
+  const cleanSection = section === "top" ? undefined : section;
+  const cleanHash = cleanSection ? `#${cleanSection}` : "";
 
   window.history.replaceState(
     window.history.state,
@@ -28,11 +33,14 @@ function cleanLocationHash() {
     `${window.location.pathname}${window.location.search}${cleanHash}`,
   );
 
-  if (section) {
-    window.requestAnimationFrame(() => {
-      document.getElementById(section)?.scrollIntoView({ block: "start" });
-    });
-  }
+  window.requestAnimationFrame(() => {
+    if (cleanSection) {
+      document.getElementById(cleanSection)?.scrollIntoView({ block: "start" });
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "auto" });
+  });
 }
 
 export function HashCleaner() {

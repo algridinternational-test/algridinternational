@@ -68,7 +68,7 @@ export function SiteHeader() {
     <header className="nav-shell">
       <a
         className="brand logo-brand"
-        href="/#top"
+        href="/"
         aria-label="Algrid International home"
       >
         <Image
@@ -83,7 +83,7 @@ export function SiteHeader() {
       </a>
       <nav aria-label="Primary navigation">
         <a href="/#services">Services</a>
-        <Link href="/mvps">MVPs</Link>
+        <Link href="/mvps">Products</Link>
         <a href="/#work">Ventures</a>
         <a href="/#systems">Systems</a>
         <a href="/#ai">AI Lab</a>
@@ -91,7 +91,7 @@ export function SiteHeader() {
       </nav>
       <div className="nav-compact-links">
         <a href="/#services">Services</a>
-        <Link href="/mvps">MVPs</Link>
+        <Link href="/mvps">Products</Link>
       </div>
       <a className="nav-cta" href="/#contact">
         Start a project <span aria-hidden="true">+</span>
@@ -106,7 +106,7 @@ export function SiteFooter() {
       <div className="footer-main">
         <a
           className="brand logo-brand footer-brand"
-          href="/#top"
+          href="/"
           aria-label="Algrid International home"
         >
           <Image
@@ -121,7 +121,7 @@ export function SiteFooter() {
 
         <nav aria-label="Footer navigation">
           <a href="/#services">Services</a>
-          <Link href="/mvps">MVPs</Link>
+          <Link href="/mvps">Products</Link>
           <a href="/#work">Ventures</a>
           <a href="/#systems">Systems</a>
           <Link href="/insights">Insights</Link>
