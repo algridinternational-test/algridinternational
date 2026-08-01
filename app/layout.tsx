@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s — Algrid International",
   },
   description:
-    "Algrid builds ventures and transforms ambitious companies through integrated brand, software engineering, AI automation and growth systems.",
+    "Algrid International is a Kuala Lumpur AI venture builder and digital transformation partner integrating strategy, branding, software engineering, automation and growth.",
   keywords: [
     "AI venture builder",
     "digital transformation Malaysia",
@@ -21,12 +21,30 @@ export const metadata: Metadata = {
     icon: "/algrid-logo.png",
     shortcut: "/algrid-logo.png",
   },
+  applicationName: "Algrid International",
+  authors: [{ name: "Algrid International", url: "https://algridinternational.com" }],
+  creator: "Algrid International",
+  publisher: "Algrid International",
+  category: "Technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: { canonical: "/" },
   openGraph: {
     title: "Algrid International — Build the next version of your business.",
     description:
       "AI ventures, digital systems and intelligent growth—built by one integrated senior team.",
     type: "website",
+    url: "https://algridinternational.com",
+    siteName: "Algrid International",
     locale: "en_MY",
     images: [
       {
@@ -61,6 +79,21 @@ const organisationSchema = {
     addressCountry: "MY",
   },
   areaServed: "Worldwide",
+  logo: "https://algridinternational.com/algrid-logo.png",
+  description:
+    "AI venture builder and digital transformation partner integrating strategy, branding, software engineering, automation and growth.",
+  sameAs: [
+    "https://www.instagram.com/algrid_international/",
+    "https://www.facebook.com/people/Algrid-International/61575191317051/",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+601169194826",
+    email: "social@algridinternational.com",
+    contactType: "sales",
+    areaServed: "Worldwide",
+    availableLanguage: ["English", "Malay"],
+  },
   knowsAbout: [
     "Artificial intelligence automation",
     "Software engineering",

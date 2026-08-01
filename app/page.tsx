@@ -9,7 +9,12 @@ import {
   useRef,
   useState,
 } from "react";
-import { SiteFooter, SiteHeader } from "./components/SiteChrome";
+import {
+  ContactIcon,
+  SiteFooter,
+  SiteHeader,
+  socialLinks,
+} from "./components/SiteChrome";
 import { ventureStories as ventures } from "./content";
 import { mvpProducts } from "./mvps/data";
 
@@ -1469,20 +1474,62 @@ export default function Home() {
             </div>
 
             <div className="contact-direct">
-              <p>Prefer a direct channel?</p>
-              <a href="mailto:social@algridinternational.com">
-                social@algridinternational.com ↗
-              </a>
-              <a
-                href="https://wa.me/601169194826"
-                target="_blank"
-                rel="noreferrer"
-              >
-                WhatsApp +60 11 6919 4826 ↗
-              </a>
-              <small>
-                15-13A, Wisma UOA II, Jalan Pinang, 50450 Kuala Lumpur
-              </small>
+              <div className="contact-direct-head">
+                <p>Prefer a direct channel?</p>
+                <span>Kuala Lumpur · GMT+8</span>
+              </div>
+              <div className="contact-channel-grid">
+                <a href="mailto:social@algridinternational.com">
+                  <span className="contact-channel-icon">
+                    <ContactIcon name="email" />
+                  </span>
+                  <span>
+                    <small>Email our team</small>
+                    <b>social@algridinternational.com</b>
+                  </span>
+                  <i aria-hidden="true">+</i>
+                </a>
+                <a
+                  href="https://wa.me/601169194826"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="contact-channel-icon">
+                    <ContactIcon name="whatsapp" />
+                  </span>
+                  <span>
+                    <small>Start on WhatsApp</small>
+                    <b>+60 11 6919 4826</b>
+                  </span>
+                  <i aria-hidden="true">+</i>
+                </a>
+              </div>
+              <div className="contact-location">
+                <span className="contact-channel-icon">
+                  <ContactIcon name="pin" />
+                </span>
+                <address>
+                  15-13A, Wisma UOA II, Jalan Pinang<br />
+                  50450 Kuala Lumpur, Malaysia
+                </address>
+              </div>
+              <div className="contact-socials">
+                <p>Follow our work</p>
+                <div>
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Follow Algrid on ${social.name}`}
+                    >
+                      <ContactIcon name={social.icon} />
+                      <span>{social.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </FadeIn>
 
