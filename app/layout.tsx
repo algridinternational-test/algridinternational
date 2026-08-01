@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { HashCleaner } from "./components/HashCleaner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -111,6 +112,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <HashCleaner />
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>

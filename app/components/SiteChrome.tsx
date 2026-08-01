@@ -66,7 +66,7 @@ export function ContactIcon({
 export function SiteHeader() {
   return (
     <header className="nav-shell">
-      <Link
+      <a
         className="brand logo-brand"
         href="/#top"
         aria-label="Algrid International home"
@@ -80,22 +80,22 @@ export function SiteHeader() {
           sizes="154px"
         />
         <small>AI VENTURE BUILDER</small>
-      </Link>
+      </a>
       <nav aria-label="Primary navigation">
-        <Link href="/#services">Services</Link>
+        <a href="/#services">Services</a>
         <Link href="/mvps">MVPs</Link>
-        <Link href="/#work">Ventures</Link>
-        <Link href="/#systems">Systems</Link>
-        <Link href="/#ai">AI Lab</Link>
+        <a href="/#work">Ventures</a>
+        <a href="/#systems">Systems</a>
+        <a href="/#ai">AI Lab</a>
         <Link href="/insights">Insights</Link>
       </nav>
       <div className="nav-compact-links">
-        <Link href="/#services">Services</Link>
+        <a href="/#services">Services</a>
         <Link href="/mvps">MVPs</Link>
       </div>
-      <Link className="nav-cta" href="/#contact">
+      <a className="nav-cta" href="/#contact">
         Start a project <span aria-hidden="true">+</span>
-      </Link>
+      </a>
     </header>
   );
 }
@@ -104,7 +104,7 @@ export function SiteFooter() {
   return (
     <footer className="footer-shell">
       <div className="footer-main">
-        <Link
+        <a
           className="brand logo-brand footer-brand"
           href="/#top"
           aria-label="Algrid International home"
@@ -117,25 +117,25 @@ export function SiteFooter() {
             sizes="154px"
           />
           <small>AI VENTURE BUILDER</small>
-        </Link>
+        </a>
 
         <nav aria-label="Footer navigation">
-          <Link href="/#services">Services</Link>
+          <a href="/#services">Services</a>
           <Link href="/mvps">MVPs</Link>
-          <Link href="/#work">Ventures</Link>
-          <Link href="/#systems">Systems</Link>
+          <a href="/#work">Ventures</a>
+          <a href="/#systems">Systems</a>
           <Link href="/insights">Insights</Link>
         </nav>
 
-        <Link className="footer-cta" href="/#contact">
+        <a className="footer-cta" href="/#contact">
           Start a project <span aria-hidden="true">+</span>
-        </Link>
+        </a>
       </div>
 
       <div className="footer-meta">
         <p>AI ventures · Digital systems · Growth</p>
         <div className="footer-legal">
-          <Link href="/#company">Company</Link>
+          <a href="/#company">Company</a>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
           <div className="footer-socials" aria-label="Algrid social media">
