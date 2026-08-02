@@ -133,11 +133,16 @@ export function SiteFooter() {
       </div>
 
       <div className="footer-meta">
-        <p>AI ventures · Digital systems · Growth</p>
-        <div className="footer-legal">
-          <a href="/#company">Company</a>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
+        <div className="footer-signature">
+          <i aria-hidden="true" />
+          <p>AI ventures · Digital systems · Growth</p>
+        </div>
+        <div className="footer-utility">
+          <nav className="footer-legal" aria-label="Legal navigation">
+            <a href="/#company">Company</a>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+          </nav>
           <div className="footer-socials" aria-label="Algrid social media">
             {socialLinks.map((social) => (
               <a
@@ -151,8 +156,8 @@ export function SiteFooter() {
               </a>
             ))}
           </div>
+          <span>© 2026 Algrid International</span>
         </div>
-        <span>© 2026 Algrid International</span>
       </div>
     </footer>
   );

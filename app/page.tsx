@@ -422,8 +422,8 @@ export default function Home() {
               <a className="button button-primary" href="#contact">
                 Build with Algrid <span aria-hidden="true">+</span>
               </a>
-              <a className="text-link" href="#work">
-                Explore our work <span>↓</span>
+              <a className="button hero-work-cta" href="#work">
+                Explore our work <span aria-hidden="true">+</span>
               </a>
             </div>
           </FadeIn>
