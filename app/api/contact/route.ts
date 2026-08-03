@@ -7,6 +7,8 @@ const fields = [
   "email",
   "company",
   "phone",
+  "country",
+  "preferredLanguage",
   "projectType",
   "timeline",
   "challenge",
@@ -34,17 +36,21 @@ export async function POST(request: Request) {
     email: clean(body.email, 254),
     company: clean(body.company, 160),
     phone: clean(body.phone, 60),
+    country: clean(body.country, 100),
+    preferredLanguage: clean(body.preferredLanguage, 40),
     projectType: clean(body.projectType, 160),
     timeline: clean(body.timeline, 120),
     challenge: clean(body.challenge, 4000),
   };
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isHeaderEnquiry = data.projectType === "Website contact enquiry";
   if (
     !data.name ||
     !emailPattern.test(data.email) ||
     !data.projectType ||
     !data.timeline ||
+    (isHeaderEnquiry && (!data.phone || !data.country)) ||
     data.challenge.length < 10
   ) {
     return NextResponse.json(
@@ -67,6 +73,8 @@ export async function POST(request: Request) {
       email: "Work email",
       company: "Company",
       phone: "Phone",
+      country: "APAC country or market",
+      preferredLanguage: "Preferred language",
       projectType: "Project type",
       timeline: "Preferred start",
       challenge: "Challenge or launch",

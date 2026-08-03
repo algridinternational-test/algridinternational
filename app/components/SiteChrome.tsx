@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useCallback, useRef, useState } from "react";
 import { SectionLink } from "./SectionLink";
+import { ContactModal } from "./ContactModal";
+import { useSiteLanguage } from "./useSiteLanguage";
 
 export const socialLinks = [
   {
@@ -65,7 +70,37 @@ export function ContactIcon({
 }
 
 export function SiteHeader() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const contactButtonRef = useRef<HTMLButtonElement>(null);
+  const { language, setLanguage } = useSiteLanguage();
+  const closeContact = useCallback(() => {
+    setIsContactOpen(false);
+    window.requestAnimationFrame(() => contactButtonRef.current?.focus());
+  }, []);
+  const labels = language === "ms"
+    ? {
+        services: "Perkhidmatan",
+        products: "Produk",
+        ventures: "Usaha",
+        systems: "Sistem",
+        ai: "Makmal AI",
+        insights: "Wawasan",
+        menu: "Menu",
+        contact: "Hubungi kami",
+      }
+    : {
+        services: "Services",
+        products: "Products",
+        ventures: "Ventures",
+        systems: "Systems",
+        ai: "AI Lab",
+        insights: "Insights",
+        menu: "Menu",
+        contact: "Contact us",
+      };
+
   return (
+    <>
     <header className="nav-shell">
       <Link className="brand logo-brand" href="/">
         <Image
@@ -79,32 +114,44 @@ export function SiteHeader() {
         <small>AI VENTURE BUILDER</small>
       </Link>
       <nav aria-label="Primary navigation">
-        <SectionLink section="services">Services</SectionLink>
-        <Link href="/mvps">Products</Link>
-        <SectionLink section="work">Ventures</SectionLink>
-        <SectionLink section="systems">Systems</SectionLink>
-        <SectionLink section="ai">AI Lab</SectionLink>
-        <Link href="/insights">Insights</Link>
+        <SectionLink section="services">{labels.services}</SectionLink>
+        <Link href="/mvps">{labels.products}</Link>
+        <SectionLink section="work">{labels.ventures}</SectionLink>
+        <SectionLink section="systems">{labels.systems}</SectionLink>
+        <SectionLink section="ai">{labels.ai}</SectionLink>
+        <Link href="/insights">{labels.insights}</Link>
       </nav>
       <details className="nav-mobile-menu">
-        <summary>Menu <span aria-hidden="true">+</span></summary>
+        <summary>{labels.menu} <span aria-hidden="true">+</span></summary>
         <nav aria-label="Mobile navigation">
-          <SectionLink section="services">Services</SectionLink>
-          <Link href="/mvps">Products</Link>
-          <SectionLink section="work">Ventures</SectionLink>
-          <SectionLink section="systems">Systems</SectionLink>
-          <SectionLink section="ai">AI Lab</SectionLink>
-          <Link href="/insights">Insights</Link>
+          <SectionLink section="services">{labels.services}</SectionLink>
+          <Link href="/mvps">{labels.products}</Link>
+          <SectionLink section="work">{labels.ventures}</SectionLink>
+          <SectionLink section="systems">{labels.systems}</SectionLink>
+          <SectionLink section="ai">{labels.ai}</SectionLink>
+          <Link href="/insights">{labels.insights}</Link>
         </nav>
       </details>
-      <SectionLink className="nav-cta" section="contact">
-        Start a project <span aria-hidden="true">+</span>
-      </SectionLink>
+      <div className="nav-actions">
+        <div className="language-toggle" role="group" aria-label="Website language">
+          <button type="button" onClick={() => setLanguage("en")} aria-pressed={language === "en"}>EN</button>
+          <button type="button" onClick={() => setLanguage("ms")} aria-pressed={language === "ms"}>BM</button>
+        </div>
+        <button ref={contactButtonRef} className="nav-cta" type="button" onClick={() => setIsContactOpen(true)}>
+          {labels.contact} <span aria-hidden="true">+</span>
+        </button>
+      </div>
     </header>
+    {isContactOpen ? <ContactModal language={language} onClose={closeContact} /> : null}
+    </>
   );
 }
 
 export function SiteFooter() {
+  const { language } = useSiteLanguage();
+  const labels = language === "ms"
+    ? { services: "Perkhidmatan", products: "Produk", ventures: "Usaha", systems: "Sistem", insights: "Wawasan", project: "Mulakan projek", company: "Syarikat", privacy: "Privasi", terms: "Terma" }
+    : { services: "Services", products: "Products", ventures: "Ventures", systems: "Systems", insights: "Insights", project: "Start a project", company: "Company", privacy: "Privacy", terms: "Terms" };
   return (
     <footer className="footer-shell">
       <div className="footer-main">
@@ -120,15 +167,15 @@ export function SiteFooter() {
         </Link>
 
         <nav aria-label="Footer navigation">
-          <SectionLink section="services">Services</SectionLink>
-          <Link href="/mvps">Products</Link>
-          <SectionLink section="work">Ventures</SectionLink>
-          <SectionLink section="systems">Systems</SectionLink>
-          <Link href="/insights">Insights</Link>
+          <SectionLink section="services">{labels.services}</SectionLink>
+          <Link href="/mvps">{labels.products}</Link>
+          <SectionLink section="work">{labels.ventures}</SectionLink>
+          <SectionLink section="systems">{labels.systems}</SectionLink>
+          <Link href="/insights">{labels.insights}</Link>
         </nav>
 
         <SectionLink className="footer-cta" section="contact">
-          Start a project <span aria-hidden="true">+</span>
+          {labels.project} <span aria-hidden="true">+</span>
         </SectionLink>
       </div>
 
@@ -139,9 +186,9 @@ export function SiteFooter() {
         </div>
         <div className="footer-utility">
           <nav className="footer-legal" aria-label="Legal navigation">
-            <SectionLink section="company">Company</SectionLink>
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
+            <SectionLink section="company">{labels.company}</SectionLink>
+            <Link href="/privacy">{labels.privacy}</Link>
+            <Link href="/terms">{labels.terms}</Link>
           </nav>
           <div className="footer-socials" aria-label="Algrid social media">
             {socialLinks.map((social) => (
