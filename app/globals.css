@@ -4804,6 +4804,26 @@ footer div a {
   }
 }
 
+/* Legal-page contact links must remain readable on light backgrounds. */
+.legal-page .legal-copy a {
+  color: #5c4100;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+  text-decoration-color: #b77b00;
+  text-decoration-thickness: 2px;
+}
+
+.legal-page .legal-copy a:hover {
+  color: #0a0a08;
+  text-decoration-color: #0a0a08;
+}
+
+.legal-page .legal-copy a:focus-visible {
+  border-radius: 2px;
+  outline: 3px solid rgba(92, 65, 0, 0.34);
+  outline-offset: 4px;
+}
+
 /* Header contact dialog and bilingual controls */
 .nav-actions {
   align-items: center;
