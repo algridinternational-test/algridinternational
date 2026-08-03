@@ -942,44 +942,77 @@ export default function Home() {
         </div>
 
         <FadeIn className="portfolio-proof" delay={0.08}>
+          <div className="portfolio-proof-bar">
+            <span>ALGRID / EVIDENCE INDEX</span>
+            <span><i /> SELECTED ENGAGEMENT SIGNALS</span>
+            <span>03 OUTCOMES · 02 CLIENT NOTES</span>
+          </div>
           <div className="portfolio-proof-head">
             <div>
               <p className="eyebrow">Portfolio highlights / Client evidence</p>
-              <h3>Expert work.<br />Visible momentum.</h3>
+              <h3>Work that moves<br />the <em>business.</em></h3>
             </div>
-            <p>
-              Selected outcomes and client feedback from Algrid engagements—
-              presented as signals of what connected execution can unlock.
-            </p>
+            <div className="portfolio-proof-intro">
+              <span>OUTCOMES, NOT OUTPUTS</span>
+              <p>
+                Selected outcome snapshots and client feedback showing what
+                connected strategy, product and growth execution can unlock.
+              </p>
+            </div>
           </div>
 
           <div className="portfolio-signal-grid" aria-label="Selected portfolio outcomes">
             {portfolioSignals.map((signal, index) => (
-              <article className="portfolio-signal" key={signal.label}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{signal.value}</strong>
-                <h4>{signal.label}</h4>
-                <p>{signal.context}</p>
-                <small>{signal.period}</small>
+              <article className={`portfolio-signal portfolio-signal-${index + 1}`} key={signal.label}>
+                <div className="portfolio-signal-meta">
+                  <span>SIGNAL / {String(index + 1).padStart(2, "0")}</span>
+                  <small>{signal.period}</small>
+                </div>
+                <div className="portfolio-signal-value">
+                  <strong>{signal.value}</strong>
+                  <i>measured outcome</i>
+                </div>
+                <div className="portfolio-signal-copy">
+                  <h4>{signal.label}</h4>
+                  <p>{signal.context}</p>
+                </div>
+                <div className="portfolio-signal-chart" aria-hidden="true">
+                  {Array.from({ length: 9 }, (_, barIndex) => <i key={barIndex} />)}
+                </div>
               </article>
             ))}
           </div>
 
           <div className="client-voice-grid" aria-label="Client testimonials">
-            <div className="client-voice-label">
-              <span>CLIENT VOICE</span>
-              <i aria-hidden="true" />
-              <small>02 selected notes</small>
+              <div className="client-voice-label">
+              <div>
+                <span>CLIENT PERSPECTIVE</span>
+                <strong>What partners<br />noticed.</strong>
+              </div>
+              <b>02</b>
+              <small>SELECTED NOTES</small>
             </div>
-            {clientVoices.map((voice) => (
+            {clientVoices.map((voice, index) => (
               <figure className="client-voice" key={voice.name}>
-                <blockquote>“{voice.quote}”</blockquote>
+                <div className="client-voice-top">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <i aria-hidden="true">“</i>
+                </div>
+                <blockquote>{voice.quote}</blockquote>
                 <figcaption>
-                  <span>{voice.name}</span>
-                  <small>{voice.focus}</small>
+                  <b aria-hidden="true">{voice.name.charAt(0)}</b>
+                  <span>
+                    <strong>{voice.name}</strong>
+                    <small>{voice.focus}</small>
+                  </span>
                 </figcaption>
               </figure>
             ))}
+          </div>
+          <div className="portfolio-proof-foot">
+            <span>Evidence note</span>
+            <p>Selected engagement snapshots. Outcomes depend on scope, market conditions and implementation.</p>
+            <i>ALGRID / CONNECTED EXECUTION</i>
           </div>
         </FadeIn>
       </section>
