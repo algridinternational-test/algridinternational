@@ -4804,6 +4804,120 @@ footer div a {
   }
 }
 
+/* Final launch usability and accessibility corrections */
+.nav-mobile-menu {
+  display: none;
+  position: relative;
+}
+
+.nav-mobile-menu summary {
+  align-items: center;
+  border: 1px solid rgba(214, 165, 43, 0.35);
+  color: #ded9ce;
+  cursor: pointer;
+  display: flex;
+  font-size: 11px;
+  font-weight: 650;
+  gap: 12px;
+  list-style: none;
+  min-height: 44px;
+  padding: 0 14px;
+}
+
+.nav-mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-mobile-menu summary span {
+  color: var(--brand-gold);
+  font-size: 16px;
+  transition: transform 180ms ease;
+}
+
+.nav-mobile-menu[open] summary span {
+  transform: rotate(45deg);
+}
+
+.nav-mobile-menu nav {
+  background: rgba(10, 10, 8, 0.99) !important;
+  border: 1px solid rgba(214, 165, 43, 0.45) !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.52);
+  display: flex !important;
+  flex-direction: column;
+  min-width: min(280px, calc(100vw - 32px));
+  padding: 8px !important;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+}
+
+.nav-mobile-menu nav a {
+  border-bottom: 1px solid rgba(245, 242, 233, 0.1);
+  padding: 13px 12px !important;
+  width: 100%;
+}
+
+.nav-mobile-menu nav a:last-child {
+  border-bottom: 0;
+}
+
+.case-content .eyebrow {
+  color: #bec4bd;
+}
+
+.insights-grid article > a {
+  color: #624900;
+  font-weight: 700;
+}
+
+.art-two span {
+  color: var(--brand-white);
+}
+
+.art-two span:nth-child(2) {
+  color: var(--metal-gold-light);
+}
+
+.philosophy-title h2 em {
+  color: var(--brand-black);
+}
+
+.contact-privacy {
+  color: #b9beb8;
+  font-size: 11px;
+}
+
+.contact-honeypot {
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+  width: 1px;
+}
+
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.contact-status {
+  color: #c7ccc5;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 12px 0 0;
+  min-height: 18px;
+}
+
+.contact-status-success {
+  color: #c9e7bd;
+}
+
+.contact-status-error,
+.contact-status-error a {
+  color: #ffd38a;
+}
+
 /* Portfolio evidence — bridges selected work with measurable client proof. */
 .portfolio-proof {
   background: var(--brand-black);
@@ -9151,6 +9265,43 @@ main {
     border-top: 1px solid rgba(214, 165, 43, 0.14);
     flex-basis: 100%;
     padding-block: 12px 7px;
+  }
+}
+
+@media (max-width: 980px) {
+  .nav-shell > nav,
+  .nav-compact-links {
+    display: none;
+  }
+
+  .nav-mobile-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-shell {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    min-height: 72px;
+    padding-inline: 12px;
+  }
+
+  .nav-shell .logo-brand img {
+    width: 126px;
+  }
+
+  .nav-shell .brand small {
+    display: none;
+  }
+
+  .nav-cta {
+    font-size: 10px;
+    min-height: 42px;
+    padding-inline: 12px;
+  }
+
+  .nav-cta span {
+    display: none;
   }
 }
 

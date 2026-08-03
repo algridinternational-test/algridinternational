@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
+import { socialImage } from "../seo";
 
 export const metadata: Metadata = {
   title: "Website Terms",
   description: "Terms for using the Algrid International website.",
   alternates: { canonical: "/terms" },
+  openGraph: { title: "Website Terms — Algrid International", url: "/terms", images: [socialImage] },
+  twitter: { card: "summary_large_image", images: [socialImage.url] },
 };
 
 export default function TermsPage() {

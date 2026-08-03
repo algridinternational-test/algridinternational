@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useEffect } from "react";
 
 export default function ErrorPage({
@@ -23,7 +25,7 @@ export default function ErrorPage({
           <button className="button button-primary" onClick={reset}>
             Try again <span aria-hidden="true">+</span>
           </button>
-          <a className="button button-secondary" href="/">Return home</a>
+          <Link className="button button-secondary" href="/">Return home</Link>
         </div>
       </section>
     </main>

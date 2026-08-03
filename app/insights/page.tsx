@@ -2,11 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 import { insightArticles } from "../content";
+import { socialImage } from "../seo";
 
 export const metadata: Metadata = {
   title: "Insights",
   description: "Perspectives on AI ventures, brand systems and compounding growth.",
   alternates: { canonical: "/insights" },
+  openGraph: {
+    title: "Insights — Algrid International",
+    description: "Perspectives on AI ventures, brand systems and compounding growth.",
+    url: "/insights",
+    images: [socialImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Insights — Algrid International",
+    description: "Perspectives on AI ventures, brand systems and compounding growth.",
+    images: [socialImage.url],
+  },
 };
 
 export default function InsightsPage() {

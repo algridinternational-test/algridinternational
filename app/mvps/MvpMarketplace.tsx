@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { mvpProducts, type MvpProduct } from "./data";
 
@@ -442,9 +443,9 @@ export function MvpMarketplace() {
               <div className="mvp-browser-note">
                 <span>Need a custom system?</span>
                 <p>We can frame a product around your own operating model.</p>
-                <a href="/#contact">
+                <Link href="/#contact">
                   Start with the problem <i aria-hidden="true">+</i>
-                </a>
+                </Link>
               </div>
             </aside>
 
@@ -566,9 +567,9 @@ export function MvpMarketplace() {
           Bring the problem.
           <br /> We’ll shape the product.
         </h2>
-        <a className="button button-primary" href="/#contact">
+        <Link className="button button-primary" href="/#contact">
           Start a product conversation <span aria-hidden="true">+</span>
-        </a>
+        </Link>
       </section>
     </>
   );

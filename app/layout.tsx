@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s — Algrid International",
   },
   description:
-    "Algrid International is a Kuala Lumpur AI venture builder and digital transformation partner integrating strategy, branding, software engineering, automation and growth.",
+    "A Kuala Lumpur AI venture builder and digital transformation partner unifying strategy, brand, software, automation and growth.",
   keywords: [
     "AI venture builder",
     "digital transformation Malaysia",

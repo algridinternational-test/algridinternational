@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
+import { socialImage } from "../seo";
 
 export const metadata: Metadata = {
   title: "Privacy",
   description: "How Algrid International handles information shared through this website.",
   alternates: { canonical: "/privacy" },
+  openGraph: { title: "Privacy — Algrid International", url: "/privacy", images: [socialImage] },
+  twitter: { card: "summary_large_image", images: [socialImage.url] },
 };
 
 export default function PrivacyPage() {
@@ -13,7 +16,7 @@ export default function PrivacyPage() {
       <SiteHeader />
       <article>
         <header className="editorial-hero">
-          <p className="editorial-kicker">Legal / Last updated 28 July 2026</p>
+          <p className="editorial-kicker">Legal / Last updated 3 August 2026</p>
           <h1>Privacy, in plain language.</h1>
           <p className="editorial-intro">
             This notice explains what happens when you contact Algrid International through this website.
@@ -23,7 +26,7 @@ export default function PrivacyPage() {
           <section>
             <h2>Information you choose to share</h2>
             <p>
-              The project form prepares an email in your own email application. The website does not submit or store that form data. If you send the email, we receive the information through our email service and use it to respond to your enquiry, assess project fit and continue the conversation you requested.
+              The project form securely submits the details you provide to our email service. We use that information to respond to your enquiry, assess project fit and continue the conversation you requested. The website does not create a marketing profile from your enquiry.
             </p>
           </section>
           <section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   type FormEvent,
   type KeyboardEvent,
@@ -253,7 +254,26 @@ function VentureMedia({
   venture: (typeof ventures)[number];
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [venture.loopVideo]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -261,7 +281,7 @@ function VentureMedia({
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (!video || prefersReducedMotion) {
+    if (!video || !shouldLoad || prefersReducedMotion) {
       video?.pause();
       setIsPlaying(false);
       return;
@@ -269,11 +289,16 @@ function VentureMedia({
 
     video.muted = true;
     video.play().catch(() => setIsPlaying(false));
-  }, [venture.loopVideo]);
+  }, [shouldLoad, venture.loopVideo]);
 
   function togglePlayback() {
     const video = videoRef.current;
     if (!video) return;
+
+    if (!shouldLoad) {
+      setShouldLoad(true);
+      return;
+    }
 
     if (video.paused) {
       video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
@@ -289,15 +314,14 @@ function VentureMedia({
         key={venture.loopVideo}
         ref={videoRef}
         className="case-video"
-        autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
-        poster={venture.homepagePoster}
+        preload={shouldLoad ? "metadata" : "none"}
+        poster={shouldLoad ? venture.homepagePoster : undefined}
         aria-label={`${venture.name} silent eight-second brand-film loop`}
       >
-        <source src={venture.loopVideo} type="video/mp4" />
+        {shouldLoad ? <source src={venture.loopVideo} type="video/mp4" /> : null}
       </video>
       <div className="case-video-shade" />
       <div className="case-video-top">
@@ -330,25 +354,39 @@ export default function Home() {
     "How could a traditional F&B brand create a repeatable growth engine?",
   );
 
-  function prepareProjectBrief(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const company = String(data.get("company") || "New project");
-    const brief = [
-      `Name: ${data.get("name") || ""}`,
-      `Work email: ${data.get("email") || ""}`,
-      `Company: ${company}`,
-      `Phone: ${data.get("phone") || "Not provided"}`,
-      `Project type: ${data.get("projectType") || ""}`,
-      `Preferred start: ${data.get("timeline") || ""}`,
-      "",
-      "What we are trying to change or launch:",
-      String(data.get("challenge") || ""),
-    ].join("\n");
+  const [contactState, setContactState] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [contactMessage, setContactMessage] = useState("");
 
-    window.location.href = `mailto:social@algridinternational.com?subject=${encodeURIComponent(
-      `Project brief — ${company}`,
-    )}&body=${encodeURIComponent(brief)}`;
+  async function submitProjectBrief(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    setContactState("submitting");
+    setContactMessage("Sending your project brief securely…");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+
+      form.reset();
+      setContactState("success");
+      setContactMessage(
+        "Thank you. Your brief has been received and our team will reply within two business days.",
+      );
+    } catch {
+      setContactState("error");
+      setContactMessage(
+        "We could not send the form right now. Please email social@algridinternational.com directly.",
+      );
+    }
   }
   const [aiState, setAiState] = useState<"idle" | "thinking" | "done">("idle");
   const [analysisKey, setAnalysisKey] =
@@ -461,7 +499,7 @@ export default function Home() {
                 <strong>06</strong>
                 <span>CONNECTED GROWTH LAYERS</span>
               </div>
-              <div className="sparkline" aria-label="Upward growth chart">
+              <div className="sparkline" role="img" aria-label="Upward growth chart">
                 {[24, 32, 27, 42, 48, 44, 61, 68, 74, 93, 88, 100].map(
                   (height, i) => (
                     <i key={i} style={{ height: `${height}%` }} />
@@ -527,7 +565,7 @@ export default function Home() {
           </div>
         </FadeIn>
         <div className="service-grid">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <motion.article
               className={`service-card service-card-${service.visual}`}
               key={service.title}
@@ -663,7 +701,7 @@ export default function Home() {
                 </div>
                 <a
                   href="#contact"
-                  aria-label={`Scope ${service.title} with Algrid`}
+                  aria-label={`Scope system: ${service.title} with Algrid`}
                 >
                   Scope system <span aria-hidden="true">+</span>
                 </a>
@@ -693,9 +731,9 @@ export default function Home() {
               Focused software products designed to reach market quickly,
               validate the core signal and scale without a rebuild.
             </p>
-            <a className="section-cta" href="/mvps">
+            <Link className="section-cta" href="/mvps">
               Explore all 15 products <span aria-hidden="true">+</span>
-            </a>
+            </Link>
           </div>
         </FadeIn>
         <FadeIn className="mvp-home-browser">
@@ -728,10 +766,10 @@ export default function Home() {
                   <strong aria-hidden="true">{activeLaunchSystem === index ? "●" : "○"}</strong>
                 </button>
               ))}
-              <a href="/mvps">
+              <Link href="/mvps">
                 <span>View all 15 business products</span>
                 <i>Open product library +</i>
-              </a>
+              </Link>
             </div>
 
             <motion.article
@@ -895,9 +933,9 @@ export default function Home() {
                   {venture.impact[3]}
                 </span>
               </div>
-              <a className="case-link" href={`/work/${venture.slug}`}>
+              <Link className="case-link" href={`/work/${venture.slug}`}>
                 View venture story <span aria-hidden="true">+</span>
-              </a>
+              </Link>
             </div>
           </motion.article>
         </div>
@@ -1305,7 +1343,7 @@ export default function Home() {
             title="Ideas for builders."
             copy="Practical thinking at the intersection of brand, technology, intelligence and growth."
           />
-          <a href="/insights">View all insights ↗</a>
+          <Link href="/insights">View all insights ↗</Link>
         </FadeIn>
         <div className="insights-grid" id="insights">
           <article className="insight-featured">
@@ -1316,7 +1354,7 @@ export default function Home() {
             </div>
             <p>VENTURE STRATEGY · 8 MIN</p>
             <h3>Why the next generation of companies will be designed around intelligence.</h3>
-            <a href="/insights/designing-companies-around-intelligence">Read field note ↗</a>
+            <Link href="/insights/designing-companies-around-intelligence">Read field note ↗</Link>
           </article>
           <article>
             <div className="insight-art art-two">
@@ -1326,7 +1364,7 @@ export default function Home() {
             </div>
             <p>BRAND SYSTEMS · 6 MIN</p>
             <h3>Your brand is not a layer. It is the interface to your business.</h3>
-            <a href="/insights/brand-as-business-interface">Read field note ↗</a>
+            <Link href="/insights/brand-as-business-interface">Read field note ↗</Link>
           </article>
           <article>
             <div className="insight-art art-three">
@@ -1336,7 +1374,7 @@ export default function Home() {
             </div>
             <p>GROWTH · 5 MIN</p>
             <h3>From campaigns to compounding: the growth operating system.</h3>
-            <a href="/insights/from-campaigns-to-compounding-growth">Read field note ↗</a>
+            <Link href="/insights/from-campaigns-to-compounding-growth">Read field note ↗</Link>
           </article>
         </div>
       </section>
@@ -1538,7 +1576,11 @@ export default function Home() {
               <span>PROJECT BRIEF / SECURE INTAKE</span>
               <i>Typically replies within 2 business days</i>
             </div>
-            <form onSubmit={prepareProjectBrief}>
+            <form onSubmit={submitProjectBrief}>
+              <label className="contact-honeypot" hidden>
+                <span>Website</span>
+                <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+              </label>
               <div className="contact-fields">
                 <label>
                   <span>Your name *</span>
@@ -1616,12 +1658,27 @@ export default function Home() {
                 </label>
               </div>
 
-              <button className="contact-submit" type="submit">
-                Prepare project brief <span aria-hidden="true">+</span>
+              <button
+                className="contact-submit"
+                type="submit"
+                disabled={contactState === "submitting"}
+              >
+                {contactState === "submitting" ? "Sending brief…" : "Send project brief"}
+                <span aria-hidden="true">+</span>
               </button>
               <p className="contact-privacy">
                 Your details are used only to assess and respond to this
-                enquiry. Submitting prepares an email in your mail application.
+                enquiry. They are never sold or used for unsolicited marketing.
+              </p>
+              <p
+                className={`contact-status contact-status-${contactState}`}
+                role="status"
+                aria-live="polite"
+              >
+                {contactMessage}
+                {contactState === "error" ? (
+                  <> <a href="mailto:social@algridinternational.com">Open email</a>.</>
+                ) : null}
               </p>
             </form>
           </FadeIn>

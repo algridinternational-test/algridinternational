@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
 import { ventureStories } from "../../content";
+import { siteOrigin, socialImage } from "../../seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -19,6 +20,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${venture.name} — Venture story`,
     description: venture.summary,
     alternates: { canonical: `/work/${venture.slug}` },
+    openGraph: {
+      title: `${venture.name} Venture Story — Algrid International`,
+      description: venture.summary,
+      url: `/work/${venture.slug}`,
+      images: [{ ...socialImage, url: venture.homepagePoster }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${venture.name} Venture Story — Algrid International`,
+      description: venture.summary,
+      images: [venture.homepagePoster],
+    },
   };
 }
 
@@ -28,6 +41,16 @@ export default async function VenturePage({ params }: PageProps) {
   if (index < 0) notFound();
   const venture = ventureStories[index];
   const next = ventureStories[(index + 1) % ventureStories.length];
+  const ventureSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: `${venture.name} venture story`,
+    headline: venture.title,
+    description: venture.summary,
+    url: `${siteOrigin}/work/${venture.slug}`,
+    image: `${siteOrigin}${venture.homepagePoster}`,
+    creator: { "@type": "Organization", name: "Algrid International" },
+  };
 
   return (
     <main id="main-content" tabIndex={-1} className="editorial-page">
@@ -43,6 +66,12 @@ export default async function VenturePage({ params }: PageProps) {
         <div className="case-film case-film-feature" style={{ "--venture-color": venture.color } as React.CSSProperties}>
           <video controls playsInline preload="metadata" poster={venture.poster}>
             <source src={venture.films[0].src} type="video/mp4" />
+            <track
+              kind="captions"
+              src="/captions/brand-film-en.vtt"
+              srcLang="en"
+              label="English captions"
+            />
             Your browser does not support embedded video.
           </video>
           <div className="case-film-meta">
@@ -147,6 +176,12 @@ export default async function VenturePage({ params }: PageProps) {
                 <article key={film.src}>
                   <video controls playsInline preload="metadata">
                     <source src={film.src} type="video/mp4" />
+                    <track
+                      kind="captions"
+                      src="/captions/brand-film-en.vtt"
+                      srcLang="en"
+                      label="English captions"
+                    />
                     Your browser does not support embedded video.
                   </video>
                   <div>
@@ -179,6 +214,12 @@ export default async function VenturePage({ params }: PageProps) {
           <i aria-hidden="true">↗</i>
         </Link>
       </article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ventureSchema).replace(/</g, "\\u003c"),
+        }}
+      />
       <SiteFooter />
     </main>
   );
