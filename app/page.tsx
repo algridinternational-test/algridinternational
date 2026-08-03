@@ -16,6 +16,7 @@ import {
   SiteHeader,
   socialLinks,
 } from "./components/SiteChrome";
+import { SectionLink } from "./components/SectionLink";
 import { ventureStories as ventures } from "./content";
 import { mvpProducts } from "./mvps/data";
 
@@ -457,12 +458,12 @@ export default function Home() {
               ambitious companies.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#contact">
+              <SectionLink className="button button-primary" section="contact">
                 Build with Algrid <span aria-hidden="true">+</span>
-              </a>
-              <a className="button hero-work-cta" href="#work">
+              </SectionLink>
+              <SectionLink className="button hero-work-cta" section="work">
                 Explore our work <span aria-hidden="true">+</span>
-              </a>
+              </SectionLink>
             </div>
           </FadeIn>
         </div>
@@ -699,12 +700,12 @@ export default function Home() {
                   <strong>{service.signal}</strong>
                   <small>{service.signalLabel}</small>
                 </div>
-                <a
-                  href="#contact"
+                <SectionLink
+                  section="contact"
                   aria-label={`Scope system: ${service.title} with Algrid`}
                 >
                   Scope system <span aria-hidden="true">+</span>
-                </a>
+                </SectionLink>
               </div>
             </motion.article>
           ))}
@@ -714,9 +715,9 @@ export default function Home() {
             <span>Not sure where to start?</span>
             <p>We will map the highest-leverage system for your next stage.</p>
           </div>
-          <a href="#contact">
+          <SectionLink section="contact">
             Design your growth system <span aria-hidden="true">+</span>
-          </a>
+          </SectionLink>
         </FadeIn>
       </section>
 
@@ -1178,9 +1179,9 @@ export default function Home() {
                 modelled conversion lift
               </p>
             </div>
-            <a href="#contact">
+            <SectionLink section="contact">
               Build your business case <span aria-hidden="true">+</span>
-            </a>
+            </SectionLink>
           </div>
         </div>
       </section>

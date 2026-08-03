@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { SectionLink } from "../components/SectionLink";
 import { useMemo, useState } from "react";
 import { mvpProducts, type MvpProduct } from "./data";
 
@@ -443,9 +443,9 @@ export function MvpMarketplace() {
               <div className="mvp-browser-note">
                 <span>Need a custom system?</span>
                 <p>We can frame a product around your own operating model.</p>
-                <Link href="/#contact">
+                <SectionLink section="contact">
                   Start with the problem <i aria-hidden="true">+</i>
-                </Link>
+                </SectionLink>
               </div>
             </aside>
 
@@ -567,9 +567,9 @@ export function MvpMarketplace() {
           Bring the problem.
           <br /> We’ll shape the product.
         </h2>
-        <Link className="button button-primary" href="/#contact">
+        <SectionLink className="button button-primary" section="contact">
           Start a product conversation <span aria-hidden="true">+</span>
-        </Link>
+        </SectionLink>
       </section>
     </>
   );

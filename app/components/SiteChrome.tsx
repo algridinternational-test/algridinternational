@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SectionLink } from "./SectionLink";
 
 export const socialLinks = [
   {
@@ -78,27 +79,27 @@ export function SiteHeader() {
         <small>AI VENTURE BUILDER</small>
       </Link>
       <nav aria-label="Primary navigation">
-        <Link href="/#services">Services</Link>
+        <SectionLink section="services">Services</SectionLink>
         <Link href="/mvps">Products</Link>
-        <Link href="/#work">Ventures</Link>
-        <Link href="/#systems">Systems</Link>
-        <Link href="/#ai">AI Lab</Link>
+        <SectionLink section="work">Ventures</SectionLink>
+        <SectionLink section="systems">Systems</SectionLink>
+        <SectionLink section="ai">AI Lab</SectionLink>
         <Link href="/insights">Insights</Link>
       </nav>
       <details className="nav-mobile-menu">
         <summary>Menu <span aria-hidden="true">+</span></summary>
         <nav aria-label="Mobile navigation">
-          <Link href="/#services">Services</Link>
+          <SectionLink section="services">Services</SectionLink>
           <Link href="/mvps">Products</Link>
-          <Link href="/#work">Ventures</Link>
-          <Link href="/#systems">Systems</Link>
-          <Link href="/#ai">AI Lab</Link>
+          <SectionLink section="work">Ventures</SectionLink>
+          <SectionLink section="systems">Systems</SectionLink>
+          <SectionLink section="ai">AI Lab</SectionLink>
           <Link href="/insights">Insights</Link>
         </nav>
       </details>
-      <Link className="nav-cta" href="/#contact">
+      <SectionLink className="nav-cta" section="contact">
         Start a project <span aria-hidden="true">+</span>
-      </Link>
+      </SectionLink>
     </header>
   );
 }
@@ -119,16 +120,16 @@ export function SiteFooter() {
         </Link>
 
         <nav aria-label="Footer navigation">
-          <Link href="/#services">Services</Link>
+          <SectionLink section="services">Services</SectionLink>
           <Link href="/mvps">Products</Link>
-          <Link href="/#work">Ventures</Link>
-          <Link href="/#systems">Systems</Link>
+          <SectionLink section="work">Ventures</SectionLink>
+          <SectionLink section="systems">Systems</SectionLink>
           <Link href="/insights">Insights</Link>
         </nav>
 
-        <Link className="footer-cta" href="/#contact">
+        <SectionLink className="footer-cta" section="contact">
           Start a project <span aria-hidden="true">+</span>
-        </Link>
+        </SectionLink>
       </div>
 
       <div className="footer-meta">
@@ -138,7 +139,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-utility">
           <nav className="footer-legal" aria-label="Legal navigation">
-            <Link href="/#company">Company</Link>
+            <SectionLink section="company">Company</SectionLink>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
           </nav>

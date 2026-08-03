@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { pendingSectionKey } from "./SectionLink";
 
 const knownSections = new Set([
   "ai",
@@ -15,27 +16,25 @@ const knownSections = new Set([
 
 function cleanLocationHash() {
   const fragments = window.location.hash.split("#").filter(Boolean);
-  if (fragments.length === 0) return;
-
-  const section = [...fragments]
+  const hashSection = [...fragments]
     .reverse()
     .find((fragment) => knownSections.has(fragment));
-  const shouldClean = fragments.length > 1 || section === "top";
+  const pendingSection = window.sessionStorage.getItem(pendingSectionKey);
+  const section = hashSection ?? pendingSection;
 
-  if (!shouldClean) return;
+  if (!section) return;
 
-  const cleanSection = section === "top" ? undefined : section;
-  const cleanHash = cleanSection ? `#${cleanSection}` : "";
+  window.sessionStorage.removeItem(pendingSectionKey);
 
   window.history.replaceState(
     window.history.state,
     "",
-    `${window.location.pathname}${window.location.search}${cleanHash}`,
+    `${window.location.pathname}${window.location.search}`,
   );
 
   window.requestAnimationFrame(() => {
-    if (cleanSection) {
-      document.getElementById(cleanSection)?.scrollIntoView({ block: "start" });
+    if (section !== "top") {
+      document.getElementById(section)?.scrollIntoView({ block: "start" });
       return;
     }
 

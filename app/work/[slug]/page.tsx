@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
+import { SectionLink } from "../../components/SectionLink";
 import { ventureStories } from "../../content";
 import { siteOrigin, socialImage } from "../../seo";
 
@@ -57,7 +58,7 @@ export default async function VenturePage({ params }: PageProps) {
       <SiteHeader />
       <article>
         <header className="editorial-hero">
-          <Link className="editorial-back" href="/#work">← Selected ventures</Link>
+          <SectionLink className="editorial-back" section="work">← Selected ventures</SectionLink>
           <p className="editorial-kicker">{venture.code} · {venture.type}</p>
           <h1>{venture.title}</h1>
           <p className="editorial-intro">{venture.summary}</p>
