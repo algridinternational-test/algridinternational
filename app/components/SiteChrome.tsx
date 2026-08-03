@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
 import { SectionLink } from "./SectionLink";
-import { ContactModal } from "./ContactModal";
 import { useSiteLanguage } from "./useSiteLanguage";
 
 export const socialLinks = [
@@ -70,13 +68,7 @@ export function ContactIcon({
 }
 
 export function SiteHeader() {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const contactButtonRef = useRef<HTMLButtonElement>(null);
   const { language, setLanguage } = useSiteLanguage();
-  const closeContact = useCallback(() => {
-    setIsContactOpen(false);
-    window.requestAnimationFrame(() => contactButtonRef.current?.focus());
-  }, []);
   const labels = language === "ms"
     ? {
         services: "Perkhidmatan",
@@ -100,7 +92,6 @@ export function SiteHeader() {
       };
 
   return (
-    <>
     <header className="nav-shell">
       <Link className="brand logo-brand" href="/">
         <Image
@@ -137,13 +128,11 @@ export function SiteHeader() {
           <button type="button" onClick={() => setLanguage("en")} aria-pressed={language === "en"}>EN</button>
           <button type="button" onClick={() => setLanguage("ms")} aria-pressed={language === "ms"}>BM</button>
         </div>
-        <button ref={contactButtonRef} className="nav-cta" type="button" onClick={() => setIsContactOpen(true)}>
+        <Link className="nav-cta" href="/contact">
           {labels.contact} <span aria-hidden="true">+</span>
-        </button>
+        </Link>
       </div>
     </header>
-    {isContactOpen ? <ContactModal language={language} onClose={closeContact} /> : null}
-    </>
   );
 }
 
@@ -174,9 +163,9 @@ export function SiteFooter() {
           <Link href="/insights">{labels.insights}</Link>
         </nav>
 
-        <SectionLink className="footer-cta" section="contact">
+        <Link className="footer-cta" href="/contact">
           {labels.project} <span aria-hidden="true">+</span>
-        </SectionLink>
+        </Link>
       </div>
 
       <div className="footer-meta">

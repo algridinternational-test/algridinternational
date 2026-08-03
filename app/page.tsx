@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  type FormEvent,
   type KeyboardEvent,
   useEffect,
   useMemo,
@@ -17,6 +16,7 @@ import {
   socialLinks,
 } from "./components/SiteChrome";
 import { SectionLink } from "./components/SectionLink";
+import { ProjectBriefForm } from "./components/ProjectBriefForm";
 import { ventureStories as ventures } from "./content";
 import { mvpProducts } from "./mvps/data";
 
@@ -355,40 +355,6 @@ export default function Home() {
     "How could a traditional F&B brand create a repeatable growth engine?",
   );
 
-  const [contactState, setContactState] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
-  const [contactMessage, setContactMessage] = useState("");
-
-  async function submitProjectBrief(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-
-    setContactState("submitting");
-    setContactMessage("Sending your project brief securely…");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) throw new Error("Submission failed");
-
-      form.reset();
-      setContactState("success");
-      setContactMessage(
-        "Thank you. Your brief has been received and our team will reply within two business days.",
-      );
-    } catch {
-      setContactState("error");
-      setContactMessage(
-        "We could not send the form right now. Please email social@algridinternational.com directly.",
-      );
-    }
-  }
   const [aiState, setAiState] = useState<"idle" | "thinking" | "done">("idle");
   const [analysisKey, setAnalysisKey] =
     useState<keyof typeof guidedAnalyses>("consumer");
@@ -458,9 +424,9 @@ export default function Home() {
               ambitious companies.
             </p>
             <div className="hero-actions">
-              <SectionLink className="button button-primary" section="contact">
+              <Link className="button button-primary" href="/contact">
                 Build with Algrid <span aria-hidden="true">+</span>
-              </SectionLink>
+              </Link>
               <SectionLink className="button hero-work-cta" section="work">
                 Explore our work <span aria-hidden="true">+</span>
               </SectionLink>
@@ -544,6 +510,26 @@ export default function Home() {
           <span>ENTERPRISE</span>
           <span>VENTURES</span>
         </div>
+      </section>
+
+      <section className="section intake-home-section" id="project-intake">
+        <FadeIn className="intake-home-intro">
+          <p className="eyebrow">Project brief / Secure intake</p>
+          <h2>Start with the<br /><em>business problem.</em></h2>
+          <p>
+            Give our senior team enough context to identify the right first
+            move—whether that is strategy, a product build, automation or a
+            connected transformation programme.
+          </p>
+          <div className="intake-home-signals">
+            <span>Senior review</span>
+            <span>Confidential</span>
+            <span>Response in 2 business days</span>
+          </div>
+        </FadeIn>
+        <FadeIn delay={0.08}>
+          <ProjectBriefForm className="intake-home-form" />
+        </FadeIn>
       </section>
 
       <section className="section services-section" id="services">
@@ -1605,116 +1591,16 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <FadeIn className="contact-form-shell" delay={0.1}>
-            <div className="contact-form-head">
-              <span>PROJECT BRIEF / SECURE INTAKE</span>
-              <i>Typically replies within 2 business days</i>
-            </div>
-            <form onSubmit={submitProjectBrief}>
-              <label className="contact-honeypot" hidden>
-                <span>Website</span>
-                <input name="website" type="text" tabIndex={-1} autoComplete="off" />
-              </label>
-              <div className="contact-fields">
-                <label>
-                  <span>Your name *</span>
-                  <input
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    placeholder="Name"
-                    required
-                  />
-                </label>
-                <label>
-                  <span>Work email *</span>
-                  <input
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@company.com"
-                    required
-                  />
-                </label>
-                <label>
-                  <span>Company</span>
-                  <input
-                    name="company"
-                    type="text"
-                    autoComplete="organization"
-                    placeholder="Company or venture"
-                  />
-                </label>
-                <label>
-                  <span>Phone</span>
-                  <input
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    placeholder="+60"
-                  />
-                </label>
-                <label>
-                  <span>What are we building? *</span>
-                  <select name="projectType" defaultValue="" required>
-                    <option value="" disabled>
-                      Select a project type
-                    </option>
-                    <option>AI &amp; automation system</option>
-                    <option>Website or software platform</option>
-                    <option>Brand, packaging or creative system</option>
-                    <option>Growth and performance engine</option>
-                    <option>Business or product launch</option>
-                    <option>Multi-system transformation</option>
-                    <option>Long-term execution partnership</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Preferred start *</span>
-                  <select name="timeline" defaultValue="" required>
-                    <option value="" disabled>
-                      Select a timeframe
-                    </option>
-                    <option>As soon as possible</option>
-                    <option>Within 30 days</option>
-                    <option>Within 1–3 months</option>
-                    <option>Exploring the right approach</option>
-                  </select>
-                </label>
-                <label className="contact-message">
-                  <span>What are you trying to change or launch? *</span>
-                  <textarea
-                    name="challenge"
-                    rows={5}
-                    placeholder="Share the business context, the friction you see and what a strong outcome would look like."
-                    required
-                  />
-                </label>
-              </div>
-
-              <button
-                className="contact-submit"
-                type="submit"
-                disabled={contactState === "submitting"}
-              >
-                {contactState === "submitting" ? "Sending brief…" : "Send project brief"}
-                <span aria-hidden="true">+</span>
-              </button>
-              <p className="contact-privacy">
-                Your details are used only to assess and respond to this
-                enquiry. They are never sold or used for unsolicited marketing.
-              </p>
-              <p
-                className={`contact-status contact-status-${contactState}`}
-                role="status"
-                aria-live="polite"
-              >
-                {contactMessage}
-                {contactState === "error" ? (
-                  <> <a href="mailto:social@algridinternational.com">Open email</a>.</>
-                ) : null}
-              </p>
-            </form>
+          <FadeIn className="contact-brief-card" delay={0.1}>
+            <span>PROJECT INTAKE / AVAILABLE</span>
+            <h3>Ready to brief the senior team?</h3>
+            <p>
+              Use the dedicated secure intake to give us the context, market
+              and timing behind the opportunity.
+            </p>
+            <Link className="button button-primary" href="/contact">
+              Start your project brief <span aria-hidden="true">+</span>
+            </Link>
           </FadeIn>
         </div>
       </section>
