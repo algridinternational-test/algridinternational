@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { SectionLink } from "../components/SectionLink";
 import { useMemo, useState } from "react";
 import { mvpProducts, type MvpProduct } from "./data";
-import { mvpMalay } from "../localization";
+import { mvpDetailsMalay, mvpMalay } from "../localization";
 import { useSiteLanguage } from "../components/useSiteLanguage";
 
 const categories = ["All", "AI", "Platforms", "Operations", "Commerce", "Growth"] as const;
@@ -196,8 +196,9 @@ function ProductGlyph({ kind }: { kind: PreviewKind }) {
   );
 }
 
-function ProductPreview({ product }: { product: MvpProduct }) {
+function ProductPreview({ product, isMalay }: { product: MvpProduct; isMalay: boolean }) {
   const kind = previewKinds[product.id] ?? "analytics";
+  const details = mvpDetailsMalay[product.id as keyof typeof mvpDetailsMalay];
 
   return (
     <div className={`mvp-product-preview preview-kind-${kind}`} aria-hidden="true">
@@ -205,7 +206,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
         <div className="preview-product-mark">
           <ProductGlyph kind={kind} />
         </div>
-        <span>{product.name}</span>
+        <span>{isMalay ? details.name : product.name}</span>
         <i />
         <i />
       </div>
@@ -219,16 +220,16 @@ function ProductPreview({ product }: { product: MvpProduct }) {
 
         {kind === "chat" && (
           <div className="preview-chat">
-            <span>How can we help?</span>
-            <p>Tell me about your project.</p>
-            <p>We’ll shape the right next step.</p>
-            <div><i /> Type a message <b>↑</b></div>
+            <span>{isMalay ? "Bagaimana kami boleh membantu?" : "How can we help?"}</span>
+            <p>{isMalay ? "Ceritakan tentang projek anda." : "Tell me about your project."}</p>
+            <p>{isMalay ? "Kami akan membentuk langkah seterusnya." : "We’ll shape the right next step."}</p>
+            <div><i /> {isMalay ? "Taip mesej" : "Type a message"} <b>↑</b></div>
           </div>
         )}
 
         {kind === "learning" && (
           <div className="preview-learning">
-            <div><i>▶</i><span>Module 04</span></div>
+            <div><i>▶</i><span>{isMalay ? "Modul" : "Module"} 04</span></div>
             <b><i /></b>
             <p><span>01</span><i /></p>
             <p><span>02</span><i /></p>
@@ -239,7 +240,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
         {(kind === "membership" || kind === "community") && (
           <div className="preview-community">
             <div className="preview-avatars"><i /><i /><i /><i /></div>
-            <strong>{kind === "community" ? "Community pulse" : "Member space"}</strong>
+            <strong>{kind === "community" ? (isMalay ? "Nadi komuniti" : "Community pulse") : (isMalay ? "Ruang ahli" : "Member space")}</strong>
             <p><i /><span /></p>
             <p><i /><span /></p>
             <p><i /><span /></p>
@@ -251,29 +252,29 @@ function ProductPreview({ product }: { product: MvpProduct }) {
             <i /><span />
             <i /><span />
             <i />
-            <b>QUALIFIED</b>
+            <b>{isMalay ? "LAYAK" : "QUALIFIED"}</b>
           </div>
         )}
 
         {kind === "pipeline" && (
           <div className="preview-pipeline">
-            <div><span>New</span><i /><i /></div>
-            <div><span>Active</span><i /><i /><i /></div>
-            <div><span>Won</span><i /></div>
+            <div><span>{isMalay ? "Baharu" : "New"}</span><i /><i /></div>
+            <div><span>{isMalay ? "Aktif" : "Active"}</span><i /><i /><i /></div>
+            <div><span>{isMalay ? "Menang" : "Won"}</span><i /></div>
           </div>
         )}
 
         {kind === "booking" && (
           <div className="preview-booking">
-            <strong>July <span>2026</span></strong>
+            <strong>{isMalay ? "Julai" : "July"} <span>2026</span></strong>
             <div>{Array.from({ length: 21 }, (_, index) => <i key={index} className={index === 11 ? "is-active" : ""} />)}</div>
-            <p><i /> 10:30 AM <b>Confirm</b></p>
+            <p><i /> 10:30 AM <b>{isMalay ? "Sahkan" : "Confirm"}</b></p>
           </div>
         )}
 
         {kind === "portal" && (
           <div className="preview-portal">
-            <strong>Project overview</strong>
+            <strong>{isMalay ? "Gambaran projek" : "Project overview"}</strong>
             <div><span><b>72%</b><i /></span><span><b>06</b><i /></span></div>
             <p><i /><span /></p>
             <p><i /><span /></p>
@@ -282,7 +283,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
 
         {kind === "inventory" && (
           <div className="preview-inventory">
-            <strong>Inventory <span>Live</span></strong>
+            <strong>{isMalay ? "Inventori" : "Inventory"} <span>{isMalay ? "Langsung" : "Live"}</span></strong>
             <p><i /><b>SKU-142</b><span /><em>128</em></p>
             <p><i /><b>SKU-088</b><span /><em>42</em></p>
             <p><i /><b>SKU-216</b><span /><em>09</em></p>
@@ -291,7 +292,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
 
         {kind === "analytics" && (
           <div className="preview-analytics">
-            <div><span>Revenue</span><strong>{product.metric}</strong></div>
+            <div><span>{isMalay ? "Hasil" : "Revenue"}</span><strong>{product.metric}</strong></div>
             <svg viewBox="0 0 220 70" preserveAspectRatio="none">
               <path d="M0 58 C26 54 36 28 61 36 S102 57 126 30 S169 34 187 17 S207 11 220 4" />
               <path className="area" d="M0 58 C26 54 36 28 61 36 S102 57 126 30 S169 34 187 17 S207 11 220 4 V70 H0 Z" />
@@ -302,7 +303,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
 
         {kind === "calculator" && (
           <div className="preview-calculator">
-            <span>Estimated outcome</span>
+            <span>{isMalay ? "Anggaran hasil" : "Estimated outcome"}</span>
             <strong>RM 248,500</strong>
             <p><i /><i /></p>
             <div>{Array.from({ length: 9 }, (_, index) => <i key={index}>{index + 1}</i>)}</div>
@@ -313,7 +314,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
           <div className="preview-mobile">
             <div>
               <i />
-              <strong>Your day</strong>
+              <strong>{isMalay ? "Hari anda" : "Your day"}</strong>
               <span><b>74%</b></span>
               <p /><p /><p />
             </div>
@@ -323,15 +324,15 @@ function ProductPreview({ product }: { product: MvpProduct }) {
         {kind === "marketplace" && (
           <div className="preview-marketplace">
             <div><i /><i /><i /></div>
-            <p><span /><b>Featured</b></p>
-            <p><span /><b>New</b></p>
+            <p><span /><b>{isMalay ? "Pilihan" : "Featured"}</b></p>
+            <p><span /><b>{isMalay ? "Baharu" : "New"}</b></p>
             <p><span /><b>Popular</b></p>
           </div>
         )}
 
         {kind === "knowledge" && (
           <div className="preview-knowledge">
-            <div><i /> Search company knowledge <b>⌘ K</b></div>
+            <div><i /> {isMalay ? "Cari pengetahuan syarikat" : "Search company knowledge"} <b>⌘ K</b></div>
             <p><span>01</span><i /><em>↗</em></p>
             <p><span>02</span><i /><em>↗</em></p>
             <p><span>03</span><i /><em>↗</em></p>
@@ -340,7 +341,7 @@ function ProductPreview({ product }: { product: MvpProduct }) {
       </div>
       <div className="mvp-visual-metric">
         <strong>{product.metric}</strong>
-        <span>{product.metricLabel}</span>
+        <span>{isMalay ? details.metricLabel : product.metricLabel}</span>
       </div>
     </div>
   );
@@ -385,7 +386,7 @@ export function MvpMarketplace() {
           <dl>
             <div>
               <dt>{isMalay ? "Pelancaran biasa" : "Typical launch"}</dt>
-              <dd>3–16 weeks</dd>
+              <dd>{isMalay ? "3–16 minggu" : "3–16 weeks"}</dd>
             </div>
             <div>
               <dt>{isMalay ? "Seni bina" : "Architecture"}</dt>
@@ -418,8 +419,8 @@ export function MvpMarketplace() {
               <i />
             </div>
             <div className="mvp-browser-path">
-              <span>ALGRID / BUSINESS PRODUCTS</span>
-              <b>Product index</b>
+              <span>ALGRID / {isMalay ? "PRODUK PERNIAGAAN" : "BUSINESS PRODUCTS"}</span>
+              <b>{isMalay ? "Indeks produk" : "Product index"}</b>
             </div>
             <div className="mvp-browser-status">
               <i aria-hidden="true" />
@@ -433,7 +434,7 @@ export function MvpMarketplace() {
                 <span>01</span>
                 <p>{isMalay ? "Tapis mengikut hasil" : "Filter by outcome"}</p>
               </div>
-              <div className="mvp-filter" role="group" aria-label="Filter business products">
+              <div className="mvp-filter" role="group" aria-label={isMalay ? "Tapis produk perniagaan" : "Filter business products"}>
                 {categories.map((category, categoryIndex) => (
                   <button
                     key={category}
@@ -475,6 +476,7 @@ export function MvpMarketplace() {
               <motion.div layout className="mvp-product-grid">
                 {visibleProducts.map((product) => {
                   const translated = mvpMalay[product.id as keyof typeof mvpMalay];
+                  const details = mvpDetailsMalay[product.id as keyof typeof mvpDetailsMalay];
                   return (
                   <motion.article
                     layout
@@ -488,17 +490,17 @@ export function MvpMarketplace() {
                   >
                     <div className="mvp-card-top">
                       <span>{product.code}</span>
-                      <i>{product.category}</i>
+                      <i>{isMalay ? categoryMetaMalay[product.category].label : product.category}</i>
                     </div>
-                    <ProductPreview product={product} />
+                    <ProductPreview product={product} isMalay={isMalay} />
                     <div className="mvp-card-title">
-                      <h3>{product.name}</h3>
+                      <h3>{isMalay ? details.name : product.name}</h3>
                       <p>{isMalay ? translated[0] : product.promise}</p>
                     </div>
                     <dl className="mvp-specs">
                       <div>
                         <dt>{isMalay ? "Anggaran pembangunan" : "Estimated build"}</dt>
-                        <dd>{product.buildTime}</dd>
+                        <dd>{isMalay ? product.buildTime.replace("weeks", "minggu") : product.buildTime}</dd>
                       </div>
                       <div>
                         <dt>{isMalay ? "Perniagaan sesuai" : "Ideal business"}</dt>
@@ -512,20 +514,20 @@ export function MvpMarketplace() {
                     <div className="mvp-detail-block">
                       <span>{isMalay ? "CIRI TERAS" : "CORE FEATURES"}</span>
                       <div>
-                        {product.features.map((feature) => (
+                        {(isMalay ? details.features : product.features).map((feature) => (
                           <i key={feature}>{feature}</i>
                         ))}
                       </div>
                     </div>
                     <div className="mvp-stack">
-                      <span>STACK</span>
+                      <span>{isMalay ? "SET TEKNOLOGI" : "STACK"}</span>
                       <div>
                         {product.stack.map((technology) => (
                           <i key={technology}>{technology}</i>
                         ))}
                       </div>
                     </div>
-                    <a href={`mailto:social@algridinternational.com?subject=${encodeURIComponent(`Product enquiry: ${product.name}`)}`}>
+                    <a href={`mailto:social@algridinternational.com?subject=${encodeURIComponent(`${isMalay ? "Pertanyaan produk" : "Product enquiry"}: ${isMalay ? details.name : product.name}`)}`}>
                       {isMalay ? "Tentukan skop produk ini" : "Scope this product"} <span aria-hidden="true">+</span>
                     </a>
                   </motion.article>

@@ -76,13 +76,19 @@ export default async function VenturePage({ params }: PageProps) {
               srcLang="en"
               label="English captions"
             />
+            <track
+              kind="captions"
+              src="/captions/brand-film-ms.vtt"
+              srcLang="ms"
+              label="Sari kata Bahasa Melayu"
+            />
             <LocalizedText en="Your browser does not support embedded video." ms="Pelayar anda tidak menyokong video terbenam." />
           </video>
           <div className="case-film-meta">
             <span><LocalizedText en="Campaign film / 01" ms="Filem kempen / 01" /></span>
             <div>
-              <strong>{venture.films[0].title}</strong>
-              <small>{venture.films[0].note}</small>
+              <strong><LocalizedText en={venture.films[0].title} ms={ms.films[0][0]} /></strong>
+              <small><LocalizedText en={venture.films[0].note} ms={ms.films[0][1]} /></small>
             </div>
           </div>
         </div>
@@ -145,7 +151,7 @@ export default async function VenturePage({ params }: PageProps) {
               >
                 <Image
                   src={asset.src}
-                  alt={asset.alt}
+                  alt={`${venture.name} — campaign asset / aset kempen`}
                   fill
                   sizes={assetIndex === 0 ? "(max-width: 760px) 100vw, 52vw" : "(max-width: 760px) 100vw, 32vw"}
                   style={
@@ -185,12 +191,18 @@ export default async function VenturePage({ params }: PageProps) {
                       srcLang="en"
                       label="English captions"
                     />
+                    <track
+                      kind="captions"
+                      src="/captions/brand-film-ms.vtt"
+                      srcLang="ms"
+                      label="Sari kata Bahasa Melayu"
+                    />
                     <LocalizedText en="Your browser does not support embedded video." ms="Pelayar anda tidak menyokong video terbenam." />
                   </video>
                   <div>
-                    <span>Film / {String(filmIndex + 2).padStart(2, "0")}</span>
-                    <strong>{film.title}</strong>
-                    <small>{film.note}</small>
+                    <span><LocalizedText en="Film" ms="Filem" /> / {String(filmIndex + 2).padStart(2, "0")}</span>
+                    <strong><LocalizedText en={film.title} ms={ms.films[filmIndex + 1][0]} /></strong>
+                    <small><LocalizedText en={film.note} ms={ms.films[filmIndex + 1][1]} /></small>
                   </div>
                 </article>
               ))}

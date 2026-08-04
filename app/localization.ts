@@ -11,6 +11,7 @@ export const ventureMalay = {
     response: ["Memperkemas kedudukan kategori berdasarkan rutin harian yang yakin.", "Membina seni bina pembungkusan untuk pelbagai produk dan varian masa depan.", "Mereka perjalanan perdagangan daripada pendidikan kepada keyakinan produk."],
     system: ["Kedudukan", "Identiti", "Pembungkusan", "UX perdagangan", "Sistem pelancaran"],
     outcome: "Asas jenama dan digital yang koheren untuk memudahkan produk dikenali, diterangkan dan dikembangkan.",
+    films: [["Rangkaian Leroselle", "Filem kempen penuh"], ["Leroselle White", "Filem produk penjagaan pemutihan"], ["Leroselle Sugi", "Filem produk penjagaan semula jadi"], ["Rutin untuk setiap generasi", "Filem penjagaan mulut keluarga"]],
   },
   mesfleur: {
     type: "Kecantikan",
@@ -24,6 +25,7 @@ export const ventureMalay = {
     response: ["Membina bahasa visual berasaskan keyakinan warna dan tingkah laku produk.", "Mereka sistem rona dan pembungkusan modular untuk pengembangan rangkaian.", "Menghubungkan pendidikan produk, arahan pencipta dan penceritaan perdagangan."],
     system: ["Platform jenama", "Pembungkusan", "Seni bina rona", "Sistem kandungan", "Perdagangan"],
     outcome: "Satu sistem kecantikan yang konsisten daripada produk kepada kamera dan pembelian.",
+    films: [["Azuki Jam", "Filem rona penuh"], ["Berani", "Versi kempen"]],
   },
   "solid-coffee": {
     type: "Minuman",
@@ -37,6 +39,7 @@ export const ventureMalay = {
     response: ["Membingkaikan jenama sebagai rutin harian berulang.", "Mencipta peraturan pembungkusan dan kandungan yang menyeimbangkan tenaga dengan kraf.", "Menghubungkan pengisian semula, bundle dan pengekalan dalam perjalanan pelanggan."],
     system: ["Kedudukan", "Pembungkusan", "Arah kandungan", "Perdagangan", "Pengekalan"],
     outcome: "Sistem produk gaya hidup untuk menyokong pengecaman, pembelian berulang dan pertumbuhan rangkaian.",
+    films: [["Rutin harian", "Filem produk penuh"], ["Dicipta untuk hari mendatang", "Filem produk dan pengeluaran"]],
   },
   glups: {
     type: "Minuman kordial",
@@ -50,6 +53,7 @@ export const ventureMalay = {
     response: ["Membangunkan seni bina perisa modular dengan navigasi konsisten.", "Mencipta bahasa visual dan verbal yang ceria tetapi terkawal.", "Mereka aset pelancaran untuk runcit, sosial dan perdagangan digital."],
     system: ["Seni bina jenama", "Pembungkusan", "Sistem perisa", "Kempen", "Pelancaran digital"],
     outcome: "Platform kordial fleksibel yang boleh memperkenalkan perisa baharu tanpa kehilangan pengecaman keluarga.",
+    films: [["Roselle, nafas baharu", "Filem kempen penuh"], ["Roselle Rock Melon", "Filem produk perisa"]],
   },
   matts: {
     type: "Sos",
@@ -63,6 +67,7 @@ export const ventureMalay = {
     response: ["Membina seni bina botol dan label untuk pengecaman perisa pantas.", "Menyeimbangkan kod rak yang berani dengan kisah produk yang kukuh.", "Mengembangkan sistem ke aplikasi runcit, kempen dan sosial."],
     system: ["Pemurnian jenama", "Pembungkusan", "Seni bina rangkaian", "Aset runcit", "Kandungan"],
     outcome: "Keluarga produk yang lebih jelas untuk memudahkan pilihan perisa dan pengembangan masa depan.",
+    films: [["Klasik merah", "Filem produk penuh"], ["Dicipta untuk hidangan", "Filem hidangan"], ["Dicipta untuk dapur", "Filem resipi"], ["Kicap Korea", "Filem kicap gaya Korea"], ["Kicap Lemak Manis", "Filem kicap manis"]],
   },
   tomms: {
     type: "Suplemen kesihatan",
@@ -76,6 +81,7 @@ export const ventureMalay = {
     response: ["Menyusun jenama berasaskan kejelasan, rutin dan panduan bertanggungjawab.", "Mereka hierarki maklumat untuk bahan, penggunaan dan kesesuaian produk.", "Memetakan laluan mudah daripada pendidikan kepada pembelian semula."],
     system: ["Kedudukan", "Identiti", "Reka bentuk maklumat", "UX perdagangan", "Langganan"],
     outcome: "Sistem berasaskan kepercayaan yang memudahkan maklumat produk dan penggunaan harian.",
+    films: [["Daripada anggur laut", "Filem bahan · tempoh penuh"], ["Edisi delima", "Filem produk"]],
   },
 } as const;
 
@@ -131,4 +137,22 @@ export const mvpMalay = {
   "saas-dashboard": ["Lancarkan produk perisian fokus dengan ruang untuk berkembang.", "Syarikat pemula B2B dan pasukan usaha dalaman", "Seni bina berbilang penyewa berasaskan penggunaan"],
   "ai-knowledge-base": ["Jadikan pengetahuan organisasi berguna serta-merta.", "Pasukan perusahaan, sokongan dan servis terkawal", "Jutaan dokumen dan pelbagai pasukan"],
   "community-platform": ["Cipta rasa kebersamaan yang semakin kukuh dengan setiap ahli.", "Rangkaian profesional, jenama dan organisasi ahli", "Model komuniti awam, persendirian dan berbayar"],
+} as const;
+
+export const mvpDetailsMalay = {
+  "ai-chatbot-platform": { name: "Platform Chatbot AI", features: ["Chat terlatih jenama", "Kelayakan prospek", "Serahan kepada manusia", "Penyegerakan CRM"], metricLabel: "liputan respons" },
+  "learning-management-system": { name: "Sistem Pengurusan Pembelajaran", features: ["Penyampaian kursus", "Kemajuan pelajar", "Penilaian", "Sijil"], metricLabel: "laluan pelajar" },
+  "membership-website": { name: "Laman Web Keahlian", features: ["Akses berperingkat", "Kandungan ahli", "Pengebilan", "Analitik penglibatan"], metricLabel: "sedia menjana hasil" },
+  "lead-generation-funnel": { name: "Corong Penjanaan Prospek", features: ["Halaman tawaran", "Pemarkahan prospek", "Urutan pemupukan", "Atribusi"], metricLabel: "penukaran dimodelkan" },
+  "crm-dashboard": { name: "Papan Pemuka CRM", features: ["Paparan saluran jualan", "Penjejakan aktiviti", "Ramalan", "Automasi"], metricLabel: "sumber kebenaran" },
+  "booking-system": { name: "Sistem Tempahan", features: ["Ketersediaan langsung", "Pembayaran", "Peringatan", "Peruntukan sumber"], metricLabel: "pengurangan kerja pentadbiran" },
+  "customer-portal": { name: "Portal Pelanggan", features: ["Akses selamat", "Status projek", "Dokumen", "Permintaan sokongan"], metricLabel: "keterlihatan pelanggan" },
+  "inventory-dashboard": { name: "Papan Pemuka Inventori", features: ["Keterlihatan stok", "Amaran ambang", "Prestasi SKU", "Paparan pembekal"], metricLabel: "kecerdasan stok" },
+  "analytics-dashboard": { name: "Papan Pemuka Analitik", features: ["KPI disatukan", "Pelaporan langsung", "Segmen", "Wawasan automatik"], metricLabel: "segar semula isyarat" },
+  "financial-calculator": { name: "Kalkulator Kewangan", features: ["Pemodelan senario", "Tangkapan prospek", "Output PDF", "Penghalaan CRM"], metricLabel: "kedalaman penglibatan" },
+  "mobile-app-mvp": { name: "Pelancaran Aplikasi Mudah Alih", features: ["Perjalanan pengguna teras", "Pemberitahuan tolak", "Pembayaran", "Analitik produk"], metricLabel: "pelancaran aplikasi" },
+  "marketplace-platform": { name: "Platform Pasaran", features: ["Senarai", "Carian dan penapis", "Transaksi", "Pengurusan vendor"], metricLabel: "enjin pertumbuhan" },
+  "saas-dashboard": { name: "Papan Pemuka SaaS", features: ["Pengesahan identiti", "Aliran kerja teras", "Langganan", "Kawalan pentadbir"], metricLabel: "sedia dilancarkan" },
+  "ai-knowledge-base": { name: "Pangkalan Pengetahuan AI", features: ["Carian semantik", "Petikan sumber", "Kawalan akses", "Pengambilan kandungan"], metricLabel: "pencarian jawapan" },
+  "community-platform": { name: "Platform Komuniti", features: ["Profil ahli", "Ruang", "Acara", "Moderasi"], metricLabel: "nilai rangkaian" },
 } as const;

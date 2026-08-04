@@ -20,9 +20,18 @@ import { ProjectBriefForm } from "./components/ProjectBriefForm";
 import { useSiteLanguage } from "./components/useSiteLanguage";
 import { ventureStories as ventures } from "./content";
 import { mvpProducts } from "./mvps/data";
-import { ventureMalay } from "./localization";
+import { mvpDetailsMalay, mvpMalay, ventureMalay } from "./localization";
 
 const featuredLaunchSystems = mvpProducts.slice(0, 4);
+
+const ventureImpactMalay = {
+  leroselle: ["JENAMA", "sistem", "DTC", "perjalanan"],
+  mesfleur: ["KANDUNGAN", "sistem", "PRODUK", "cerita"],
+  "solid-coffee": ["RUTIN", "platform", "ULANGAN", "perjalanan"],
+  glups: ["PERISA", "sistem", "RUNCIT", "pelancaran"],
+  matts: ["RAK", "sistem", "PERISA", "navigasi"],
+  tomms: ["KEPERCAYAAN", "sistem", "HARIAN", "perjalanan"],
+} as const;
 
 const portfolioSignals = [
   {
@@ -58,6 +67,17 @@ const clientVoices = [
   },
 ];
 
+const portfolioSignalsMalay = [
+  { value: "+20%", label: "tempahan", context: "Sistem SEO · Hospitaliti Kuala Lumpur", period: "03 bulan" },
+  { value: "+50%", label: "pertumbuhan audiens", context: "Pertumbuhan sosial · Runcit butik", period: "02 bulan" },
+  { value: "+15%", label: "penukaran", context: "Automasi kitar hayat · Teknologi", period: "+30% bukaan" },
+];
+
+const clientVoicesMalay = [
+  { quote: "Aliran kerja kami menjadi lebih teratur, menjimatkan masa dan sumber.", name: "Samantha Lee", focus: "Pertumbuhan digital & automasi" },
+  { quote: "Hasilnya melebihi jangkaan kami.", name: "Dinesh Kumar", focus: "Operasi & penglibatan dalam talian" },
+];
+
 const systems = [
   {
     index: "01",
@@ -77,6 +97,12 @@ const systems = [
     text: "AI-powered content, lifecycle automation and experimentation systems that compound instead of creating campaign debt.",
     tags: ["AI automation", "Growth loops", "Performance"],
   },
+];
+
+const systemsMalay = [
+  { index: "01", title: "Penciptaan Usaha Niaga", text: "Daripada tesis peluang kepada isyarat kesesuaian produk-pasaran. Kami mengubah idea yang belum berkembang menjadi usaha niaga yang boleh beroperasi dan menarik pelaburan.", tags: ["Strategi usaha niaga", "Sistem jenama", "Pembangunan produk"] },
+  { index: "02", title: "Transformasi Digital", text: "Perjalanan pelanggan moden, operasi terhubung dan perisian berskala—direka sebagai satu hala tuju transformasi.", tags: ["Reka bentuk produk", "Kejuruteraan perisian", "Data"] },
+  { index: "03", title: "Pertumbuhan Pintar", text: "Kandungan berkuasa AI, automasi kitar hayat dan sistem eksperimen yang berkembang tanpa menambah beban kempen.", tags: ["Automasi AI", "Gelung pertumbuhan", "Prestasi"] },
 ];
 
 const services = [
@@ -176,6 +202,15 @@ const services = [
   },
 ];
 
+const servicesMalay = [
+  { ...services[0], title: "AI & Automasi", outcome: "Ubah kerja berulang menjadi kelebihan operasi pintar.", text: "Laksanakan pengalaman AI dipercayai yang menjawab, menilai, mendapatkan maklumat dan bertindak merentas aliran kerja pelanggan serta dalaman.", capabilities: ["Chatbot AI", "Pembantu Jualan AI", "Automasi Aliran Kerja", "Integrasi CRM", "Pangkalan Pengetahuan AI"], signalLabel: "pelaksanaan pintar" },
+  { ...services[1], title: "Web & Perisian", outcome: "Lancarkan produk digital yang dipercayai pengguna—dan boleh diskalakan pasukan.", text: "Cipta infrastruktur produk yang pantas dan berdaya tahan, menghubungkan pengalaman pelanggan kepada sistem di belakangnya.", capabilities: ["Laman Web Next.js", "Platform SaaS", "Papan Pemuka Tersuai", "Portal Pelanggan", "Integrasi API"], signalLabel: "sasaran prestasi" },
+  { ...services[2], title: "Jenama & Kreatif", outcome: "Jadi jenama yang diingati dalam kategori anda.", text: "Bina identiti komersial tersendiri yang kekal konsisten daripada rak dan skrin hingga gerakan serta kempen.", capabilities: ["Identiti Jenama", "Pembungkusan", "Grafik Gerakan", "Video Komersial", "Fotografi Produk"], signalLabel: "dunia jenama terhubung" },
+  { ...services[3], title: "Pemasaran Pertumbuhan", outcome: "Gantikan lonjakan kempen dengan sistem yang terus berkembang.", text: "Hubungkan pemerolehan, kandungan dan pengekalan melalui satu gelung pembelajaran yang boleh diukur.", capabilities: ["SEO", "Pengiklanan Berbayar", "Pemasaran Kandungan", "Pemasaran E-mel", "Media Sosial"], signalLabel: "peroleh · belajar · kekalkan" },
+  { ...services[4], title: "Kecerdasan Perniagaan", outcome: "Ketahui apa yang berkesan, sebabnya—dan tindakan seterusnya.", text: "Ubah aktiviti berpecah kepada kecerdasan sedia membuat keputusan merentas keseluruhan perjalanan pelanggan.", capabilities: ["Papan Pemuka Analitik", "Penjejakan Penukaran", "Pemetaan Perjalanan Pelanggan", "Pelaporan"], signalLabel: "keterlihatan keputusan" },
+  { ...services[5], title: "Pelancaran Perniagaan", outcome: "Bergerak daripada idea berpotensi kepada isyarat pasaran dengan lebih pantas.", text: "Selaraskan proposisi, produk dan cerita komersial menjadi pelancaran yang direka untuk belajar dan berkembang.", capabilities: ["Strategi Ke Pasaran", "Pembangunan Produk", "Aset Jualan", "Pelancaran Produk"], signalLabel: "momentum pasaran" },
+];
+
 const stack = [
   "Next.js",
   "React",
@@ -208,6 +243,24 @@ const guidedAnalyses = {
     ["Reduce the confidence gap", "Find the product information customers need before they can act."],
     ["Design the learning journey", "Use questions, comparison and guidance to make choice feel easier."],
     ["Close the retention loop", "Carry purchase and support signals into replenishment and lifecycle communication."],
+  ],
+} as const;
+
+const guidedAnalysesMalay = {
+  consumer: [
+    ["Miliki rutin penggunaan berulang", "Bingkaikan produk berdasarkan detik penggunaan, bukan SKU semata-mata."],
+    ["Tangkap pilihan pada waktu yang tepat", "Gunakan data yang dikongsi pelanggan untuk memperbaik bundle, panduan dan CRM."],
+    ["Hubungkan kreativiti dengan isyarat komersial", "Ubah tingkah laku pelanggan menjadi hipotesis kandungan mingguan yang fokus."],
+  ],
+  operations: [
+    ["Petakan keputusan berulang", "Kenal pasti serahan atau pertimbangan yang paling melambatkan operasi."],
+    ["Cipta satu lapisan pengetahuan dipercayai", "Hubungkan maklumat yang diluluskan sebelum memperkenalkan automasi merentas pasukan."],
+    ["Automatikkan tindakan seterusnya", "Bergerak daripada amaran kepada aliran kerja terkawal yang mengemas kini, menghala dan menindaklanjuti."],
+  ],
+  commerce: [
+    ["Kurangkan jurang keyakinan", "Temui maklumat produk yang diperlukan pelanggan sebelum mereka boleh bertindak."],
+    ["Reka perjalanan pembelajaran", "Gunakan soalan, perbandingan dan panduan untuk memudahkan pilihan."],
+    ["Lengkapkan gelung pengekalan", "Bawa isyarat pembelian dan sokongan ke dalam pengisian semula serta komunikasi kitar hayat."],
   ],
 } as const;
 
@@ -253,8 +306,10 @@ function FadeIn({
 
 function VentureMedia({
   venture,
+  isMalay,
 }: {
   venture: (typeof ventures)[number];
+  isMalay: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -322,14 +377,14 @@ function VentureMedia({
         playsInline
         preload={shouldLoad ? "metadata" : "none"}
         poster={shouldLoad ? venture.homepagePoster : undefined}
-        aria-label={`${venture.name} silent eight-second brand-film loop`}
+        aria-label={isMalay ? `Gelung filem jenama ${venture.name} selama lapan saat` : `${venture.name} silent eight-second brand-film loop`}
       >
         {shouldLoad ? <source src={venture.loopVideo} type="video/mp4" /> : null}
       </video>
       <div className="case-video-shade" />
       <div className="case-video-top">
-        <span>BRAND FILM / {venture.code}</span>
-        <i>08 SEC LOOP</i>
+        <span>{isMalay ? "FILEM JENAMA" : "BRAND FILM"} / {venture.code}</span>
+        <i>{isMalay ? "GELUNG 08 SAAT" : "08 SEC LOOP"}</i>
       </div>
       <div className="case-video-title">
         <span>{venture.type}</span>
@@ -340,12 +395,12 @@ function VentureMedia({
           className="case-video-toggle"
           type="button"
           onClick={togglePlayback}
-          aria-label={`${isPlaying ? "Pause" : "Play"} ${venture.name} brand film`}
+          aria-label={isMalay ? `${isPlaying ? "Jeda" : "Mainkan"} filem jenama ${venture.name}` : `${isPlaying ? "Pause" : "Play"} ${venture.name} brand film`}
         >
           {isPlaying ? "Ⅱ" : "▶"}
         </button>
       </div>
-      <p>ALGRID VENTURE / {venture.code}</p>
+      <p>ALGRID {isMalay ? "USAHA NIAGA" : "VENTURE"} / {venture.code}</p>
     </div>
   );
 }
@@ -355,9 +410,7 @@ export default function Home() {
   const isMalay = language === "ms";
   const [activeVenture, setActiveVenture] = useState(0);
   const [activeLaunchSystem, setActiveLaunchSystem] = useState(0);
-  const [aiPrompt, setAiPrompt] = useState(
-    "How could a traditional F&B brand create a repeatable growth engine?",
-  );
+  const [aiPrompt, setAiPrompt] = useState("");
 
   const [aiState, setAiState] = useState<"idle" | "thinking" | "done">("idle");
   const [analysisKey, setAnalysisKey] =
@@ -366,14 +419,23 @@ export default function Home() {
   const [closeRate, setCloseRate] = useState(12);
   const [dealValue, setDealValue] = useState(4200);
   const venture = ventures[activeVenture];
+  const ventureImpact = isMalay ? ventureImpactMalay[venture.slug as keyof typeof ventureImpactMalay] : venture.impact;
   const highlightedLaunchSystem = featuredLaunchSystems[activeLaunchSystem];
   const annualRevenue = useMemo(
     () => Math.round(monthlyLeads * (closeRate / 100) * dealValue * 12),
     [monthlyLeads, closeRate, dealValue],
   );
+  const displayedServices = isMalay ? servicesMalay : services;
+  const displayedSystems = isMalay ? systemsMalay : systems;
+  const displayedPortfolioSignals = isMalay ? portfolioSignalsMalay : portfolioSignals;
+  const displayedClientVoices = isMalay ? clientVoicesMalay : clientVoices;
+  const displayedAnalyses = isMalay ? guidedAnalysesMalay : guidedAnalyses;
+  const displayedAiPrompt = aiPrompt || (isMalay
+    ? "Bagaimanakah jenama F&B tradisional boleh membina enjin pertumbuhan berulang?"
+    : "How could a traditional F&B brand create a repeatable growth engine?");
 
   function runAnalysis() {
-    const prompt = aiPrompt.toLowerCase();
+    const prompt = displayedAiPrompt.toLowerCase();
     const nextKey =
       /manual|workflow|crm|operation|process|team/.test(prompt)
         ? "operations"
@@ -438,9 +500,9 @@ export default function Home() {
 
         <FadeIn className="hero-system" delay={0.2}>
           <div className="system-topbar">
-            <span>ALGRID / VENTURE OS</span>
+              <span>ALGRID / {isMalay ? "SISTEM USAHA NIAGA" : "VENTURE OS"}</span>
             <span className="system-live">
-              <i /> SYSTEM ONLINE
+              <i /> {isMalay ? "SISTEM AKTIF" : "SYSTEM ONLINE"}
             </span>
           </div>
           <div className="hero-dashboard">
@@ -448,7 +510,7 @@ export default function Home() {
               <span className="orbit orbit-a" />
               <span className="orbit orbit-b" />
               <span className="core">A</span>
-              {["STRATEGY", "BRAND", "PRODUCT", "AI", "GROWTH"].map(
+              {(isMalay ? ["STRATEGI", "JENAMA", "PRODUK", "AI", "PERTUMBUHAN"] : ["STRATEGY", "BRAND", "PRODUCT", "AI", "GROWTH"]).map(
                 (label, i) => (
                   <span
                     className={`signal signal-${i + 1}`}
@@ -461,14 +523,14 @@ export default function Home() {
             </div>
             <div className="metric-board">
               <div className="metric-head">
-                <span>VENTURE SIGNAL MODEL</span>
-                <span>INTERFACE DEMO ↗</span>
+                <span>{isMalay ? "MODEL ISYARAT USAHA NIAGA" : "VENTURE SIGNAL MODEL"}</span>
+                <span>{isMalay ? "DEMO ANTARA MUKA" : "INTERFACE DEMO"} ↗</span>
               </div>
               <div className="big-metric">
                 <strong>06</strong>
-                <span>CONNECTED GROWTH LAYERS</span>
+                <span>{isMalay ? "LAPISAN PERTUMBUHAN TERHUBUNG" : "CONNECTED GROWTH LAYERS"}</span>
               </div>
-              <div className="sparkline" role="img" aria-label="Upward growth chart">
+              <div className="sparkline" role="img" aria-label={isMalay ? "Carta pertumbuhan menaik" : "Upward growth chart"}>
                 {[24, 32, 27, 42, 48, 44, 61, 68, 74, 93, 88, 100].map(
                   (height, i) => (
                     <i key={i} style={{ height: `${height}%` }} />
@@ -477,27 +539,27 @@ export default function Home() {
               </div>
               <div className="micro-metrics">
                 <span>
-                  <b>06</b> ACTIVE SYSTEMS
+                  <b>06</b> {isMalay ? "SISTEM AKTIF" : "ACTIVE SYSTEMS"}
                 </span>
                 <span>
-                  <b>04</b> DELIVERY PHASES
+                  <b>04</b> {isMalay ? "FASA PENYAMPAIAN" : "DELIVERY PHASES"}
                 </span>
                 <span>
-                  <b>01</b> ACCOUNTABLE TEAM
+                  <b>01</b> {isMalay ? "PASUKAN BERTANGGUNGJAWAB" : "ACCOUNTABLE TEAM"}
                 </span>
               </div>
             </div>
           </div>
           <div className="system-ticker">
-            <span>STRATEGY</span>
+            <span>{isMalay ? "STRATEGI" : "STRATEGY"}</span>
             <i>→</i>
-            <span>IDENTITY</span>
+            <span>{isMalay ? "IDENTITI" : "IDENTITY"}</span>
             <i>→</i>
-            <span>PRODUCT</span>
+            <span>{isMalay ? "PRODUK" : "PRODUCT"}</span>
             <i>→</i>
-            <span>INTELLIGENCE</span>
+            <span>{isMalay ? "KECERDASAN" : "INTELLIGENCE"}</span>
             <i>→</i>
-            <span>GROWTH</span>
+            <span>{isMalay ? "PERTUMBUHAN" : "GROWTH"}</span>
           </div>
         </FadeIn>
       </section>
@@ -505,12 +567,12 @@ export default function Home() {
       <section className="proof-strip">
         <p>{isMalay ? "Dibina untuk pencipta kategori, pemimpin transformasi dan pengasas" : "Built for category creators, transformation leaders and founders"}</p>
         <div>
-          <span>CONSUMER</span>
-          <span>COMMERCE</span>
-          <span>HEALTH</span>
+          <span>{isMalay ? "PENGGUNA" : "CONSUMER"}</span>
+          <span>{isMalay ? "PERDAGANGAN" : "COMMERCE"}</span>
+          <span>{isMalay ? "KESIHATAN" : "HEALTH"}</span>
           <span>F&B</span>
-          <span>ENTERPRISE</span>
-          <span>VENTURES</span>
+          <span>{isMalay ? "PERUSAHAAN" : "ENTERPRISE"}</span>
+          <span>{isMalay ? "USAHA NIAGA" : "VENTURES"}</span>
         </div>
       </section>
 
@@ -543,16 +605,16 @@ export default function Home() {
         <FadeIn className="services-platform-bar" delay={0.06}>
           <div>
             <i aria-hidden="true" />
-            <span>ALGRID / SOLUTION OS</span>
+            <span>ALGRID / {isMalay ? "SISTEM PENYELESAIAN" : "SOLUTION OS"}</span>
           </div>
-          <p>Strategy / Build / Intelligence / Growth</p>
+          <p>{isMalay ? "Strategi / Bina / Kecerdasan / Pertumbuhan" : "Strategy / Build / Intelligence / Growth"}</p>
           <div>
-            <span>06 connected modules</span>
-            <b>Platform active</b>
+            <span>{isMalay ? "06 modul terhubung" : "06 connected modules"}</span>
+            <b>{isMalay ? "Platform aktif" : "Platform active"}</b>
           </div>
         </FadeIn>
         <div className="service-grid">
-          {services.map((service) => (
+          {displayedServices.map((service) => (
             <motion.article
               className={`service-card service-card-${service.visual}`}
               key={service.title}
@@ -565,7 +627,7 @@ export default function Home() {
                 <p>{service.title}</p>
                 <i aria-hidden="true">
                   <span />
-                  Active
+                  {isMalay ? "Aktif" : "Active"}
                 </i>
               </div>
 
@@ -574,13 +636,13 @@ export default function Home() {
                 aria-hidden="true"
               >
                 <div className="service-product-label">
-                  <span>Solution interface</span>
-                  <i>Module {service.index}</i>
+                  <span>{isMalay ? "Antara muka penyelesaian" : "Solution interface"}</span>
+                  <i>{isMalay ? "Modul" : "Module"} {service.index}</i>
                 </div>
                 {service.visual === "automation" && (
                   <>
                     <div className="automation-node">
-                      <span>IN</span>
+                      <span>{isMalay ? "MASUK" : "IN"}</span>
                     </div>
                     <div className="automation-flow">
                       <i />
@@ -589,9 +651,9 @@ export default function Home() {
                     </div>
                     <div className="automation-core">AI</div>
                     <div className="automation-output">
-                      <span>QUALIFY</span>
-                      <span>UPDATE</span>
-                      <span>ACT</span>
+                      <span>{isMalay ? "NILAI" : "QUALIFY"}</span>
+                      <span>{isMalay ? "KEMAS KINI" : "UPDATE"}</span>
+                      <span>{isMalay ? "TINDAK" : "ACT"}</span>
                     </div>
                   </>
                 )}
@@ -601,7 +663,7 @@ export default function Home() {
                       <span />
                       <span />
                       <span />
-                      <i>DEPLOY / READY</i>
+                      <i>{isMalay ? "LANCAR / SEDIA" : "DEPLOY / READY"}</i>
                     </div>
                     <div className="software-layout">
                       <span />
@@ -611,7 +673,7 @@ export default function Home() {
                         <i />
                       </div>
                     </div>
-                    <div className="software-status">● EDGE / READY</div>
+                    <div className="software-status">● {isMalay ? "PINGGIR / SEDIA" : "EDGE / READY"}</div>
                   </>
                 )}
                 {service.visual === "brand" && (
@@ -622,7 +684,7 @@ export default function Home() {
                       <span />
                       <span />
                     </div>
-                    <div className="brand-word">DISTINCT / COHERENT</div>
+                    <div className="brand-word">{isMalay ? "TERSENDIRI / KOHEREN" : "DISTINCT / COHERENT"}</div>
                   </>
                 )}
                 {service.visual === "growth" && (
@@ -633,20 +695,20 @@ export default function Home() {
                       ))}
                     </div>
                     <div className="growth-loop">
-                      <span>ACQUIRE</span>
+                      <span>{isMalay ? "PEROLEH" : "ACQUIRE"}</span>
                       <i>→</i>
-                      <span>LEARN</span>
+                      <span>{isMalay ? "BELAJAR" : "LEARN"}</span>
                       <i>→</i>
-                      <span>COMPOUND</span>
+                      <span>{isMalay ? "BERGANDA" : "COMPOUND"}</span>
                     </div>
                   </>
                 )}
                 {service.visual === "intelligence" && (
                   <>
                     <div className="bi-metric">
-                      <span>CONVERSION SIGNAL</span>
-                      <b>PRIORITY / HIGH</b>
-                      <i>NEXT / TEST</i>
+                      <span>{isMalay ? "ISYARAT PENUKARAN" : "CONVERSION SIGNAL"}</span>
+                      <b>{isMalay ? "KEUTAMAAN / TINGGI" : "PRIORITY / HIGH"}</b>
+                      <i>{isMalay ? "SETERUSNYA / UJI" : "NEXT / TEST"}</i>
                     </div>
                     <div className="bi-map">
                       <span />
@@ -663,9 +725,9 @@ export default function Home() {
                       <i />
                     </div>
                     <div className="launch-steps">
-                      <span className="done">THESIS</span>
-                      <span className="done">PRODUCT</span>
-                      <span>MARKET</span>
+                      <span className="done">{isMalay ? "TESIS" : "THESIS"}</span>
+                      <span className="done">{isMalay ? "PRODUK" : "PRODUCT"}</span>
+                      <span>{isMalay ? "PASARAN" : "MARKET"}</span>
                     </div>
                   </>
                 )}
@@ -675,22 +737,22 @@ export default function Home() {
                 <h3>{service.outcome}</h3>
                 <p>{service.text}</p>
               </div>
-              <div className="service-capabilities" aria-label={`${service.title} capabilities`}>
+              <div className="service-capabilities" aria-label={isMalay ? `Keupayaan ${service.title}` : `${service.title} capabilities`}>
                 {service.capabilities.map((capability) => (
                   <span key={capability}>{capability}</span>
                 ))}
               </div>
               <div className="service-signal">
                 <div>
-                  <span>Outcome signal</span>
+                  <span>{isMalay ? "Isyarat hasil" : "Outcome signal"}</span>
                   <strong>{service.signal}</strong>
                   <small>{service.signalLabel}</small>
                 </div>
                 <SectionLink
                   section="contact"
-                  aria-label={`Scope system: ${service.title} with Algrid`}
+                  aria-label={isMalay ? `Tentukan skop sistem ${service.title} bersama Algrid` : `Scope system: ${service.title} with Algrid`}
                 >
-                  Scope system <span aria-hidden="true">+</span>
+                  {isMalay ? "Tentukan skop sistem" : "Scope system"} <span aria-hidden="true">+</span>
                 </SectionLink>
               </div>
             </motion.article>
@@ -698,11 +760,11 @@ export default function Home() {
         </div>
         <FadeIn className="services-cta">
           <div>
-            <span>Not sure where to start?</span>
-            <p>We will map the highest-leverage system for your next stage.</p>
+            <span>{isMalay ? "Tidak pasti untuk bermula di mana?" : "Not sure where to start?"}</span>
+            <p>{isMalay ? "Kami akan memetakan sistem berimpak tertinggi untuk peringkat seterusnya." : "We will map the highest-leverage system for your next stage."}</p>
           </div>
           <SectionLink section="contact">
-            Design your growth system <span aria-hidden="true">+</span>
+            {isMalay ? "Reka sistem pertumbuhan anda" : "Design your growth system"} <span aria-hidden="true">+</span>
           </SectionLink>
         </FadeIn>
       </section>
@@ -726,15 +788,15 @@ export default function Home() {
           <div className="mvp-home-toolbar">
             <div aria-hidden="true"><i /><i /><i /></div>
             <span>
-              ALGRID / BUSINESS PRODUCTS / <strong>FEATURED</strong>
+              ALGRID / {isMalay ? "PRODUK PERNIAGAAN" : "BUSINESS PRODUCTS"} / <strong>{isMalay ? "PILIHAN" : "FEATURED"}</strong>
             </span>
-            <b><i aria-hidden="true" /> Product library online</b>
+            <b><i aria-hidden="true" /> {isMalay ? "Pustaka produk aktif" : "Product library online"}</b>
           </div>
           <div className="mvp-home-browser-body">
-            <div className="mvp-home-index" role="group" aria-label="Featured business products">
+            <div className="mvp-home-index" role="group" aria-label={isMalay ? "Produk perniagaan pilihan" : "Featured business products"}>
               <div className="mvp-home-index-head">
-                <span>Product library</span>
-                <i>04 featured / 15 total</i>
+                <span>{isMalay ? "Pustaka produk" : "Product library"}</span>
+                <i>{isMalay ? "04 pilihan / 15 keseluruhan" : "04 featured / 15 total"}</i>
               </div>
               {featuredLaunchSystems.map((product, index) => (
                 <button
@@ -745,16 +807,16 @@ export default function Home() {
                 >
                   <span>{product.code}</span>
                   <div>
-                    <b>{product.name}</b>
+                    <b>{isMalay ? mvpDetailsMalay[product.id as keyof typeof mvpDetailsMalay].name : product.name}</b>
                     <small>{product.category}</small>
                   </div>
-                  <i>{product.buildTime}</i>
+                  <i>{isMalay ? product.buildTime.replace("weeks", "minggu") : product.buildTime}</i>
                   <strong aria-hidden="true">{activeLaunchSystem === index ? "●" : "○"}</strong>
                 </button>
               ))}
               <Link href="/products">
-                <span>View all 15 business products</span>
-                <i>Open product library +</i>
+                <span>{isMalay ? "Lihat kesemua 15 produk perniagaan" : "View all 15 business products"}</span>
+                <i>{isMalay ? "Buka pustaka produk" : "Open product library"} +</i>
               </Link>
             </div>
 
@@ -767,54 +829,59 @@ export default function Home() {
             >
               <div className="mvp-home-preview-head">
                 <div>
-                  <span>Blueprint / {highlightedLaunchSystem.code}</span>
-                  <small>{highlightedLaunchSystem.category} product system</small>
+                  <span>{isMalay ? "Pelan tindakan" : "Blueprint"} / {highlightedLaunchSystem.code}</span>
+                  <small>{highlightedLaunchSystem.category} {isMalay ? "sistem produk" : "product system"}</small>
                 </div>
-                <i><b aria-hidden="true" /> Reference configuration</i>
+                <i><b aria-hidden="true" /> {isMalay ? "Konfigurasi rujukan" : "Reference configuration"}</i>
               </div>
 
               <div className="mvp-home-preview-overview">
                 <div>
-                  <h3>{highlightedLaunchSystem.name}</h3>
-                  <strong>{highlightedLaunchSystem.promise}</strong>
+                  <h3>{isMalay ? mvpDetailsMalay[highlightedLaunchSystem.id as keyof typeof mvpDetailsMalay].name : highlightedLaunchSystem.name}</h3>
+                  <strong>{isMalay ? mvpMalay[highlightedLaunchSystem.id as keyof typeof mvpMalay][0] : highlightedLaunchSystem.promise}</strong>
                 </div>
                 <div className="mvp-home-readiness">
-                  <span>Blueprint status</span>
-                  <strong>Build-ready</strong>
-                  <small>Scope, architecture and launch path mapped</small>
+                  <span>{isMalay ? "Status pelan tindakan" : "Blueprint status"}</span>
+                  <strong>{isMalay ? "Sedia dibina" : "Build-ready"}</strong>
+                  <small>{isMalay ? "Skop, seni bina dan laluan pelancaran telah dipetakan" : "Scope, architecture and launch path mapped"}</small>
                 </div>
               </div>
 
               <div className="mvp-home-kpis">
                 <article>
-                  <span>Outcome signal</span>
+                  <span>{isMalay ? "Isyarat hasil" : "Outcome signal"}</span>
                   <strong>{highlightedLaunchSystem.metric}</strong>
-                  <small>{highlightedLaunchSystem.metricLabel}</small>
+                  <small>{isMalay ? mvpDetailsMalay[highlightedLaunchSystem.id as keyof typeof mvpDetailsMalay].metricLabel : highlightedLaunchSystem.metricLabel}</small>
                 </article>
                 <article>
-                  <span>Estimated build</span>
-                  <strong>{highlightedLaunchSystem.buildTime}</strong>
-                  <small>Strategy through launch</small>
+                  <span>{isMalay ? "Anggaran pembangunan" : "Estimated build"}</span>
+                  <strong>{isMalay ? highlightedLaunchSystem.buildTime.replace("weeks", "minggu") : highlightedLaunchSystem.buildTime}</strong>
+                  <small>{isMalay ? "Daripada strategi hingga pelancaran" : "Strategy through launch"}</small>
                 </article>
                 <article>
-                  <span>Architecture</span>
-                  <strong>{highlightedLaunchSystem.stack.length} layers</strong>
-                  <small>Modular and scale-ready</small>
+                  <span>{isMalay ? "Seni bina" : "Architecture"}</span>
+                  <strong>{highlightedLaunchSystem.stack.length} {isMalay ? "lapisan" : "layers"}</strong>
+                  <small>{isMalay ? "Modular dan sedia diskala" : "Modular and scale-ready"}</small>
                 </article>
               </div>
 
               <div className="mvp-home-command-grid">
                 <section className="mvp-home-plan">
                   <div className="mvp-home-panel-head">
-                    <span>Delivery plan</span>
-                    <i>{highlightedLaunchSystem.buildTime} total</i>
+                    <span>{isMalay ? "Pelan penyampaian" : "Delivery plan"}</span>
+                    <i>{isMalay ? highlightedLaunchSystem.buildTime.replace("weeks", "minggu") : highlightedLaunchSystem.buildTime} {isMalay ? "keseluruhan" : "total"}</i>
                   </div>
-                  {[
+                  {(isMalay ? [
+                    ["01", "Strategi produk", "15%"],
+                    ["02", "Sistem pengalaman", "25%"],
+                    ["03", "Pembangunan & integrasi", "45%"],
+                    ["04", "Pelancaran & pembelajaran", "15%"],
+                  ] : [
                     ["01", "Product strategy", "15%"],
                     ["02", "Experience system", "25%"],
                     ["03", "Build & integration", "45%"],
                     ["04", "Launch & learning", "15%"],
-                  ].map((phase) => (
+                  ]).map((phase) => (
                     <div className="mvp-home-phase" key={phase[0]}>
                       <span>{phase[0]}</span>
                       <b>{phase[1]}</b>
@@ -826,20 +893,20 @@ export default function Home() {
 
                 <section className="mvp-home-modules">
                   <div className="mvp-home-panel-head">
-                    <span>Product architecture</span>
-                    <i>{highlightedLaunchSystem.features.length} modules included</i>
+                    <span>{isMalay ? "Seni bina produk" : "Product architecture"}</span>
+                    <i>{highlightedLaunchSystem.features.length} {isMalay ? "modul disertakan" : "modules included"}</i>
                   </div>
                   <div className="mvp-home-module-list">
-                    {highlightedLaunchSystem.features.map((feature, index) => (
+                    {(isMalay ? mvpDetailsMalay[highlightedLaunchSystem.id as keyof typeof mvpDetailsMalay].features : highlightedLaunchSystem.features).map((feature, index) => (
                       <div key={feature}>
                         <span>{String(index + 1).padStart(2, "0")}</span>
                         <b>{feature}</b>
-                        <i>Included</i>
+                        <i>{isMalay ? "Disertakan" : "Included"}</i>
                       </div>
                     ))}
                   </div>
                   <div className="mvp-home-stack">
-                    <span>Technology stack</span>
+                    <span>{isMalay ? "Set teknologi" : "Technology stack"}</span>
                     <div>
                       {highlightedLaunchSystem.stack.map((technology) => (
                         <i key={technology}>{technology}</i>
@@ -851,12 +918,12 @@ export default function Home() {
 
               <div className="mvp-home-preview-foot">
                 <div className="mvp-home-fit">
-                  <span>Best suited for</span>
-                  <b>{highlightedLaunchSystem.idealFor}</b>
-                  <small>{highlightedLaunchSystem.scalability}</small>
+                  <span>{isMalay ? "Paling sesuai untuk" : "Best suited for"}</span>
+                  <b>{isMalay ? mvpMalay[highlightedLaunchSystem.id as keyof typeof mvpMalay][1] : highlightedLaunchSystem.idealFor}</b>
+                  <small>{isMalay ? mvpMalay[highlightedLaunchSystem.id as keyof typeof mvpMalay][2] : highlightedLaunchSystem.scalability}</small>
                 </div>
                 <a href={`/products#${highlightedLaunchSystem.id}`}>
-                  View system <span aria-hidden="true">+</span>
+                  {isMalay ? "Lihat sistem" : "View system"} <span aria-hidden="true">+</span>
                 </a>
               </div>
             </motion.article>
@@ -874,7 +941,7 @@ export default function Home() {
         </FadeIn>
 
         <div className="case-layout">
-          <div className="case-tabs" role="tablist" aria-label="Case studies">
+          <div className="case-tabs" role="tablist" aria-label={isMalay ? "Kajian kes" : "Case studies"}>
             {ventures.map((item, index) => (
               <button
                 key={item.name}
@@ -904,19 +971,19 @@ export default function Home() {
             transition={{ duration: 0.4 }}
             style={{ "--case-color": venture.color } as React.CSSProperties}
           >
-            <VentureMedia venture={venture} />
+            <VentureMedia venture={venture} isMalay={isMalay} />
             <div className="case-content">
               <p className="eyebrow">{isMalay ? ventureMalay[venture.slug as keyof typeof ventureMalay].type : venture.type} · {isMalay ? "Hasil kerja pilihan" : "Selected work"}</p>
               <h3>{isMalay ? ventureMalay[venture.slug as keyof typeof ventureMalay].title : venture.title}</h3>
               <p>{isMalay ? ventureMalay[venture.slug as keyof typeof ventureMalay].summary : venture.summary}</p>
               <div className="case-results">
                 <span>
-                  <b>{venture.impact[0]}</b>
-                  {venture.impact[1]}
+                  <b>{ventureImpact[0]}</b>
+                  {ventureImpact[1]}
                 </span>
                 <span>
-                  <b>{venture.impact[2]}</b>
-                  {venture.impact[3]}
+                  <b>{ventureImpact[2]}</b>
+                  {ventureImpact[3]}
                 </span>
               </div>
               <Link className="case-link" href={`/work/${venture.slug}`}>
@@ -928,34 +995,33 @@ export default function Home() {
 
         <FadeIn className="portfolio-proof" delay={0.08}>
           <div className="portfolio-proof-bar">
-            <span>ALGRID / EVIDENCE INDEX</span>
-            <span><i /> SELECTED ENGAGEMENT SIGNALS</span>
-            <span>03 OUTCOMES · 02 CLIENT NOTES</span>
+            <span>ALGRID / {isMalay ? "INDEKS BUKTI" : "EVIDENCE INDEX"}</span>
+            <span><i /> {isMalay ? "ISYARAT PENGLIBATAN PILIHAN" : "SELECTED ENGAGEMENT SIGNALS"}</span>
+            <span>{isMalay ? "03 HASIL · 02 CATATAN PELANGGAN" : "03 OUTCOMES · 02 CLIENT NOTES"}</span>
           </div>
           <div className="portfolio-proof-head">
             <div>
-              <p className="eyebrow">Portfolio highlights / Client evidence</p>
-              <h3>Work that moves<br />the <em>business.</em></h3>
+              <p className="eyebrow">{isMalay ? "Sorotan portfolio / Bukti pelanggan" : "Portfolio highlights / Client evidence"}</p>
+              <h3>{isMalay ? "Hasil kerja yang menggerakkan" : "Work that moves"}<br />{isMalay ? "" : "the "}<em>{isMalay ? "perniagaan." : "business."}</em></h3>
             </div>
             <div className="portfolio-proof-intro">
-              <span>OUTCOMES, NOT OUTPUTS</span>
+              <span>{isMalay ? "HASIL, BUKAN SEKADAR OUTPUT" : "OUTCOMES, NOT OUTPUTS"}</span>
               <p>
-                Selected outcome snapshots and client feedback showing what
-                connected strategy, product and growth execution can unlock.
+                {isMalay ? "Sorotan hasil dan maklum balas pelanggan yang menunjukkan potensi pelaksanaan strategi, produk dan pertumbuhan yang terhubung." : "Selected outcome snapshots and client feedback showing what connected strategy, product and growth execution can unlock."}
               </p>
             </div>
           </div>
 
-          <div className="portfolio-signal-grid" aria-label="Selected portfolio outcomes">
-            {portfolioSignals.map((signal, index) => (
+          <div className="portfolio-signal-grid" aria-label={isMalay ? "Hasil portfolio pilihan" : "Selected portfolio outcomes"}>
+            {displayedPortfolioSignals.map((signal, index) => (
               <article className={`portfolio-signal portfolio-signal-${index + 1}`} key={signal.label}>
                 <div className="portfolio-signal-meta">
-                  <span>SIGNAL / {String(index + 1).padStart(2, "0")}</span>
+                  <span>{isMalay ? "ISYARAT" : "SIGNAL"} / {String(index + 1).padStart(2, "0")}</span>
                   <small>{signal.period}</small>
                 </div>
                 <div className="portfolio-signal-value">
                   <strong>{signal.value}</strong>
-                  <i>measured outcome</i>
+                  <i>{isMalay ? "hasil terukur" : "measured outcome"}</i>
                 </div>
                 <div className="portfolio-signal-copy">
                   <h4>{signal.label}</h4>
@@ -968,16 +1034,16 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="client-voice-grid" aria-label="Client testimonials">
+          <div className="client-voice-grid" aria-label={isMalay ? "Testimoni pelanggan" : "Client testimonials"}>
               <div className="client-voice-label">
               <div>
-                <span>CLIENT PERSPECTIVE</span>
-                <strong>What partners<br />noticed.</strong>
+                <span>{isMalay ? "PERSPEKTIF PELANGGAN" : "CLIENT PERSPECTIVE"}</span>
+                <strong>{isMalay ? "Perkara yang rakan" : "What partners"}<br />{isMalay ? "kami perhatikan." : "noticed."}</strong>
               </div>
               <b>02</b>
-              <small>SELECTED NOTES</small>
+              <small>{isMalay ? "CATATAN PILIHAN" : "SELECTED NOTES"}</small>
             </div>
-            {clientVoices.map((voice, index) => (
+            {displayedClientVoices.map((voice, index) => (
               <figure className="client-voice" key={voice.name}>
                 <div className="client-voice-top">
                   <span>{String(index + 1).padStart(2, "0")}</span>
@@ -995,9 +1061,9 @@ export default function Home() {
             ))}
           </div>
           <div className="portfolio-proof-foot">
-            <span>Evidence note</span>
-            <p>Selected engagement snapshots. Outcomes depend on scope, market conditions and implementation.</p>
-            <i>ALGRID / CONNECTED EXECUTION</i>
+            <span>{isMalay ? "Catatan bukti" : "Evidence note"}</span>
+            <p>{isMalay ? "Sorotan penglibatan terpilih. Hasil bergantung pada skop, keadaan pasaran dan pelaksanaan." : "Selected engagement snapshots. Outcomes depend on scope, market conditions and implementation."}</p>
+            <i>ALGRID / {isMalay ? "PELAKSANAAN TERHUBUNG" : "CONNECTED EXECUTION"}</i>
           </div>
         </FadeIn>
       </section>
@@ -1011,7 +1077,7 @@ export default function Home() {
           />
         </FadeIn>
         <div className="systems-grid">
-          {systems.map((system, index) => (
+          {displayedSystems.map((system, index) => (
             <FadeIn className="system-card" delay={index * 0.08} key={system.title}>
               <div className="card-index">{system.index}</div>
               <div className={`system-glyph glyph-${index + 1}`} aria-hidden="true">
@@ -1042,42 +1108,42 @@ export default function Home() {
         <div className="ai-grid">
           <div className="ai-playground">
             <div className="panel-top">
-              <span>ALGRID / OPPORTUNITY ENGINE</span>
-              <span className="beta">GUIDED DEMO</span>
+              <span>ALGRID / {isMalay ? "ENJIN PELUANG" : "OPPORTUNITY ENGINE"}</span>
+              <span className="beta">{isMalay ? "DEMO BERPANDU" : "GUIDED DEMO"}</span>
             </div>
             <div className="ai-terminal">
-              <label htmlFor="ai-prompt">Ask the venture strategist</label>
+              <label htmlFor="ai-prompt">{isMalay ? "Tanya ahli strategi usaha niaga" : "Ask the venture strategist"}</label>
               <textarea
                 id="ai-prompt"
-                value={aiPrompt}
+                value={displayedAiPrompt}
                 onChange={(event) => {
                   setAiPrompt(event.target.value);
                   setAiState("idle");
                 }}
               />
-              <button onClick={runAnalysis} disabled={!aiPrompt.trim()}>
-                {aiState === "thinking" ? "Mapping opportunity…" : "Run analysis"}
+              <button onClick={runAnalysis} disabled={!displayedAiPrompt.trim()}>
+                {aiState === "thinking" ? (isMalay ? "Memetakan peluang…" : "Mapping opportunity…") : (isMalay ? "Jalankan analisis" : "Run analysis")}
                 <span aria-hidden="true">+</span>
               </button>
             </div>
             <div className={`ai-output ${aiState}`}>
               {aiState === "idle" && (
-                <p>Select a question or write your own to reveal a strategy map.</p>
+                <p>{isMalay ? "Pilih soalan atau tulis soalan anda untuk melihat peta strategi." : "Select a question or write your own to reveal a strategy map."}</p>
               )}
               {aiState === "thinking" && (
                 <div className="scan-state">
                   <i />
-                  <span>Connecting market, brand and operating signals…</span>
+                  <span>{isMalay ? "Menghubungkan isyarat pasaran, jenama dan operasi…" : "Connecting market, brand and operating signals…"}</span>
                 </div>
               )}
               {aiState === "done" && (
                 <>
                   <div className="output-head">
-                    <span>GUIDED OPPORTUNITY MAP</span>
-                    <b>FRAMEWORK OUTPUT</b>
+                    <span>{isMalay ? "PETA PELUANG BERPANDU" : "GUIDED OPPORTUNITY MAP"}</span>
+                    <b>{isMalay ? "HASIL KERANGKA KERJA" : "FRAMEWORK OUTPUT"}</b>
                   </div>
                   <ol>
-                    {guidedAnalyses[analysisKey].map((item, index) => (
+                    {displayedAnalyses[analysisKey].map((item, index) => (
                       <li key={item[0]}>
                         <span>{String(index + 1).padStart(2, "0")}</span>
                         <div>
@@ -1088,8 +1154,7 @@ export default function Home() {
                     ))}
                   </ol>
                   <p className="demo-disclosure">
-                    Guided demonstration using a prebuilt decision framework.
-                    No prompt data is stored or sent to an AI provider.
+                    {isMalay ? "Demonstrasi berpandu menggunakan kerangka keputusan yang telah dibina. Data arahan tidak disimpan atau dihantar kepada penyedia AI." : "Guided demonstration using a prebuilt decision framework. No prompt data is stored or sent to an AI provider."}
                   </p>
                 </>
               )}
@@ -1098,19 +1163,19 @@ export default function Home() {
           <div className="ai-products">
             <article>
               <span className="product-icon">◎</span>
-              <p className="eyebrow">AI / CUSTOMER</p>
-              <h3>Concierge</h3>
-              <p>Trained product guidance that converts complex choices into confident action.</p>
+              <p className="eyebrow">AI / {isMalay ? "PELANGGAN" : "CUSTOMER"}</p>
+              <h3>{isMalay ? "Konsierj" : "Concierge"}</h3>
+              <p>{isMalay ? "Panduan produk terlatih yang mengubah pilihan kompleks menjadi tindakan yakin." : "Trained product guidance that converts complex choices into confident action."}</p>
               <div className="mini-chat">
-                <span>What fits my daily routine?</span>
-                <span>Based on your goals, start here ↗</span>
+                <span>{isMalay ? "Apa yang sesuai dengan rutin harian saya?" : "What fits my daily routine?"}</span>
+                <span>{isMalay ? "Berdasarkan matlamat anda, mulakan di sini" : "Based on your goals, start here"} ↗</span>
               </div>
             </article>
             <article>
               <span className="product-icon">⌁</span>
-              <p className="eyebrow">AI / OPERATIONS</p>
-              <h3>Command Centre</h3>
-              <p>One intelligence layer across workflows, teams and business performance.</p>
+              <p className="eyebrow">AI / {isMalay ? "OPERASI" : "OPERATIONS"}</p>
+              <h3>{isMalay ? "Pusat Arahan" : "Command Centre"}</h3>
+              <p>{isMalay ? "Satu lapisan kecerdasan merentas aliran kerja, pasukan dan prestasi perniagaan." : "One intelligence layer across workflows, teams and business performance."}</p>
               <div className="bars">
                 <i style={{ width: "84%" }} />
                 <i style={{ width: "61%" }} />
@@ -1119,9 +1184,9 @@ export default function Home() {
             </article>
             <article>
               <span className="product-icon">✦</span>
-              <p className="eyebrow">AI / GROWTH</p>
-              <h3>Content Engine</h3>
-              <p>Brand-trained creative systems that learn from the market without diluting identity.</p>
+              <p className="eyebrow">AI / {isMalay ? "PERTUMBUHAN" : "GROWTH"}</p>
+              <h3>{isMalay ? "Enjin Kandungan" : "Content Engine"}</h3>
+              <p>{isMalay ? "Sistem kreatif terlatih jenama yang belajar daripada pasaran tanpa mencairkan identiti." : "Brand-trained creative systems that learn from the market without diluting identity."}</p>
               <div className="content-tiles">
                 <i />
                 <i />
@@ -1136,16 +1201,16 @@ export default function Home() {
       <section className="section transformation-section">
         <FadeIn>
           <SectionIntro
-            eyebrow="Business case / 04"
-            title="Make transformation measurable."
-            copy="Model the commercial impact of connecting better experience, faster execution and intelligent operations."
+            eyebrow={isMalay ? "Kes perniagaan / 04" : "Business case / 04"}
+            title={isMalay ? "Jadikan transformasi boleh diukur." : "Make transformation measurable."}
+            copy={isMalay ? "Modelkan impak komersial daripada pengalaman lebih baik, pelaksanaan lebih pantas dan operasi pintar yang terhubung." : "Model the commercial impact of connecting better experience, faster execution and intelligent operations."}
           />
         </FadeIn>
         <div className="roi-shell">
           <div className="calculator">
             <div className="calc-row">
               <label htmlFor="leads">
-                Monthly qualified leads <b>{monthlyLeads}</b>
+                {isMalay ? "Prospek layak bulanan" : "Monthly qualified leads"} <b>{monthlyLeads}</b>
               </label>
               <input
                 id="leads"
@@ -1159,7 +1224,7 @@ export default function Home() {
             </div>
             <div className="calc-row">
               <label htmlFor="rate">
-                Current close rate <b>{closeRate}%</b>
+                {isMalay ? "Kadar penutupan semasa" : "Current close rate"} <b>{closeRate}%</b>
               </label>
               <input
                 id="rate"
@@ -1172,7 +1237,7 @@ export default function Home() {
             </div>
             <div className="calc-row">
               <label htmlFor="value">
-                Average deal value <b>RM {dealValue.toLocaleString()}</b>
+                {isMalay ? "Nilai urus niaga purata" : "Average deal value"} <b>RM {dealValue.toLocaleString()}</b>
               </label>
               <input
                 id="value"
@@ -1184,21 +1249,21 @@ export default function Home() {
                 onChange={(e) => setDealValue(Number(e.target.value))}
               />
             </div>
-            <p>Illustrative model based on a 20% conversion improvement.</p>
+            <p>{isMalay ? "Model ilustrasi berdasarkan peningkatan penukaran sebanyak 20%." : "Illustrative model based on a 20% conversion improvement."}</p>
           </div>
           <div className="roi-result" aria-live="polite">
-            <p>Potential annual opportunity</p>
+            <p>{isMalay ? "Potensi peluang tahunan" : "Potential annual opportunity"}</p>
             <strong>RM {Math.round(annualRevenue * 0.2).toLocaleString()}</strong>
-            <span>INCREMENTAL REVENUE / YEAR</span>
+            <span>{isMalay ? "HASIL TAMBAHAN / TAHUN" : "INCREMENTAL REVENUE / YEAR"}</span>
             <div>
               <i />
               <p>
                 <b>+20%</b>
-                modelled conversion lift
+                {isMalay ? " peningkatan penukaran dimodelkan" : " modelled conversion lift"}
               </p>
             </div>
             <SectionLink section="contact">
-              Build your business case <span aria-hidden="true">+</span>
+              {isMalay ? "Bina kes perniagaan anda" : "Build your business case"} <span aria-hidden="true">+</span>
             </SectionLink>
           </div>
         </div>
@@ -1207,18 +1272,23 @@ export default function Home() {
       <section className="section process-section">
         <FadeIn>
           <SectionIntro
-            eyebrow="Delivery system / 05"
-            title="From ambiguity to momentum."
-            copy="A senior, integrated team moves through four connected phases—with evidence, decisions and working outputs at every step."
+            eyebrow={isMalay ? "Sistem penyampaian / 05" : "Delivery system / 05"}
+            title={isMalay ? "Daripada ketidakpastian kepada momentum." : "From ambiguity to momentum."}
+            copy={isMalay ? "Pasukan kanan bersepadu bergerak melalui empat fasa terhubung—dengan bukti, keputusan dan hasil kerja pada setiap langkah." : "A senior, integrated team moves through four connected phases—with evidence, decisions and working outputs at every step."}
           />
         </FadeIn>
         <div className="process-line">
-          {[
+          {(isMalay ? [
+            ["01", "Bingkai", "Peluang, audiens, ekonomi"],
+            ["02", "Reka", "Kedudukan, produk, pengalaman"],
+            ["03", "Bina", "Teknologi, kandungan, automasi"],
+            ["04", "Gandakan", "Lancar, belajar, skala"],
+          ] : [
             ["01", "Frame", "Opportunity, audience, economics"],
             ["02", "Design", "Positioning, product, experience"],
             ["03", "Build", "Technology, content, automation"],
             ["04", "Compound", "Launch, learn, scale"],
-          ].map((phase, index) => (
+          ]).map((phase, index) => (
             <FadeIn className="process-step" delay={index * 0.08} key={phase[0]}>
               <span>{phase[0]}</span>
               <i />
@@ -1231,57 +1301,55 @@ export default function Home() {
 
       <section className="section dashboard-section">
         <FadeIn className="dashboard-copy">
-          <p className="eyebrow">Shared command centre / 06</p>
-          <h2>One view of the work. And the value.</h2>
+          <p className="eyebrow">{isMalay ? "Pusat arahan bersama / 06" : "Shared command centre / 06"}</p>
+          <h2>{isMalay ? "Satu pandangan untuk kerja. Dan nilainya." : "One view of the work. And the value."}</h2>
           <p>
-            Every engagement includes a transparent operating layer for
-            decisions, milestones, experiments and performance—so momentum is
-            visible, not buried in status meetings.
+            {isMalay ? "Setiap penglibatan merangkumi lapisan operasi telus untuk keputusan, pencapaian, eksperimen dan prestasi—supaya momentum dapat dilihat, bukan terkubur dalam mesyuarat status." : "Every engagement includes a transparent operating layer for decisions, milestones, experiments and performance—so momentum is visible, not buried in status meetings."}
           </p>
           <ul>
-            <li>Live roadmap and decision log</li>
-            <li>Venture, product and growth metrics</li>
-            <li>Weekly senior-team signals</li>
+            <li>{isMalay ? "Hala tuju langsung dan log keputusan" : "Live roadmap and decision log"}</li>
+            <li>{isMalay ? "Metrik usaha niaga, produk dan pertumbuhan" : "Venture, product and growth metrics"}</li>
+            <li>{isMalay ? "Isyarat mingguan pasukan kanan" : "Weekly senior-team signals"}</li>
           </ul>
         </FadeIn>
         <FadeIn className="dashboard-ui" delay={0.1}>
           <div className="dash-sidebar">
             <b>A.</b>
-            <span className="active">Overview</span>
-            <span>Roadmap</span>
-            <span>Experiments</span>
-            <span>Assets</span>
-            <span>Signals</span>
+            <span className="active">{isMalay ? "Gambaran" : "Overview"}</span>
+            <span>{isMalay ? "Hala tuju" : "Roadmap"}</span>
+            <span>{isMalay ? "Eksperimen" : "Experiments"}</span>
+            <span>{isMalay ? "Aset" : "Assets"}</span>
+            <span>{isMalay ? "Isyarat" : "Signals"}</span>
           </div>
           <div className="dash-main">
             <div className="dash-header">
               <div>
-                <small>CLIENT INTERFACE / ILLUSTRATIVE</small>
-                <b>Growth command centre</b>
+                <small>{isMalay ? "ANTARA MUKA PELANGGAN / ILUSTRASI" : "CLIENT INTERFACE / ILLUSTRATIVE"}</small>
+                <b>{isMalay ? "Pusat arahan pertumbuhan" : "Growth command centre"}</b>
               </div>
               <span>Q3 · DEMO</span>
             </div>
             <div className="dash-stats">
               <article>
-                <small>Launch readiness</small>
+                <small>{isMalay ? "Kesediaan pelancaran" : "Launch readiness"}</small>
                 <b>86%</b>
                 <i style={{ width: "86%" }} />
               </article>
               <article>
-                <small>Experiment velocity</small>
+                <small>{isMalay ? "Kelajuan eksperimen" : "Experiment velocity"}</small>
                 <b>12</b>
-                <span>+4 this sprint</span>
+                <span>{isMalay ? "+4 pecutan ini" : "+4 this sprint"}</span>
               </article>
               <article>
-                <small>Signal quality</small>
-                <b>High</b>
+                <small>{isMalay ? "Kualiti isyarat" : "Signal quality"}</small>
+                <b>{isMalay ? "Tinggi" : "High"}</b>
                 <span className="green">↑ 18.2%</span>
               </article>
             </div>
             <div className="dash-chart">
               <div className="chart-head">
-                <span>COMPOUND GROWTH SIGNAL</span>
-                <span>90 DAYS</span>
+                <span>{isMalay ? "ISYARAT PERTUMBUHAN BERGANDA" : "COMPOUND GROWTH SIGNAL"}</span>
+                <span>90 {isMalay ? "HARI" : "DAYS"}</span>
               </div>
               <div className="line-chart">
                 {[18, 24, 21, 32, 38, 35, 49, 56, 64, 72, 81].map(
@@ -1298,24 +1366,24 @@ export default function Home() {
       <section className="section compare-section">
         <FadeIn>
           <SectionIntro
-            eyebrow="Transformation view / 07"
-            title="Not a redesign. A new operating reality."
-            copy="We connect the experience customers see with the systems teams use behind it."
+            eyebrow={isMalay ? "Paparan transformasi / 07" : "Transformation view / 07"}
+            title={isMalay ? "Bukan reka bentuk semula. Realiti operasi baharu." : "Not a redesign. A new operating reality."}
+            copy={isMalay ? "Kami menghubungkan pengalaman yang dilihat pelanggan dengan sistem yang digunakan pasukan di belakangnya." : "We connect the experience customers see with the systems teams use behind it."}
           />
         </FadeIn>
         <div className="compare-grid">
           <article className="before">
-            <span>BEFORE / FRAGMENTED</span>
-            <h3>Many activities.<br />Little compounding.</h3>
-            {["Separate suppliers", "Manual operations", "Campaign-led growth", "Disconnected data"].map(
+            <span>{isMalay ? "SEBELUM / BERPECAH" : "BEFORE / FRAGMENTED"}</span>
+            <h3>{isMalay ? "Banyak aktiviti." : "Many activities."}<br />{isMalay ? "Sedikit penggandaan." : "Little compounding."}</h3>
+            {(isMalay ? ["Pembekal berasingan", "Operasi manual", "Pertumbuhan berasaskan kempen", "Data tidak terhubung"] : ["Separate suppliers", "Manual operations", "Campaign-led growth", "Disconnected data"]).map(
               (item) => <p key={item}>× {item}</p>,
             )}
           </article>
           <div className="compare-arrow">→</div>
           <article className="after">
-            <span>AFTER / ALGRID SYSTEM</span>
-            <h3>One strategy.<br />Every layer aligned.</h3>
-            {["Integrated senior team", "AI-enabled workflows", "Always-on growth loops", "Shared intelligence layer"].map(
+            <span>{isMalay ? "SELEPAS / SISTEM ALGRID" : "AFTER / ALGRID SYSTEM"}</span>
+            <h3>{isMalay ? "Satu strategi." : "One strategy."}<br />{isMalay ? "Setiap lapisan selaras." : "Every layer aligned."}</h3>
+            {(isMalay ? ["Pasukan kanan bersepadu", "Aliran kerja berdaya AI", "Gelung pertumbuhan sentiasa aktif", "Lapisan kecerdasan bersama"] : ["Integrated senior team", "AI-enabled workflows", "Always-on growth loops", "Shared intelligence layer"]).map(
               (item) => <p key={item}>✓ {item}</p>,
             )}
           </article>
@@ -1325,9 +1393,9 @@ export default function Home() {
       <section className="section ecosystem-section">
         <FadeIn>
           <SectionIntro
-            eyebrow="Technology ecosystem / 08"
-            title="Built on the modern stack."
-            copy="We choose proven technology around the problem—not the other way around—and leave every system maintainable, observable and ready to scale."
+            eyebrow={isMalay ? "Ekosistem teknologi / 08" : "Technology ecosystem / 08"}
+            title={isMalay ? "Dibina dengan teknologi moden." : "Built on the modern stack."}
+            copy={isMalay ? "Kami memilih teknologi terbukti berdasarkan masalah—bukan sebaliknya—dan memastikan setiap sistem mudah diselenggara, dipantau dan sedia diskala." : "We choose proven technology around the problem—not the other way around—and leave every system maintainable, observable and ready to scale."}
           />
         </FadeIn>
         <div className="stack-cloud">
@@ -1343,14 +1411,14 @@ export default function Home() {
           ))}
         </div>
         <div className="industry-row">
-          <p>Built across</p>
+          <p>{isMalay ? "Dibina merentas" : "Built across"}</p>
           <div>
-            <span>Consumer brands</span>
-            <span>Retail & commerce</span>
-            <span>Food & beverage</span>
-            <span>Health & wellness</span>
-            <span>Professional services</span>
-            <span>Enterprise transformation</span>
+            <span>{isMalay ? "Jenama pengguna" : "Consumer brands"}</span>
+            <span>{isMalay ? "Runcit & perdagangan" : "Retail & commerce"}</span>
+            <span>{isMalay ? "Makanan & minuman" : "Food & beverage"}</span>
+            <span>{isMalay ? "Kesihatan & kesejahteraan" : "Health & wellness"}</span>
+            <span>{isMalay ? "Perkhidmatan profesional" : "Professional services"}</span>
+            <span>{isMalay ? "Transformasi perusahaan" : "Enterprise transformation"}</span>
           </div>
         </div>
       </section>
@@ -1358,32 +1426,32 @@ export default function Home() {
       <section className="section insights-section">
         <FadeIn className="insights-head">
           <SectionIntro
-            eyebrow="Field notes / 09"
-            title="Ideas for builders."
-            copy="Practical thinking at the intersection of brand, technology, intelligence and growth."
+            eyebrow={isMalay ? "Catatan lapangan / 09" : "Field notes / 09"}
+            title={isMalay ? "Idea untuk pembina." : "Ideas for builders."}
+            copy={isMalay ? "Pemikiran praktikal di persimpangan jenama, teknologi, kecerdasan dan pertumbuhan." : "Practical thinking at the intersection of brand, technology, intelligence and growth."}
           />
-          <Link href="/insights">View all insights ↗</Link>
+          <Link href="/insights">{isMalay ? "Lihat semua wawasan" : "View all insights"} ↗</Link>
         </FadeIn>
         <div className="insights-grid" id="insights">
           <article className="insight-featured">
             <div className="insight-art art-one">
               <span>01</span>
               <i />
-              <b>AI ≠ TOOL</b>
+              <b>AI ≠ {isMalay ? "ALAT" : "TOOL"}</b>
             </div>
-            <p>VENTURE STRATEGY · 8 MIN</p>
-            <h3>Why the next generation of companies will be designed around intelligence.</h3>
-            <Link href="/insights/designing-companies-around-intelligence">Read field note ↗</Link>
+            <p>{isMalay ? "STRATEGI USAHA NIAGA" : "VENTURE STRATEGY"} · 8 MIN</p>
+            <h3>{isMalay ? "Mengapa generasi syarikat seterusnya akan direka berasaskan kecerdasan." : "Why the next generation of companies will be designed around intelligence."}</h3>
+            <Link href="/insights/designing-companies-around-intelligence">{isMalay ? "Baca catatan lapangan" : "Read field note"} ↗</Link>
           </article>
           <article>
             <div className="insight-art art-two">
-              <span>BRAND</span>
+              <span>{isMalay ? "JENAMA" : "BRAND"}</span>
               <span>↔</span>
-              <span>SYSTEM</span>
+              <span>{isMalay ? "SISTEM" : "SYSTEM"}</span>
             </div>
-            <p>BRAND SYSTEMS · 6 MIN</p>
-            <h3>Your brand is not a layer. It is the interface to your business.</h3>
-            <Link href="/insights/brand-as-business-interface">Read field note ↗</Link>
+            <p>{isMalay ? "SISTEM JENAMA" : "BRAND SYSTEMS"} · 6 MIN</p>
+            <h3>{isMalay ? "Jenama anda bukan lapisan. Ia ialah antara muka kepada perniagaan anda." : "Your brand is not a layer. It is the interface to your business."}</h3>
+            <Link href="/insights/brand-as-business-interface">{isMalay ? "Baca catatan lapangan" : "Read field note"} ↗</Link>
           </article>
           <article>
             <div className="insight-art art-three">
@@ -1391,9 +1459,9 @@ export default function Home() {
               <div />
               <div />
             </div>
-            <p>GROWTH · 5 MIN</p>
-            <h3>From campaigns to compounding: the growth operating system.</h3>
-            <Link href="/insights/from-campaigns-to-compounding-growth">Read field note ↗</Link>
+            <p>{isMalay ? "PERTUMBUHAN" : "GROWTH"} · 5 MIN</p>
+            <h3>{isMalay ? "Daripada kempen kepada pertumbuhan berganda: sistem operasi pertumbuhan." : "From campaigns to compounding: the growth operating system."}</h3>
+            <Link href="/insights/from-campaigns-to-compounding-growth">{isMalay ? "Baca catatan lapangan" : "Read field note"} ↗</Link>
           </article>
         </div>
       </section>
@@ -1408,7 +1476,7 @@ export default function Home() {
             </h2>
           </div>
           <div className="philosophy-intro">
-            <span>Independent · Kuala Lumpur · Global</span>
+            <span>{isMalay ? "Bebas · Kuala Lumpur · Global" : "Independent · Kuala Lumpur · Global"}</span>
             <p>
               {isMalay ? "Kebanyakan syarikat tidak memerlukan lebih banyak nasihat. Mereka memerlukan rakan yang boleh melihat keseluruhan sistem—dan merealisasikannya." : "Most companies do not need more advice. They need a partner who can see the whole system—and make it real."}
             </p>
@@ -1418,55 +1486,55 @@ export default function Home() {
         <div className="philosophy-stage">
           <div className="philosophy-manifesto">
             <div className="philosophy-manifesto-top">
-              <span>ALGRID / COMPANY PROFILE</span>
-              <i>EST. KUALA LUMPUR</i>
+              <span>ALGRID / {isMalay ? "PROFIL SYARIKAT" : "COMPANY PROFILE"}</span>
+              <i>{isMalay ? "DITUBUHKAN DI KUALA LUMPUR" : "EST. KUALA LUMPUR"}</i>
             </div>
             <div className="philosophy-statement">
-              <p>We operate where strategy usually stops.</p>
+              <p>{isMalay ? "Kami beroperasi di tempat strategi biasanya terhenti." : "We operate where strategy usually stops."}</p>
               <strong>
-                One senior team to define the opportunity, shape the brand,
-                engineer the product, apply intelligence and build growth.
+                {isMalay ? "Satu pasukan kanan untuk menentukan peluang, membentuk jenama, merekayasa produk, menerapkan kecerdasan dan membina pertumbuhan." : "One senior team to define the opportunity, shape the brand, engineer the product, apply intelligence and build growth."}
               </strong>
             </div>
             <div className="philosophy-note">
               <p>
-                Algrid International is an independent venture builder and
-                digital transformation company. For almost a decade, we have
-                helped founders and transformation leaders turn ambitious ideas
-                into businesses that can operate, learn and scale.
+                {isMalay ? "Algrid International ialah pembina usaha niaga dan syarikat transformasi digital bebas. Selama hampir sedekad, kami membantu pengasas dan pemimpin transformasi mengubah idea bercita-cita tinggi menjadi perniagaan yang boleh beroperasi, belajar dan berkembang." : "Algrid International is an independent venture builder and digital transformation company. For almost a decade, we have helped founders and transformation leaders turn ambitious ideas into businesses that can operate, learn and scale."}
               </p>
               <blockquote>
-                The work is only successful when the business is stronger after
-                we leave.
+                {isMalay ? "Kerja hanya dianggap berjaya apabila perniagaan menjadi lebih kukuh selepas kami selesai." : "The work is only successful when the business is stronger after we leave."}
               </blockquote>
             </div>
           </div>
 
-          <div className="philosophy-system" aria-label="Algrid integrated execution model">
+          <div className="philosophy-system" aria-label={isMalay ? "Model pelaksanaan bersepadu Algrid" : "Algrid integrated execution model"}>
             <div className="philosophy-system-head">
-              <span>ONE ACCOUNTABLE SYSTEM</span>
-              <i>05 / CONNECTED DISCIPLINES</i>
+              <span>{isMalay ? "SATU SISTEM BERTANGGUNGJAWAB" : "ONE ACCOUNTABLE SYSTEM"}</span>
+              <i>05 / {isMalay ? "DISIPLIN TERHUBUNG" : "CONNECTED DISCIPLINES"}</i>
             </div>
             <div className="philosophy-orbit" aria-hidden="true">
               <span className="philosophy-ring philosophy-ring-one" />
               <span className="philosophy-ring philosophy-ring-two" />
               <b>A</b>
-              <i className="philosophy-node node-strategy">STRATEGY</i>
-              <i className="philosophy-node node-creative">CREATIVE</i>
-              <i className="philosophy-node node-engineering">ENGINEERING</i>
+              <i className="philosophy-node node-strategy">{isMalay ? "STRATEGI" : "STRATEGY"}</i>
+              <i className="philosophy-node node-creative">{isMalay ? "KREATIF" : "CREATIVE"}</i>
+              <i className="philosophy-node node-engineering">{isMalay ? "KEJURUTERAAN" : "ENGINEERING"}</i>
               <i className="philosophy-node node-ai">AI</i>
-              <i className="philosophy-node node-growth">GROWTH</i>
+              <i className="philosophy-node node-growth">{isMalay ? "PERTUMBUHAN" : "GROWTH"}</i>
             </div>
             <div className="philosophy-system-foot">
-              <span>VISION</span>
+              <span>{isMalay ? "VISI" : "VISION"}</span>
               <i />
-              <span>OPERATING REALITY</span>
+              <span>{isMalay ? "REALITI OPERASI" : "OPERATING REALITY"}</span>
             </div>
           </div>
         </div>
 
         <div className="principles">
-          {[
+          {(isMalay ? [
+            ["01", "Sistem mengatasi gejala", "Selesaikan masalah perniagaan yang terhubung, bukan serpihan yang kelihatan."],
+            ["02", "Bakat kanan, dekat dengan kerja", "Mereka yang membentuk strategi kekal bertanggungjawab sepanjang penyampaian."],
+            ["03", "Bukti sebelum persembahan", "Prototaip, ukur dan belajar sebelum mengembangkan cerita."],
+            ["04", "Bina untuk pemilikan", "Cipta keupayaan yang boleh dikendalikan pasukan anda lama selepas pelancaran."],
+          ] : [
             [
               "01",
               "Systems over symptoms",
@@ -1487,7 +1555,7 @@ export default function Home() {
               "Build for ownership",
               "Create capability your team can operate long after launch.",
             ],
-          ].map((principle) => (
+          ]).map((principle) => (
             <div key={principle[0]}>
               <span>{principle[0]}</span>
               <b>{principle[1]}</b>
@@ -1515,21 +1583,21 @@ export default function Home() {
             <div className="contact-proof">
               <div>
                 <b>01</b>
-                <span>Senior review from the first conversation</span>
+                <span>{isMalay ? "Semakan kanan sejak perbualan pertama" : "Senior review from the first conversation"}</span>
               </div>
               <div>
                 <b>02</b>
-                <span>Clear next step within two business days</span>
+                <span>{isMalay ? "Langkah seterusnya yang jelas dalam dua hari bekerja" : "Clear next step within two business days"}</span>
               </div>
               <div>
                 <b>03</b>
-                <span>Project, launch or long-term partnership</span>
+                <span>{isMalay ? "Projek, pelancaran atau kerjasama jangka panjang" : "Project, launch or long-term partnership"}</span>
               </div>
             </div>
 
             <div className="contact-direct">
               <div className="contact-direct-head">
-                <p>Prefer a direct channel?</p>
+                <p>{isMalay ? "Lebih suka saluran terus?" : "Prefer a direct channel?"}</p>
                 <span>Kuala Lumpur · GMT+8</span>
               </div>
               <div className="contact-channel-grid">
@@ -1538,7 +1606,7 @@ export default function Home() {
                     <ContactIcon name="email" />
                   </span>
                   <span>
-                    <small>Email our team</small>
+                    <small>{isMalay ? "E-mel pasukan kami" : "Email our team"}</small>
                     <b>social@algridinternational.com</b>
                   </span>
                   <i aria-hidden="true">+</i>
@@ -1552,7 +1620,7 @@ export default function Home() {
                     <ContactIcon name="whatsapp" />
                   </span>
                   <span>
-                    <small>Start on WhatsApp</small>
+                    <small>{isMalay ? "Mulakan di WhatsApp" : "Start on WhatsApp"}</small>
                     <b>+60 11 6919 4826</b>
                   </span>
                   <i aria-hidden="true">+</i>
@@ -1568,7 +1636,7 @@ export default function Home() {
                 </address>
               </div>
               <div className="contact-socials">
-                <p>Follow our work</p>
+                <p>{isMalay ? "Ikuti hasil kerja kami" : "Follow our work"}</p>
                 <div>
                   {socialLinks.map((social) => (
                     <a
@@ -1576,7 +1644,7 @@ export default function Home() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Follow Algrid on ${social.name}`}
+                      aria-label={isMalay ? `Ikuti Algrid di ${social.name}` : `Follow Algrid on ${social.name}`}
                     >
                       <ContactIcon name={social.icon} />
                       <span>{social.name}</span>
@@ -1588,14 +1656,13 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn className="contact-brief-card" delay={0.1}>
-            <span>PROJECT INTAKE / AVAILABLE</span>
-            <h3>Ready to brief the senior team?</h3>
+            <span>{isMalay ? "PENERIMAAN PROJEK / TERSEDIA" : "PROJECT INTAKE / AVAILABLE"}</span>
+            <h3>{isMalay ? "Sedia berkongsi ringkasan dengan pasukan kanan?" : "Ready to brief the senior team?"}</h3>
             <p>
-              Use the dedicated secure intake to give us the context, market
-              and timing behind the opportunity.
+              {isMalay ? "Gunakan borang penerimaan selamat untuk berkongsi konteks, pasaran dan masa di sebalik peluang anda." : "Use the dedicated secure intake to give us the context, market and timing behind the opportunity."}
             </p>
             <Link className="button button-primary" href="/contact">
-              Start your project brief <span aria-hidden="true">+</span>
+              {isMalay ? "Mulakan ringkasan projek" : "Start your project brief"} <span aria-hidden="true">+</span>
             </Link>
           </FadeIn>
         </div>

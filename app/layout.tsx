@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HashCleaner } from "./components/HashCleaner";
 import { SiteLanguageProvider } from "./components/useSiteLanguage";
+import { LocalizedText } from "./components/LocalizedText";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -120,7 +121,7 @@ export default function RootLayout({
         <SiteLanguageProvider>
           <HashCleaner />
           <a className="skip-link" href="#main-content">
-            Skip to content
+            <LocalizedText en="Skip to content" ms="Langkau ke kandungan" />
           </a>
           {children}
         </SiteLanguageProvider>

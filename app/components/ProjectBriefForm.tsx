@@ -36,6 +36,28 @@ const apacCountries = [
   "Other APAC market",
 ];
 
+const apacCountryMalay: Record<string, string> = {
+  Australia: "Australia", Bangladesh: "Bangladesh", Bhutan: "Bhutan", Brunei: "Brunei",
+  Cambodia: "Kemboja", China: "China", Fiji: "Fiji", "Hong Kong": "Hong Kong",
+  India: "India", Indonesia: "Indonesia", Japan: "Jepun", Laos: "Laos", Macau: "Macau",
+  Malaysia: "Malaysia", Maldives: "Maldives", Mongolia: "Mongolia", Myanmar: "Myanmar",
+  Nepal: "Nepal", "New Zealand": "New Zealand", Pakistan: "Pakistan",
+  "Papua New Guinea": "Papua New Guinea", Philippines: "Filipina", Singapore: "Singapura",
+  "South Korea": "Korea Selatan", "Sri Lanka": "Sri Lanka", Taiwan: "Taiwan",
+  Thailand: "Thailand", "Timor-Leste": "Timor-Leste", Vietnam: "Vietnam",
+  "Other APAC market": "Pasaran APAC lain",
+};
+
+const projectOptions = {
+  en: ["AI & automation system", "Website or software platform", "Brand, packaging or creative system", "Growth and performance engine", "Business or product launch", "Multi-system transformation", "Long-term execution partnership"],
+  ms: ["Sistem AI & automasi", "Laman web atau platform perisian", "Sistem jenama, pembungkusan atau kreatif", "Enjin pertumbuhan dan prestasi", "Pelancaran perniagaan atau produk", "Transformasi pelbagai sistem", "Kerjasama pelaksanaan jangka panjang"],
+};
+
+const timelineOptions = {
+  en: ["As soon as possible", "Within 30 days", "Within 1–3 months", "Exploring the right approach"],
+  ms: ["Secepat mungkin", "Dalam tempoh 30 hari", "Dalam tempoh 1–3 bulan", "Sedang meneroka pendekatan yang tepat"],
+};
+
 const formCopy = {
   en: {
     head: "PROJECT BRIEF / SECURE INTAKE",
@@ -156,7 +178,7 @@ export function ProjectBriefForm({ className = "" }: { className?: string }) {
             <span>{labels.country} *</span>
             <select name="country" defaultValue="" required>
               <option value="" disabled>{labels.selectCountry}</option>
-              {apacCountries.map((country) => <option key={country}>{country}</option>)}
+              {apacCountries.map((country) => <option key={country} value={country}>{language === "ms" ? apacCountryMalay[country] : country}</option>)}
             </select>
           </label>
           <label>
@@ -167,23 +189,18 @@ export function ProjectBriefForm({ className = "" }: { className?: string }) {
             <span>{labels.project} *</span>
             <select name="projectType" defaultValue="" required>
               <option value="" disabled>{labels.selectProject}</option>
-              <option>AI &amp; automation system</option>
-              <option>Website or software platform</option>
-              <option>Brand, packaging or creative system</option>
-              <option>Growth and performance engine</option>
-              <option>Business or product launch</option>
-              <option>Multi-system transformation</option>
-              <option>Long-term execution partnership</option>
+              {projectOptions[language].map((option, index) => (
+                <option key={projectOptions.en[index]} value={projectOptions.en[index]}>{option}</option>
+              ))}
             </select>
           </label>
           <label>
             <span>{labels.timeline} *</span>
             <select name="timeline" defaultValue="" required>
               <option value="" disabled>{labels.selectTimeline}</option>
-              <option>As soon as possible</option>
-              <option>Within 30 days</option>
-              <option>Within 1–3 months</option>
-              <option>Exploring the right approach</option>
+              {timelineOptions[language].map((option, index) => (
+                <option key={timelineOptions.en[index]} value={timelineOptions.en[index]}>{option}</option>
+              ))}
             </select>
           </label>
           <label className="contact-message">

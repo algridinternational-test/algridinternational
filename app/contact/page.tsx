@@ -27,7 +27,7 @@ export default function ContactPage() {
           <p>
             <LocalizedText en="Share the opportunity, friction and outcome you are aiming for. A senior Algrid team member will review the brief and respond with a clear next step within two business days." ms="Kongsikan peluang, halangan dan hasil yang anda sasarkan. Ahli kanan pasukan Algrid akan menyemak ringkasan anda dan memberi langkah seterusnya yang jelas dalam tempoh dua hari bekerja." />
           </p>
-          <div className="contact-page-assurance" aria-label="Enquiry process">
+          <div className="contact-page-assurance" aria-label="Enquiry process / Proses pertanyaan">
             <span><b>01</b> <LocalizedText en="Senior review" ms="Semakan kanan" /></span>
             <span><b>02</b> <LocalizedText en="Confidential intake" ms="Pengambilan sulit" /></span>
             <span><b>03</b> <LocalizedText en="Clear next step" ms="Langkah seterusnya jelas" /></span>

@@ -102,9 +102,9 @@ export function SiteHeader() {
           priority
           sizes="(max-width: 700px) 52px, 64px"
         />
-        <small>AI VENTURE BUILDER</small>
+        <small>{language === "ms" ? "PEMBINA USAHA NIAGA AI" : "AI VENTURE BUILDER"}</small>
       </Link>
-      <nav aria-label="Primary navigation">
+      <nav aria-label={language === "ms" ? "Navigasi utama" : "Primary navigation"}>
         <SectionLink section="services">{labels.services}</SectionLink>
         <Link href="/products">{labels.products}</Link>
         <SectionLink section="work">{labels.ventures}</SectionLink>
@@ -115,7 +115,7 @@ export function SiteHeader() {
       <details className="nav-mobile-menu">
         <summary>{labels.menu} <span aria-hidden="true">+</span></summary>
         <div className="nav-mobile-panel">
-          <nav aria-label="Mobile navigation">
+          <nav aria-label={language === "ms" ? "Navigasi mudah alih" : "Mobile navigation"}>
             <SectionLink section="services">{labels.services}</SectionLink>
             <Link href="/products">{labels.products}</Link>
             <SectionLink section="work">{labels.ventures}</SectionLink>
@@ -124,7 +124,7 @@ export function SiteHeader() {
             <Link href="/insights">{labels.insights}</Link>
           </nav>
           <div className="nav-mobile-actions">
-            <div className="language-toggle" role="group" aria-label="Website language">
+            <div className="language-toggle" role="group" aria-label={language === "ms" ? "Bahasa laman web" : "Website language"}>
               <button type="button" onClick={() => setLanguage("en")} aria-pressed={language === "en"}>EN</button>
               <button type="button" onClick={() => setLanguage("ms")} aria-pressed={language === "ms"}>BM</button>
             </div>
@@ -135,7 +135,7 @@ export function SiteHeader() {
         </div>
       </details>
       <div className="nav-actions">
-        <div className="language-toggle" role="group" aria-label="Website language">
+        <div className="language-toggle" role="group" aria-label={language === "ms" ? "Bahasa laman web" : "Website language"}>
           <button type="button" onClick={() => setLanguage("en")} aria-pressed={language === "en"}>EN</button>
           <button type="button" onClick={() => setLanguage("ms")} aria-pressed={language === "ms"}>BM</button>
         </div>
@@ -163,10 +163,10 @@ export function SiteFooter() {
             height={1254}
             sizes="64px"
           />
-          <small>AI VENTURE BUILDER</small>
+          <small>{language === "ms" ? "PEMBINA USAHA NIAGA AI" : "AI VENTURE BUILDER"}</small>
         </Link>
 
-        <nav aria-label="Footer navigation">
+        <nav aria-label={language === "ms" ? "Navigasi pengaki" : "Footer navigation"}>
           <SectionLink section="services">{labels.services}</SectionLink>
           <Link href="/products">{labels.products}</Link>
           <SectionLink section="work">{labels.ventures}</SectionLink>
@@ -182,22 +182,22 @@ export function SiteFooter() {
       <div className="footer-meta">
         <div className="footer-signature">
           <i aria-hidden="true" />
-          <p>AI ventures · Digital systems · Growth</p>
+          <p>{language === "ms" ? "Usaha niaga AI · Sistem digital · Pertumbuhan" : "AI ventures · Digital systems · Growth"}</p>
         </div>
         <div className="footer-utility">
-          <nav className="footer-legal" aria-label="Legal navigation">
+          <nav className="footer-legal" aria-label={language === "ms" ? "Navigasi undang-undang" : "Legal navigation"}>
             <SectionLink section="company">{labels.company}</SectionLink>
             <Link href="/privacy">{labels.privacy}</Link>
             <Link href="/terms">{labels.terms}</Link>
           </nav>
-          <div className="footer-socials" aria-label="Algrid social media">
+          <div className="footer-socials" aria-label={language === "ms" ? "Media sosial Algrid" : "Algrid social media"}>
             {socialLinks.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Follow Algrid on ${social.name}`}
+                aria-label={language === "ms" ? `Ikuti Algrid di ${social.name}` : `Follow Algrid on ${social.name}`}
               >
                 <ContactIcon name={social.icon} />
               </a>
