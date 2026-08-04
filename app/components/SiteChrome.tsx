@@ -114,14 +114,25 @@ export function SiteHeader() {
       </nav>
       <details className="nav-mobile-menu">
         <summary>{labels.menu} <span aria-hidden="true">+</span></summary>
-        <nav aria-label="Mobile navigation">
-          <SectionLink section="services">{labels.services}</SectionLink>
-          <Link href="/products">{labels.products}</Link>
-          <SectionLink section="work">{labels.ventures}</SectionLink>
-          <SectionLink section="systems">{labels.systems}</SectionLink>
-          <SectionLink section="ai">{labels.ai}</SectionLink>
-          <Link href="/insights">{labels.insights}</Link>
-        </nav>
+        <div className="nav-mobile-panel">
+          <nav aria-label="Mobile navigation">
+            <SectionLink section="services">{labels.services}</SectionLink>
+            <Link href="/products">{labels.products}</Link>
+            <SectionLink section="work">{labels.ventures}</SectionLink>
+            <SectionLink section="systems">{labels.systems}</SectionLink>
+            <SectionLink section="ai">{labels.ai}</SectionLink>
+            <Link href="/insights">{labels.insights}</Link>
+          </nav>
+          <div className="nav-mobile-actions">
+            <div className="language-toggle" role="group" aria-label="Website language">
+              <button type="button" onClick={() => setLanguage("en")} aria-pressed={language === "en"}>EN</button>
+              <button type="button" onClick={() => setLanguage("ms")} aria-pressed={language === "ms"}>BM</button>
+            </div>
+            <Link className="nav-mobile-cta" href="/contact">
+              {labels.contact} <span aria-hidden="true">+</span>
+            </Link>
+          </div>
+        </div>
       </details>
       <div className="nav-actions">
         <div className="language-toggle" role="group" aria-label="Website language">
