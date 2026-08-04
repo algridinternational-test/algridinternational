@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HashCleaner } from "./components/HashCleaner";
+import { SiteLanguageProvider } from "./components/useSiteLanguage";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -112,11 +113,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <HashCleaner />
-        <a className="skip-link" href="#main-content">
-          Skip to content
-        </a>
-        {children}
+        <SiteLanguageProvider>
+          <HashCleaner />
+          <a className="skip-link" href="#main-content">
+            Skip to content
+          </a>
+          {children}
+        </SiteLanguageProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationSchema) }}

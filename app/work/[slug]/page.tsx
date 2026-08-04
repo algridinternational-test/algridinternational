@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
+import { LocalizedText } from "../../components/LocalizedText";
 import { SectionLink } from "../../components/SectionLink";
 import { ventureStories } from "../../content";
+import { ventureMalay } from "../../localization";
 import { siteOrigin, socialImage } from "../../seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -42,6 +44,7 @@ export default async function VenturePage({ params }: PageProps) {
   if (index < 0) notFound();
   const venture = ventureStories[index];
   const next = ventureStories[(index + 1) % ventureStories.length];
+  const ms = ventureMalay[venture.slug as keyof typeof ventureMalay];
   const ventureSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -58,10 +61,10 @@ export default async function VenturePage({ params }: PageProps) {
       <SiteHeader />
       <article>
         <header className="editorial-hero">
-          <SectionLink className="editorial-back" section="work">← Selected ventures</SectionLink>
-          <p className="editorial-kicker">{venture.code} · {venture.type}</p>
-          <h1>{venture.title}</h1>
-          <p className="editorial-intro">{venture.summary}</p>
+          <SectionLink className="editorial-back" section="work"><LocalizedText en="← Selected ventures" ms="← Usaha niaga pilihan" /></SectionLink>
+          <p className="editorial-kicker">{venture.code} · <LocalizedText en={venture.type} ms={ms.type} /></p>
+          <h1><LocalizedText en={venture.title} ms={ms.title} /></h1>
+          <p className="editorial-intro"><LocalizedText en={venture.summary} ms={ms.summary} /></p>
         </header>
 
         <div className="case-film case-film-feature" style={{ "--venture-color": venture.color } as React.CSSProperties}>
@@ -73,10 +76,10 @@ export default async function VenturePage({ params }: PageProps) {
               srcLang="en"
               label="English captions"
             />
-            Your browser does not support embedded video.
+            <LocalizedText en="Your browser does not support embedded video." ms="Pelayar anda tidak menyokong video terbenam." />
           </video>
           <div className="case-film-meta">
-            <span>Campaign film / 01</span>
+            <span><LocalizedText en="Campaign film / 01" ms="Filem kempen / 01" /></span>
             <div>
               <strong>{venture.films[0].title}</strong>
               <small>{venture.films[0].note}</small>
@@ -86,41 +89,41 @@ export default async function VenturePage({ params }: PageProps) {
 
         <section className="venture-story-band">
           <div className="venture-story-lead">
-            <p className="editorial-kicker">The venture story</p>
-            <h2>A product range designed as a commercial platform.</h2>
+            <p className="editorial-kicker"><LocalizedText en="The venture story" ms="Kisah usaha niaga" /></p>
+            <h2><LocalizedText en="A product range designed as a commercial platform." ms="Rangkaian produk yang direka sebagai platform komersial." /></h2>
           </div>
           <div className="venture-story-points">
             <article>
-              <span>01 / Opportunity</span>
-              <p>{venture.story.opportunity}</p>
+              <span><LocalizedText en="01 / Opportunity" ms="01 / Peluang" /></span>
+              <p><LocalizedText en={venture.story.opportunity} ms={ms.opportunity} /></p>
             </article>
             <article>
-              <span>02 / Product</span>
-              <p>{venture.story.product}</p>
+              <span><LocalizedText en="02 / Product" ms="02 / Produk" /></span>
+              <p><LocalizedText en={venture.story.product} ms={ms.product} /></p>
             </article>
             <article>
-              <span>03 / Market system</span>
-              <p>{venture.story.market}</p>
+              <span><LocalizedText en="03 / Market system" ms="03 / Sistem pasaran" /></span>
+              <p><LocalizedText en={venture.story.market} ms={ms.market} /></p>
             </article>
             <article>
-              <span>04 / Creative direction</span>
-              <p>{venture.story.direction}</p>
+              <span><LocalizedText en="04 / Creative direction" ms="04 / Arah kreatif" /></span>
+              <p><LocalizedText en={venture.story.direction} ms={ms.direction} /></p>
             </article>
           </div>
         </section>
 
         <div className="editorial-grid">
           <section className="editorial-section">
-            <p className="editorial-kicker">The challenge</p>
-            <h2>Finding the clearest strategic opening.</h2>
-            <p>{venture.challenge}</p>
+            <p className="editorial-kicker"><LocalizedText en="The challenge" ms="Cabaran" /></p>
+            <h2><LocalizedText en="Finding the clearest strategic opening." ms="Mencari ruang strategik yang paling jelas." /></h2>
+            <p><LocalizedText en={venture.challenge} ms={ms.challenge} /></p>
           </section>
           <section className="editorial-section">
-            <p className="editorial-kicker">The response</p>
-            <h2>One connected system, designed to move.</h2>
+            <p className="editorial-kicker"><LocalizedText en="The response" ms="Respons" /></p>
+            <h2><LocalizedText en="One connected system, designed to move." ms="Satu sistem terhubung, direka untuk bergerak." /></h2>
             <ol className="editorial-list">
               {venture.response.map((item, itemIndex) => (
-                <li key={item}><span>0{itemIndex + 1}</span>{item}</li>
+                <li key={item}><span>0{itemIndex + 1}</span><LocalizedText en={item} ms={ms.response[itemIndex]} /></li>
               ))}
             </ol>
           </section>
@@ -128,11 +131,10 @@ export default async function VenturePage({ params }: PageProps) {
 
         <section className="venture-gallery-section">
           <div className="venture-gallery-head">
-            <p className="editorial-kicker">Campaign system</p>
-            <h2>One visual language, expressed across every customer moment.</h2>
+            <p className="editorial-kicker"><LocalizedText en="Campaign system" ms="Sistem kempen" /></p>
+            <h2><LocalizedText en="One visual language, expressed across every customer moment." ms="Satu bahasa visual, diterapkan pada setiap detik pelanggan." /></h2>
             <p>
-              A curated view of the product, range and campaign artwork—built to
-              remain recognisable from a fast mobile scroll to the retail shelf.
+              <LocalizedText en="A curated view of the product, range and campaign artwork—built to remain recognisable from a fast mobile scroll to the retail shelf." ms="Paparan terpilih produk, rangkaian dan karya seni kempen—dibina untuk kekal dikenali daripada skrol mudah alih yang pantas hingga ke rak runcit." />
             </p>
           </div>
           <div className={`venture-gallery venture-gallery-${venture.slug} venture-gallery-${venture.gallery.length}`}>
@@ -158,7 +160,7 @@ export default async function VenturePage({ params }: PageProps) {
                 />
                 <figcaption>
                   <span>{String(assetIndex + 1).padStart(2, "0")}</span>
-                  {venture.name} / Campaign asset
+                  {venture.name} / <LocalizedText en="Campaign asset" ms="Aset kempen" />
                 </figcaption>
               </figure>
             ))}
@@ -168,9 +170,9 @@ export default async function VenturePage({ params }: PageProps) {
         {venture.films.length > 1 ? (
           <section className="venture-film-library">
             <div className="venture-film-library-head">
-              <p className="editorial-kicker">More from the campaign</p>
-              <h2>Full-length campaign cuts.</h2>
-              <p>Press play to watch each complete film and explore the campaign in motion.</p>
+              <p className="editorial-kicker"><LocalizedText en="More from the campaign" ms="Lagi daripada kempen" /></p>
+              <h2><LocalizedText en="Full-length campaign cuts." ms="Filem kempen versi penuh." /></h2>
+              <p><LocalizedText en="Press play to watch each complete film and explore the campaign in motion." ms="Tekan main untuk menonton setiap filem penuh dan meneroka kempen dalam gerakan." /></p>
             </div>
             <div className="venture-film-grid">
               {venture.films.slice(1).map((film, filmIndex) => (
@@ -183,7 +185,7 @@ export default async function VenturePage({ params }: PageProps) {
                       srcLang="en"
                       label="English captions"
                     />
-                    Your browser does not support embedded video.
+                    <LocalizedText en="Your browser does not support embedded video." ms="Pelayar anda tidak menyokong video terbenam." />
                   </video>
                   <div>
                     <span>Film / {String(filmIndex + 2).padStart(2, "0")}</span>
@@ -198,19 +200,19 @@ export default async function VenturePage({ params }: PageProps) {
 
         <section className="editorial-section editorial-outcome">
           <div>
-            <p className="editorial-kicker">Built as a system</p>
+            <p className="editorial-kicker"><LocalizedText en="Built as a system" ms="Dibina sebagai sistem" /></p>
             <div className="system-pills">
-              {venture.system.map((item) => <span key={item}>{item}</span>)}
+              {venture.system.map((item, itemIndex) => <span key={item}><LocalizedText en={item} ms={ms.system[itemIndex]} /></span>)}
             </div>
           </div>
           <div>
-            <p className="editorial-kicker">Outcome</p>
-            <h2>{venture.outcome}</h2>
+            <p className="editorial-kicker"><LocalizedText en="Outcome" ms="Hasil" /></p>
+            <h2><LocalizedText en={venture.outcome} ms={ms.outcome} /></h2>
           </div>
         </section>
 
         <Link className="editorial-next" href={`/work/${next.slug}`}>
-          <span>Next venture · {next.code}</span>
+          <span><LocalizedText en={`Next venture · ${next.code}`} ms={`Usaha niaga seterusnya · ${next.code}`} /></span>
           <strong>{next.name}</strong>
           <i aria-hidden="true">↗</i>
         </Link>

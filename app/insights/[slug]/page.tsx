@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../components/SiteChrome";
+import { LocalizedText } from "../../components/LocalizedText";
 import { insightArticles } from "../../content";
+import { insightMalay } from "../../localization";
 import { articleSeoTitles, siteOrigin, socialImage } from "../../seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -42,6 +44,8 @@ export default async function InsightPage({ params }: PageProps) {
   if (index < 0) notFound();
   const article = insightArticles[index];
   const next = insightArticles[(index + 1) % insightArticles.length];
+  const ms = insightMalay[article.slug as keyof typeof insightMalay];
+  const nextMs = insightMalay[next.slug as keyof typeof insightMalay];
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -57,25 +61,25 @@ export default async function InsightPage({ params }: PageProps) {
       <SiteHeader />
       <article className="article-body">
         <header className="editorial-hero">
-          <Link className="editorial-back" href="/insights">← All insights</Link>
-          <p className="editorial-kicker">{article.category} · {article.readTime} read</p>
-          <h1>{article.title}</h1>
-          <p className="editorial-intro">{article.description}</p>
+          <Link className="editorial-back" href="/insights"><LocalizedText en="← All insights" ms="← Semua wawasan" /></Link>
+          <p className="editorial-kicker"><LocalizedText en={`${article.category} · ${article.readTime} read`} ms={`${ms.category} · bacaan ${ms.readTime}`} /></p>
+          <h1><LocalizedText en={article.title} ms={ms.title} /></h1>
+          <p className="editorial-intro"><LocalizedText en={article.description} ms={ms.description} /></p>
         </header>
         <div className="article-copy">
           {article.sections.map((section, sectionIndex) => (
             <section key={section.heading}>
               <span>0{sectionIndex + 1}</span>
               <div>
-                <h2>{section.heading}</h2>
-                {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                <h2><LocalizedText en={section.heading} ms={ms.sections[sectionIndex].heading} /></h2>
+                {section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraph}><LocalizedText en={paragraph} ms={ms.sections[sectionIndex].paragraphs[paragraphIndex]} /></p>)}
               </div>
             </section>
           ))}
         </div>
         <Link className="editorial-next" href={`/insights/${next.slug}`}>
-          <span>Read next · {next.category}</span>
-          <strong>{next.title}</strong>
+          <span><LocalizedText en={`Read next · ${next.category}`} ms={`Baca seterusnya · ${nextMs.category}`} /></span>
+          <strong><LocalizedText en={next.title} ms={nextMs.title} /></strong>
           <i aria-hidden="true">↗</i>
         </Link>
       </article>

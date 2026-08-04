@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { SectionLink } from "../components/SectionLink";
 import { useMemo, useState } from "react";
 import { mvpProducts, type MvpProduct } from "./data";
+import { mvpMalay } from "../localization";
+import { useSiteLanguage } from "../components/useSiteLanguage";
 
 const categories = ["All", "AI", "Platforms", "Operations", "Commerce", "Growth"] as const;
 type Category = (typeof categories)[number];
@@ -58,6 +60,15 @@ const categoryCounts = Object.fromEntries(
       : mvpProducts.filter((product) => product.category === category).length,
   ]),
 ) as Record<Category, number>;
+
+const categoryMetaMalay: Record<Category, { label: string; title: string; description: string }> = {
+  All: { label: "Semua sistem", title: "Lancarkan, jual dan beroperasi daripada satu asas produk.", description: "Terokai keseluruhan pustaka sistem, daripada platform pelanggan hingga infrastruktur operasi di belakangnya." },
+  AI: { label: "Sistem AI", title: "Letakkan kecerdasan dalam aliran kerja perniagaan yang bernilai.", description: "Pembantu pelanggan dan produk pengetahuan dalaman yang direka berasaskan tindakan, tadbir urus dan pengawasan manusia." },
+  Platforms: { label: "Platform digital", title: "Ubah akses, kepakaran atau komuniti menjadi produk berskala.", description: "Asas produk selamat untuk hubungan berulang, kandungan, aliran kerja dan perjalanan pengguna pelbagai pihak." },
+  Operations: { label: "Operasi", title: "Berikan pasukan satu sistem jelas untuk mengendalikan perniagaan.", description: "Papan pemuka dan alat operasi yang menggantikan hamparan berpecah dengan aliran kerja yang nyata dan terhubung." },
+  Commerce: { label: "Perdagangan", title: "Bina kepercayaan pada setiap sisi transaksi.", description: "Infrastruktur pasaran untuk penemuan, operasi penjual, pembayaran dan pertumbuhan rangkaian berulang." },
+  Growth: { label: "Pertumbuhan", title: "Ubah keputusan kompleks menjadi permintaan yang boleh diukur.", description: "Produk pemerolehan fokus yang menghubungkan pengalaman pelanggan berguna kepada kelayakan, atribusi dan tindakan jualan." },
+};
 
 type PreviewKind =
   | "chat"
@@ -336,6 +347,9 @@ function ProductPreview({ product }: { product: MvpProduct }) {
 }
 
 export function MvpMarketplace() {
+  const { language } = useSiteLanguage();
+  const isMalay = language === "ms";
+  const meta = isMalay ? categoryMetaMalay : categoryMeta;
   const [activeCategory, setActiveCategory] =
     useState<(typeof categories)[number]>("All");
 
@@ -352,36 +366,34 @@ export function MvpMarketplace() {
       <section className="mvp-hero">
         <div className="mvp-hero-grid" aria-hidden="true" />
         <div className="mvp-hero-copy">
-          <p className="eyebrow">Algrid / Ready-to-launch products</p>
+          <p className="eyebrow">{isMalay ? "Algrid / Produk sedia dilancarkan" : "Algrid / Ready-to-launch products"}</p>
           <h1>
-            Products designed
-            <br /> to reach <em>market.</em>
+            {isMalay ? "Produk yang direka" : "Products designed"}
+            <br /> {isMalay ? "untuk sampai ke " : "to reach "}<em>{isMalay ? "pasaran." : "market."}</em>
           </h1>
           <p>
-            Not prototypes for a pitch deck. Focused, production-ready business
-            systems designed to validate demand, create operating leverage and
-            become the foundation for what comes next.
+            {isMalay ? "Bukan prototaip untuk dek pembentangan. Sistem perniagaan fokus dan sedia produksi yang direka untuk mengesahkan permintaan, mencipta kelebihan operasi dan menjadi asas untuk langkah seterusnya." : "Not prototypes for a pitch deck. Focused, production-ready business systems designed to validate demand, create operating leverage and become the foundation for what comes next."}
           </p>
         </div>
         <div className="mvp-hero-terminal">
           <div>
-            <span>LAUNCH INDEX</span>
-            <i>LIVE</i>
+            <span>{isMalay ? "INDEKS PELANCARAN" : "LAUNCH INDEX"}</span>
+            <i>{isMalay ? "AKTIF" : "LIVE"}</i>
           </div>
           <strong>15</strong>
-          <p>READY-TO-SHAPE PRODUCT SYSTEMS</p>
+          <p>{isMalay ? "SISTEM PRODUK SEDIA DIBENTUK" : "READY-TO-SHAPE PRODUCT SYSTEMS"}</p>
           <dl>
             <div>
-              <dt>Typical launch</dt>
+              <dt>{isMalay ? "Pelancaran biasa" : "Typical launch"}</dt>
               <dd>3–16 weeks</dd>
             </div>
             <div>
-              <dt>Architecture</dt>
-              <dd>Scale-ready</dd>
+              <dt>{isMalay ? "Seni bina" : "Architecture"}</dt>
+              <dd>{isMalay ? "Sedia diskala" : "Scale-ready"}</dd>
             </div>
             <div>
-              <dt>Ownership</dt>
-              <dd>100% yours</dd>
+              <dt>{isMalay ? "Pemilikan" : "Ownership"}</dt>
+              <dd>{isMalay ? "100% milik anda" : "100% yours"}</dd>
             </div>
           </dl>
         </div>
@@ -390,13 +402,11 @@ export function MvpMarketplace() {
       <section className="mvp-marketplace">
         <div className="mvp-market-head">
           <div>
-            <p className="eyebrow">Explore ready-to-launch products</p>
-            <h2>Choose the business outcome.</h2>
+            <p className="eyebrow">{isMalay ? "Terokai produk sedia dilancarkan" : "Explore ready-to-launch products"}</p>
+            <h2>{isMalay ? "Pilih hasil perniagaan." : "Choose the business outcome."}</h2>
           </div>
           <p>
-            Every product is shaped around your operating model, customer and
-            commercial advantage. Timelines are directional and confirmed
-            during the product framing sprint.
+            {isMalay ? "Setiap produk dibentuk mengikut model operasi, pelanggan dan kelebihan komersial anda. Garis masa adalah anggaran dan disahkan semasa pecutan pembingkaian produk." : "Every product is shaped around your operating model, customer and commercial advantage. Timelines are directional and confirmed during the product framing sprint."}
           </p>
         </div>
 
@@ -413,7 +423,7 @@ export function MvpMarketplace() {
             </div>
             <div className="mvp-browser-status">
               <i aria-hidden="true" />
-              Scoping open
+              {isMalay ? "Skop dibuka" : "Scoping open"}
             </div>
           </div>
 
@@ -421,7 +431,7 @@ export function MvpMarketplace() {
             <aside className="mvp-browser-sidebar">
               <div>
                 <span>01</span>
-                <p>Filter by outcome</p>
+                <p>{isMalay ? "Tapis mengikut hasil" : "Filter by outcome"}</p>
               </div>
               <div className="mvp-filter" role="group" aria-label="Filter business products">
                 {categories.map((category, categoryIndex) => (
@@ -434,17 +444,17 @@ export function MvpMarketplace() {
                     <span className="mvp-filter-index">
                       {String(categoryIndex + 1).padStart(2, "0")}
                     </span>
-                    <b>{categoryMeta[category].label}</b>
+                    <b>{meta[category].label}</b>
                     <span className="mvp-filter-count">{categoryCounts[category]}</span>
                     <i aria-hidden="true">↗</i>
                   </button>
                 ))}
               </div>
               <div className="mvp-browser-note">
-                <span>Need a custom system?</span>
-                <p>We can frame a product around your own operating model.</p>
+                <span>{isMalay ? "Perlukan sistem tersuai?" : "Need a custom system?"}</span>
+                <p>{isMalay ? "Kami boleh membingkaikan produk mengikut model operasi anda sendiri." : "We can frame a product around your own operating model."}</p>
                 <SectionLink section="contact">
-                  Start with the problem <i aria-hidden="true">+</i>
+                  {isMalay ? "Mulakan dengan masalah" : "Start with the problem"} <i aria-hidden="true">+</i>
                 </SectionLink>
               </div>
             </aside>
@@ -452,18 +462,20 @@ export function MvpMarketplace() {
             <div className="mvp-browser-results">
               <div className="mvp-results-head" aria-live="polite">
                 <div>
-                  <p className="eyebrow">{categoryMeta[activeCategory].label}</p>
-                  <h3>{categoryMeta[activeCategory].title}</h3>
+                  <p className="eyebrow">{meta[activeCategory].label}</p>
+                  <h3>{meta[activeCategory].title}</h3>
                 </div>
                 <div className="mvp-results-summary">
-                  <span>Showing</span>
+                  <span>{isMalay ? "Dipaparkan" : "Showing"}</span>
                   <strong>{String(visibleProducts.length).padStart(2, "0")}</strong>
-                  <p>{categoryMeta[activeCategory].description}</p>
+                  <p>{meta[activeCategory].description}</p>
                 </div>
               </div>
 
               <motion.div layout className="mvp-product-grid">
-                {visibleProducts.map((product) => (
+                {visibleProducts.map((product) => {
+                  const translated = mvpMalay[product.id as keyof typeof mvpMalay];
+                  return (
                   <motion.article
                     layout
                     id={product.id}
@@ -481,24 +493,24 @@ export function MvpMarketplace() {
                     <ProductPreview product={product} />
                     <div className="mvp-card-title">
                       <h3>{product.name}</h3>
-                      <p>{product.promise}</p>
+                      <p>{isMalay ? translated[0] : product.promise}</p>
                     </div>
                     <dl className="mvp-specs">
                       <div>
-                        <dt>Estimated build</dt>
+                        <dt>{isMalay ? "Anggaran pembangunan" : "Estimated build"}</dt>
                         <dd>{product.buildTime}</dd>
                       </div>
                       <div>
-                        <dt>Ideal business</dt>
-                        <dd>{product.idealFor}</dd>
+                        <dt>{isMalay ? "Perniagaan sesuai" : "Ideal business"}</dt>
+                        <dd>{isMalay ? translated[1] : product.idealFor}</dd>
                       </div>
                       <div>
-                        <dt>Scalability</dt>
-                        <dd>{product.scalability}</dd>
+                        <dt>{isMalay ? "Kebolehskalaan" : "Scalability"}</dt>
+                        <dd>{isMalay ? translated[2] : product.scalability}</dd>
                       </div>
                     </dl>
                     <div className="mvp-detail-block">
-                      <span>CORE FEATURES</span>
+                      <span>{isMalay ? "CIRI TERAS" : "CORE FEATURES"}</span>
                       <div>
                         {product.features.map((feature) => (
                           <i key={feature}>{feature}</i>
@@ -514,10 +526,11 @@ export function MvpMarketplace() {
                       </div>
                     </div>
                     <a href={`mailto:social@algridinternational.com?subject=${encodeURIComponent(`Product enquiry: ${product.name}`)}`}>
-                      Scope this product <span aria-hidden="true">+</span>
+                      {isMalay ? "Tentukan skop produk ini" : "Scope this product"} <span aria-hidden="true">+</span>
                     </a>
                   </motion.article>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
           </div>
@@ -526,49 +539,49 @@ export function MvpMarketplace() {
 
       <section className="mvp-method">
         <div>
-          <p className="eyebrow">How product delivery works</p>
-          <h2>Fixed focus. Real product. Clear next move.</h2>
+          <p className="eyebrow">{isMalay ? "Cara penyampaian produk berfungsi" : "How product delivery works"}</p>
+          <h2>{isMalay ? "Fokus tetap. Produk sebenar. Langkah seterusnya jelas." : "Fixed focus. Real product. Clear next move."}</h2>
         </div>
         <ol>
           <li>
             <span>01</span>
             <div>
-              <b>Frame the signal</b>
-              <p>Define the riskiest assumption and smallest valuable product.</p>
+              <b>{isMalay ? "Bingkaikan isyarat" : "Frame the signal"}</b>
+              <p>{isMalay ? "Tentukan andaian paling berisiko dan produk bernilai paling kecil." : "Define the riskiest assumption and smallest valuable product."}</p>
             </div>
           </li>
           <li>
             <span>02</span>
             <div>
-              <b>Design the system</b>
-              <p>Map the core journey, operating logic and scale architecture.</p>
+              <b>{isMalay ? "Reka sistem" : "Design the system"}</b>
+              <p>{isMalay ? "Petakan perjalanan teras, logik operasi dan seni bina skala." : "Map the core journey, operating logic and scale architecture."}</p>
             </div>
           </li>
           <li>
             <span>03</span>
             <div>
-              <b>Build the advantage</b>
-              <p>Ship the production product with analytics and admin control.</p>
+              <b>{isMalay ? "Bina kelebihan" : "Build the advantage"}</b>
+              <p>{isMalay ? "Lancarkan produk produksi dengan analitik dan kawalan pentadbir." : "Ship the production product with analytics and admin control."}</p>
             </div>
           </li>
           <li>
             <span>04</span>
             <div>
-              <b>Launch and learn</b>
-              <p>Activate the market, read behaviour and prioritise the next release.</p>
+              <b>{isMalay ? "Lancar dan belajar" : "Launch and learn"}</b>
+              <p>{isMalay ? "Aktifkan pasaran, baca tingkah laku dan utamakan keluaran seterusnya." : "Activate the market, read behaviour and prioritise the next release."}</p>
             </div>
           </li>
         </ol>
       </section>
 
       <section className="mvp-page-cta">
-        <p className="eyebrow">Have a different product in mind?</p>
+        <p className="eyebrow">{isMalay ? "Ada produk lain dalam fikiran?" : "Have a different product in mind?"}</p>
         <h2>
-          Bring the problem.
-          <br /> We’ll shape the product.
+          {isMalay ? "Bawa masalahnya." : "Bring the problem."}
+          <br /> {isMalay ? "Kami akan membentuk produknya." : "We’ll shape the product."}
         </h2>
         <SectionLink className="button button-primary" section="contact">
-          Start a product conversation <span aria-hidden="true">+</span>
+          {isMalay ? "Mulakan perbualan produk" : "Start a product conversation"} <span aria-hidden="true">+</span>
         </SectionLink>
       </section>
     </>

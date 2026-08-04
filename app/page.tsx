@@ -17,8 +17,10 @@ import {
 } from "./components/SiteChrome";
 import { SectionLink } from "./components/SectionLink";
 import { ProjectBriefForm } from "./components/ProjectBriefForm";
+import { useSiteLanguage } from "./components/useSiteLanguage";
 import { ventureStories as ventures } from "./content";
 import { mvpProducts } from "./mvps/data";
+import { ventureMalay } from "./localization";
 
 const featuredLaunchSystems = mvpProducts.slice(0, 4);
 
@@ -349,6 +351,8 @@ function VentureMedia({
 }
 
 export default function Home() {
+  const { language } = useSiteLanguage();
+  const isMalay = language === "ms";
   const [activeVenture, setActiveVenture] = useState(0);
   const [activeLaunchSystem, setActiveLaunchSystem] = useState(0);
   const [aiPrompt, setAiPrompt] = useState(
@@ -408,27 +412,25 @@ export default function Home() {
       <section className="hero section" id="top">
         <FadeIn className="hero-kicker">
           <span className="status-dot" />
-          AI venture builder · Kuala Lumpur / Global
+          {isMalay ? "Pembina usaha niaga AI · Kuala Lumpur / Global" : "AI venture builder · Kuala Lumpur / Global"}
         </FadeIn>
         <div className="hero-grid">
           <FadeIn>
             <h1>
-              Build the next version
-              <br /> of your <em>business.</em>
+              {isMalay ? "Bina versi seterusnya" : "Build the next version"}
+              <br /> {isMalay ? "untuk " : "of your "}<em>{isMalay ? "perniagaan anda." : "business."}</em>
             </h1>
           </FadeIn>
           <FadeIn className="hero-aside" delay={0.12}>
             <p>
-              Algrid unifies brand, software, AI and growth into one senior
-              execution partner—built to create ventures and transform
-              ambitious companies.
+              {isMalay ? "Algrid menyatukan jenama, perisian, AI dan pertumbuhan melalui satu rakan pelaksanaan kanan—dibina untuk mencipta usaha niaga dan mentransformasikan syarikat bercita-cita tinggi." : "Algrid unifies brand, software, AI and growth into one senior execution partner—built to create ventures and transform ambitious companies."}
             </p>
             <div className="hero-actions">
               <Link className="button button-primary" href="/contact">
-                Build with Algrid <span aria-hidden="true">+</span>
+                {isMalay ? "Bina bersama Algrid" : "Build with Algrid"} <span aria-hidden="true">+</span>
               </Link>
               <SectionLink className="button hero-work-cta" section="work">
-                Explore our work <span aria-hidden="true">+</span>
+                {isMalay ? "Terokai hasil kerja kami" : "Explore our work"} <span aria-hidden="true">+</span>
               </SectionLink>
             </div>
           </FadeIn>
@@ -501,7 +503,7 @@ export default function Home() {
       </section>
 
       <section className="proof-strip">
-        <p>Built for category creators, transformation leaders and founders</p>
+        <p>{isMalay ? "Dibina untuk pencipta kategori, pemimpin transformasi dan pengasas" : "Built for category creators, transformation leaders and founders"}</p>
         <div>
           <span>CONSUMER</span>
           <span>COMMERCE</span>
@@ -514,17 +516,15 @@ export default function Home() {
 
       <section className="section intake-home-section" id="project-intake">
         <FadeIn className="intake-home-intro">
-          <p className="eyebrow">Project brief / Secure intake</p>
-          <h2>Start with the<br /><em>business problem.</em></h2>
+          <p className="eyebrow">{isMalay ? "Ringkasan projek / Pengambilan selamat" : "Project brief / Secure intake"}</p>
+          <h2>{isMalay ? "Mulakan dengan" : "Start with the"}<br /><em>{isMalay ? "masalah perniagaan." : "business problem."}</em></h2>
           <p>
-            Give our senior team enough context to identify the right first
-            move—whether that is strategy, a product build, automation or a
-            connected transformation programme.
+            {isMalay ? "Berikan pasukan kanan kami konteks yang mencukupi untuk mengenal pasti langkah pertama yang tepat—sama ada strategi, pembangunan produk, automasi atau program transformasi terhubung." : "Give our senior team enough context to identify the right first move—whether that is strategy, a product build, automation or a connected transformation programme."}
           </p>
           <div className="intake-home-signals">
-            <span>Senior review</span>
-            <span>Confidential</span>
-            <span>Response in 2 business days</span>
+            <span>{isMalay ? "Semakan kanan" : "Senior review"}</span>
+            <span>{isMalay ? "Sulit" : "Confidential"}</span>
+            <span>{isMalay ? "Respons dalam 2 hari bekerja" : "Response in 2 business days"}</span>
           </div>
         </FadeIn>
         <FadeIn delay={0.08}>
@@ -535,9 +535,9 @@ export default function Home() {
       <section className="section services-section" id="services">
         <FadeIn>
           <SectionIntro
-            eyebrow="Our services / Solution platform"
-            title="One platform. Six systems for growth."
-            copy="A modular operating platform for building, launching and scaling companies. Activate one system—or connect all six through one accountable partner."
+            eyebrow={isMalay ? "Perkhidmatan kami / Platform penyelesaian" : "Our services / Solution platform"}
+            title={isMalay ? "Satu platform. Enam sistem untuk pertumbuhan." : "One platform. Six systems for growth."}
+            copy={isMalay ? "Platform operasi modular untuk membina, melancarkan dan menskalakan syarikat. Aktifkan satu sistem—atau hubungkan kesemua enam melalui satu rakan yang bertanggungjawab." : "A modular operating platform for building, launching and scaling companies. Activate one system—or connect all six through one accountable partner."}
           />
         </FadeIn>
         <FadeIn className="services-platform-bar" delay={0.06}>
@@ -710,16 +710,15 @@ export default function Home() {
       <section className="section mvp-highlight-section" id="mvps">
         <FadeIn className="mvp-highlight-head">
           <div>
-            <p className="eyebrow">Ready-to-launch products / Featured</p>
-            <h2>Business products built to launch and grow.</h2>
+            <p className="eyebrow">{isMalay ? "Produk sedia dilancarkan / Pilihan" : "Ready-to-launch products / Featured"}</p>
+            <h2>{isMalay ? "Produk perniagaan dibina untuk dilancarkan dan berkembang." : "Business products built to launch and grow."}</h2>
           </div>
           <div>
             <p>
-              Focused software products designed to reach market quickly,
-              validate the core signal and scale without a rebuild.
+              {isMalay ? "Produk perisian fokus yang direka untuk sampai ke pasaran dengan pantas, mengesahkan isyarat teras dan berkembang tanpa perlu dibina semula." : "Focused software products designed to reach market quickly, validate the core signal and scale without a rebuild."}
             </p>
             <Link className="section-cta" href="/mvps">
-              Explore all 15 products <span aria-hidden="true">+</span>
+              {isMalay ? "Terokai kesemua 15 produk" : "Explore all 15 products"} <span aria-hidden="true">+</span>
             </Link>
           </div>
         </FadeIn>
@@ -868,9 +867,9 @@ export default function Home() {
       <section className="section work-section" id="work">
         <FadeIn>
           <SectionIntro
-            eyebrow="Selected ventures / 01"
-            title="Proof, not promises."
-            copy="We build the identity, product and growth infrastructure behind ventures designed to last."
+            eyebrow={isMalay ? "Usaha niaga pilihan / 01" : "Selected ventures / 01"}
+            title={isMalay ? "Bukti, bukan janji." : "Proof, not promises."}
+            copy={isMalay ? "Kami membina identiti, produk dan infrastruktur pertumbuhan di sebalik usaha niaga yang direka untuk bertahan." : "We build the identity, product and growth infrastructure behind ventures designed to last."}
           />
         </FadeIn>
 
@@ -889,7 +888,7 @@ export default function Home() {
               >
                 <span>{item.code}</span>
                 <b>{item.name}</b>
-                <small>{item.type}</small>
+                <small>{isMalay ? ventureMalay[item.slug as keyof typeof ventureMalay].type : item.type}</small>
                 <i>↗</i>
               </button>
             ))}
@@ -907,9 +906,9 @@ export default function Home() {
           >
             <VentureMedia venture={venture} />
             <div className="case-content">
-              <p className="eyebrow">{venture.type} · Selected work</p>
-              <h3>{venture.title}</h3>
-              <p>{venture.summary}</p>
+              <p className="eyebrow">{isMalay ? ventureMalay[venture.slug as keyof typeof ventureMalay].type : venture.type} · {isMalay ? "Hasil kerja pilihan" : "Selected work"}</p>
+              <h3>{isMalay ? ventureMalay[venture.slug as keyof typeof ventureMalay].title : venture.title}</h3>
+              <p>{isMalay ? ventureMalay[venture.slug as keyof typeof ventureMalay].summary : venture.summary}</p>
               <div className="case-results">
                 <span>
                   <b>{venture.impact[0]}</b>
@@ -921,7 +920,7 @@ export default function Home() {
                 </span>
               </div>
               <Link className="case-link" href={`/work/${venture.slug}`}>
-                View venture story <span aria-hidden="true">+</span>
+                {isMalay ? "Lihat kisah usaha niaga" : "View venture story"} <span aria-hidden="true">+</span>
               </Link>
             </div>
           </motion.article>
@@ -1006,9 +1005,9 @@ export default function Home() {
       <section className="section systems-section" id="systems">
         <FadeIn>
           <SectionIntro
-            eyebrow="Growth systems / 02"
-            title="One partner. Every growth layer."
-            copy="Traditional agencies hand you deliverables. We engineer connected systems that move a business from strategy to repeatable growth."
+            eyebrow={isMalay ? "Sistem pertumbuhan / 02" : "Growth systems / 02"}
+            title={isMalay ? "Satu rakan. Setiap lapisan pertumbuhan." : "One partner. Every growth layer."}
+            copy={isMalay ? "Agensi tradisional menyerahkan hasil kerja. Kami merekayasa sistem terhubung yang membawa perniagaan daripada strategi kepada pertumbuhan berulang." : "Traditional agencies hand you deliverables. We engineer connected systems that move a business from strategy to repeatable growth."}
           />
         </FadeIn>
         <div className="systems-grid">
@@ -1035,9 +1034,9 @@ export default function Home() {
       <section className="section ai-section" id="ai">
         <FadeIn>
           <SectionIntro
-            eyebrow="Applied intelligence / 03"
-            title="AI you can interact with."
-            copy="We turn AI from a presentation slide into useful infrastructure across decisions, operations, customer experience and growth."
+            eyebrow={isMalay ? "Kecerdasan gunaan / 03" : "Applied intelligence / 03"}
+            title={isMalay ? "AI yang boleh anda gunakan." : "AI you can interact with."}
+            copy={isMalay ? "Kami mengubah AI daripada slaid pembentangan kepada infrastruktur berguna merangkumi keputusan, operasi, pengalaman pelanggan dan pertumbuhan." : "We turn AI from a presentation slide into useful infrastructure across decisions, operations, customer experience and growth."}
           />
         </FadeIn>
         <div className="ai-grid">
@@ -1402,17 +1401,16 @@ export default function Home() {
       <section className="section philosophy-section" id="company">
         <FadeIn className="philosophy-head">
           <div className="philosophy-title">
-            <p className="eyebrow">About Algrid / 10</p>
+            <p className="eyebrow">{isMalay ? "Tentang Algrid / 10" : "About Algrid / 10"}</p>
             <h2>
-              The company behind
-              <br /> the <em>next company.</em>
+              {isMalay ? "Syarikat di sebalik" : "The company behind"}
+              <br /> {isMalay ? "" : "the "}<em>{isMalay ? "syarikat seterusnya." : "next company."}</em>
             </h2>
           </div>
           <div className="philosophy-intro">
             <span>Independent · Kuala Lumpur · Global</span>
             <p>
-              Most companies do not need more advice. They need a partner who can
-              see the whole system—and make it real.
+              {isMalay ? "Kebanyakan syarikat tidak memerlukan lebih banyak nasihat. Mereka memerlukan rakan yang boleh melihat keseluruhan sistem—dan merealisasikannya." : "Most companies do not need more advice. They need a partner who can see the whole system—and make it real."}
             </p>
           </div>
         </FadeIn>
@@ -1505,15 +1503,13 @@ export default function Home() {
         </div>
         <div className="contact-layout">
           <FadeIn className="contact-content">
-            <p className="eyebrow">The next move / 11</p>
+            <p className="eyebrow">{isMalay ? "Langkah seterusnya / 11" : "The next move / 11"}</p>
             <h2>
-              Bring us the
-              <br /> hard problem.
+              {isMalay ? "Bawa kepada kami" : "Bring us the"}
+              <br /> {isMalay ? "cabaran yang sukar." : "hard problem."}
             </h2>
             <p>
-              Tell us what you are changing, creating or trying to unlock. A
-              senior team member will review the brief and return with a point
-              of view—not a generic sales deck.
+              {isMalay ? "Beritahu kami apa yang anda sedang ubah, cipta atau cuba capai. Ahli kanan pasukan akan menyemak ringkasan dan kembali dengan pandangan yang jelas—bukan dek jualan generik." : "Tell us what you are changing, creating or trying to unlock. A senior team member will review the brief and return with a point of view—not a generic sales deck."}
             </p>
 
             <div className="contact-proof">

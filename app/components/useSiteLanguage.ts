@@ -1,23 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  createContext,
+  createElement,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 export type SiteLanguage = "en" | "ms";
 
 const storageKey = "algrid:language";
 const languageEvent = "algrid:language-change";
 
-export function useSiteLanguage() {
+type SiteLanguageContextValue = {
+  language: SiteLanguage;
+  setLanguage: (language: SiteLanguage) => void;
+};
+
+const SiteLanguageContext = createContext<SiteLanguageContextValue | null>(null);
+
+export function SiteLanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<SiteLanguage>("en");
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem(storageKey);
-    let animationFrame: number | undefined;
     if (savedLanguage === "en" || savedLanguage === "ms") {
       document.documentElement.lang = savedLanguage;
-      animationFrame = window.requestAnimationFrame(() => {
-        setLanguageState(savedLanguage);
-      });
+      queueMicrotask(() => setLanguageState(savedLanguage));
     }
 
     function syncLanguage(event: Event) {
@@ -27,20 +40,30 @@ export function useSiteLanguage() {
     }
 
     window.addEventListener(languageEvent, syncLanguage);
-    return () => {
-      if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      window.removeEventListener(languageEvent, syncLanguage);
-    };
+    return () => window.removeEventListener(languageEvent, syncLanguage);
   }, []);
 
-  function setLanguage(nextLanguage: SiteLanguage) {
+  const setLanguage = useCallback((nextLanguage: SiteLanguage) => {
     window.localStorage.setItem(storageKey, nextLanguage);
     document.documentElement.lang = nextLanguage;
     setLanguageState(nextLanguage);
     window.dispatchEvent(
       new CustomEvent<SiteLanguage>(languageEvent, { detail: nextLanguage }),
     );
-  }
+  }, []);
 
-  return { language, setLanguage };
+  const value = useMemo(
+    () => ({ language, setLanguage }),
+    [language, setLanguage],
+  );
+
+  return createElement(SiteLanguageContext.Provider, { value }, children);
+}
+
+export function useSiteLanguage() {
+  const context = useContext(SiteLanguageContext);
+  if (!context) {
+    throw new Error("useSiteLanguage must be used within SiteLanguageProvider");
+  }
+  return context;
 }
