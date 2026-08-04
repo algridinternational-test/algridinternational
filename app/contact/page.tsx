@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Start a Project — Algrid International",
     description:
       "Tell Algrid what you are building, changing or trying to unlock.",
-    url: "https://algridinternational.com/contact",
+    url: "https://www.algridinternational.com/contact",
   },
 };
 

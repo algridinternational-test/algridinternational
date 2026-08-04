@@ -11,10 +11,10 @@ const nextConfig: NextConfig = {
         has: [
           {
             type: "host",
-            value: "www.algridinternational.com",
+            value: "algridinternational.com",
           },
         ],
-        destination: "https://algridinternational.com/:path*",
+        destination: "https://www.algridinternational.com/:path*",
         permanent: true,
       },
     ];

@@ -4,7 +4,7 @@ import { SiteLanguageProvider } from "./components/useSiteLanguage";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://algridinternational.com"),
+  metadataBase: new URL("https://www.algridinternational.com"),
   title: {
     default: "Algrid International — AI Venture Builder",
     template: "%s — Algrid International",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     shortcut: "/algrid-logo.png",
   },
   applicationName: "Algrid International",
-  authors: [{ name: "Algrid International", url: "https://algridinternational.com" }],
+  authors: [{ name: "Algrid International", url: "https://www.algridinternational.com" }],
   creator: "Algrid International",
   publisher: "Algrid International",
   category: "Technology",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description:
       "AI ventures, digital systems and intelligent growth—built by one integrated senior team.",
     type: "website",
-    url: "https://algridinternational.com",
+    url: "https://www.algridinternational.com",
     siteName: "Algrid International",
     locale: "en_MY",
     images: [
@@ -70,7 +70,7 @@ const organisationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Algrid International",
-  url: "https://algridinternational.com",
+  url: "https://www.algridinternational.com",
   email: "social@algridinternational.com",
   telephone: "+601169194826",
   address: {
@@ -81,7 +81,7 @@ const organisationSchema = {
     addressCountry: "MY",
   },
   areaServed: "Worldwide",
-  logo: "https://algridinternational.com/algrid-logo.png",
+  logo: "https://www.algridinternational.com/algrid-logo.png",
   description:
     "AI venture builder and digital transformation partner integrating strategy, branding, software engineering, automation and growth.",
   sameAs: [

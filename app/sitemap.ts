@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { insightArticles, ventureStories } from "./content";
 
-const origin = "https://algridinternational.com";
+const origin = "https://www.algridinternational.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/contact", "/mvps", "/insights", "/privacy", "/terms"];

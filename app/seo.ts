@@ -1,4 +1,4 @@
-export const siteOrigin = "https://algridinternational.com";
+export const siteOrigin = "https://www.algridinternational.com";
 
 export const socialImage = {
   url: "/og-gold.png",
