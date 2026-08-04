@@ -717,7 +717,7 @@ export default function Home() {
             <p>
               {isMalay ? "Produk perisian fokus yang direka untuk sampai ke pasaran dengan pantas, mengesahkan isyarat teras dan berkembang tanpa perlu dibina semula." : "Focused software products designed to reach market quickly, validate the core signal and scale without a rebuild."}
             </p>
-            <Link className="section-cta" href="/mvps">
+            <Link className="section-cta" href="/products">
               {isMalay ? "Terokai kesemua 15 produk" : "Explore all 15 products"} <span aria-hidden="true">+</span>
             </Link>
           </div>
@@ -752,7 +752,7 @@ export default function Home() {
                   <strong aria-hidden="true">{activeLaunchSystem === index ? "●" : "○"}</strong>
                 </button>
               ))}
-              <Link href="/mvps">
+              <Link href="/products">
                 <span>View all 15 business products</span>
                 <i>Open product library +</i>
               </Link>
@@ -855,7 +855,7 @@ export default function Home() {
                   <b>{highlightedLaunchSystem.idealFor}</b>
                   <small>{highlightedLaunchSystem.scalability}</small>
                 </div>
-                <a href={`/mvps#${highlightedLaunchSystem.id}`}>
+                <a href={`/products#${highlightedLaunchSystem.id}`}>
                   View system <span aria-hidden="true">+</span>
                 </a>
               </div>

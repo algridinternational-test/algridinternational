@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { pendingSectionKey } from "./SectionLink";
+
+const routeSections: Record<string, string> = {
+  "/ai-lab": "ai",
+  "/services": "services",
+  "/systems": "systems",
+  "/ventures": "work",
+};
 
 const knownSections = new Set([
   "ai",
@@ -14,13 +22,13 @@ const knownSections = new Set([
   "work",
 ]);
 
-function cleanLocationHash() {
+function cleanLocationHash(pathname: string) {
   const fragments = window.location.hash.split("#").filter(Boolean);
   const hashSection = [...fragments]
     .reverse()
     .find((fragment) => knownSections.has(fragment));
   const pendingSection = window.sessionStorage.getItem(pendingSectionKey);
-  const section = hashSection ?? pendingSection;
+  const section = routeSections[pathname] ?? hashSection ?? pendingSection;
 
   if (!section) return;
 
@@ -43,11 +51,14 @@ function cleanLocationHash() {
 }
 
 export function HashCleaner() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    cleanLocationHash();
-    window.addEventListener("hashchange", cleanLocationHash);
-    return () => window.removeEventListener("hashchange", cleanLocationHash);
-  }, []);
+    const handleHashChange = () => cleanLocationHash(pathname);
+    cleanLocationHash(pathname);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [pathname]);
 
   return null;
 }

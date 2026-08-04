@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/mvps/:path*",
+        destination: "/products/:path*",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [
           {

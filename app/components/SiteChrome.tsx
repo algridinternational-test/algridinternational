@@ -106,7 +106,7 @@ export function SiteHeader() {
       </Link>
       <nav aria-label="Primary navigation">
         <SectionLink section="services">{labels.services}</SectionLink>
-        <Link href="/mvps">{labels.products}</Link>
+        <Link href="/products">{labels.products}</Link>
         <SectionLink section="work">{labels.ventures}</SectionLink>
         <SectionLink section="systems">{labels.systems}</SectionLink>
         <SectionLink section="ai">{labels.ai}</SectionLink>
@@ -116,7 +116,7 @@ export function SiteHeader() {
         <summary>{labels.menu} <span aria-hidden="true">+</span></summary>
         <nav aria-label="Mobile navigation">
           <SectionLink section="services">{labels.services}</SectionLink>
-          <Link href="/mvps">{labels.products}</Link>
+          <Link href="/products">{labels.products}</Link>
           <SectionLink section="work">{labels.ventures}</SectionLink>
           <SectionLink section="systems">{labels.systems}</SectionLink>
           <SectionLink section="ai">{labels.ai}</SectionLink>
@@ -157,7 +157,7 @@ export function SiteFooter() {
 
         <nav aria-label="Footer navigation">
           <SectionLink section="services">{labels.services}</SectionLink>
-          <Link href="/mvps">{labels.products}</Link>
+          <Link href="/products">{labels.products}</Link>
           <SectionLink section="work">{labels.ventures}</SectionLink>
           <SectionLink section="systems">{labels.systems}</SectionLink>
           <Link href="/insights">{labels.insights}</Link>

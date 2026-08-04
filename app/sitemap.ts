@@ -4,7 +4,18 @@ import { insightArticles, ventureStories } from "./content";
 const origin = "https://www.algridinternational.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/contact", "/mvps", "/insights", "/privacy", "/terms"];
+  const staticRoutes = [
+    "",
+    "/services",
+    "/products",
+    "/ventures",
+    "/systems",
+    "/ai-lab",
+    "/insights",
+    "/contact",
+    "/privacy",
+    "/terms",
+  ];
   return [
     ...staticRoutes.map((route) => ({
       url: `${origin}${route}`,

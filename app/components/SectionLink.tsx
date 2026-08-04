@@ -5,13 +5,25 @@ import Link from "next/link";
 
 const pendingSectionKey = "algrid:pending-section";
 
+const sectionRoutes: Record<string, string> = {
+  ai: "/ai-lab",
+  contact: "/contact",
+  services: "/services",
+  systems: "/systems",
+  work: "/ventures",
+};
+
 type SectionLinkProps = Omit<ComponentPropsWithoutRef<"a">, "href"> & {
   section: string;
 };
 
 export function SectionLink({ section, onClick, ...props }: SectionLinkProps) {
+  const route = sectionRoutes[section];
+
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     onClick?.(event);
+    if (route) return;
+
     if (
       event.defaultPrevented ||
       event.button !== 0 ||
@@ -44,7 +56,7 @@ export function SectionLink({ section, onClick, ...props }: SectionLinkProps) {
     });
   }
 
-  return <Link {...props} href="/" onClick={handleClick} />;
+  return <Link {...props} href={route ?? "/"} onClick={handleClick} />;
 }
 
 export { pendingSectionKey };
