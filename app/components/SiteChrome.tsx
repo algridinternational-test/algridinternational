@@ -97,10 +97,10 @@ export function SiteHeader() {
         <Image
           src="/algrid-logo.png"
           alt="Algrid International"
-          width={440}
-          height={178}
+          width={1254}
+          height={1254}
           priority
-          sizes="154px"
+          sizes="(max-width: 700px) 52px, 64px"
         />
         <small>AI VENTURE BUILDER</small>
       </Link>
@@ -159,9 +159,9 @@ export function SiteFooter() {
           <Image
             src="/algrid-logo.png"
             alt="Algrid International"
-            width={440}
-            height={178}
-            sizes="154px"
+            width={1254}
+            height={1254}
+            sizes="64px"
           />
           <small>AI VENTURE BUILDER</small>
         </Link>

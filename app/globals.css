@@ -170,7 +170,7 @@ footer {
   display: block;
   height: auto;
   mix-blend-mode: screen;
-  width: 154px;
+  width: 64px;
 }
 
 .nav-shell .brand {
@@ -4069,7 +4069,7 @@ footer div a {
     font-size: 17px;
   }
   .nav-shell .logo-brand img {
-    width: 126px;
+    width: 52px;
   }
   .nav-shell .brand small {
     display: none;
@@ -9262,7 +9262,7 @@ main {
 }
 
 .nav-shell .logo-brand img {
-  width: 174px;
+  width: 64px;
 }
 
 .nav-shell .brand small {
@@ -9832,7 +9832,7 @@ main {
   display: block;
   height: auto;
   mix-blend-mode: screen;
-  width: 154px;
+  width: 64px;
 }
 
 .footer-brand small {
@@ -10032,7 +10032,7 @@ main {
   }
 
   .nav-shell .logo-brand img {
-    width: 126px;
+    width: 52px;
   }
 
   .nav-shell .brand small {

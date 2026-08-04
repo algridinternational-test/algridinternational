@@ -20,8 +20,12 @@ export const metadata: Metadata = {
     "growth systems",
   ],
   icons: {
-    icon: "/algrid-logo.png",
-    shortcut: "/algrid-logo.png",
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-touch-icon.png",
   },
   applicationName: "Algrid International",
   authors: [{ name: "Algrid International", url: "https://www.algridinternational.com" }],
